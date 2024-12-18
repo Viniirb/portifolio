@@ -1,0 +1,58 @@
+/* Sidenav.module.css */
+.sidenav {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Inicialmente fora da tela, no lado direito */
+  width: 250px;
+  height: 100%;
+  background-color: rgba(37, 35, 48, 0.9); /* Cor com transparência (rgba) */
+  transition: transform 0.3s ease;
+  padding: 20px; /* Adicionando padding para não colar o conteúdo nas bordas */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Para começar o conteúdo do topo */
+}
+
+.sidenav.open {
+  transform: translateX(-250px); /* Quando aberto, mova para dentro */
+}
+
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px; /* Ajustando para o canto superior direito */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 2rem;
+}
+
+.nav {
+  margin-top: 80px; /* Espaço adicional para não ficar muito perto do botão de fechar */
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav li {
+  margin: 25px 0; /* Espaço maior entre os itens */
+}
+
+.nav a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+  padding: 10px; /* Adicionando padding para tornar o link mais clicável */
+  border-radius: 5px; /* Borda arredondada para cada item */
+}
+
+.nav a:hover {
+  color: #ff6347; /* Cor de hover */
+  background-color: rgba(255, 99, 71, 0.2); /* Cor de fundo no hover, mantendo a transparência */
+}

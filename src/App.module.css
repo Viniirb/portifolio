@@ -1,0 +1,40 @@
+.app {
+  font-family: 'Agu Display', sans-serif; /* Fonte personalizada */
+  background-color: #575669; /* Cor de fundo */
+  display: flex; /* Usar flexbox para o layout */
+  flex-direction: column; /* Coloca os elementos de forma empilhada */
+  min-height: 100vh; /* Garante que o conteúdo ocupe pelo menos a altura da tela */
+  padding-top: 80px; /* Espaço suficiente para o header */
+}
+
+/* Estilos para a área principal */
+.main {
+  display: flex; /* Usamos flexbox para centralizar o conteúdo */
+  justify-content: center; /* Alinha horizontalmente no centro */
+  align-items: center; /* Alinha verticalmente no centro */
+  height: calc(100vh - 80px); /* Subtrai a altura do header (80px) para usar o restante da tela */
+  padding: 20px; /* Adiciona um pequeno padding nas laterais */
+  width: 100%; /* Garante que a área principal ocupe toda a largura */
+  box-sizing: border-box; /* Impede que o padding afete o tamanho total da área */
+}
+
+.text {
+  font-size: 1.25rem; /* Define o tamanho da fonte */
+  color: #f5f9f8; /* Cor do texto */
+  text-align: center; /* Centraliza o texto horizontalmente */
+  margin-bottom: 20px; /* Espaçamento entre as frases */
+  line-height: 1.6; /* Aumenta a altura da linha para melhorar a legibilidade */
+}
+
+.text p {
+  margin: 0; /* Remove as margens padrão de parágrafos */
+  padding: 0; /* Remove o padding padrão */
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Garante que o padding e border não afetem o tamanho do elemento */
+}
+

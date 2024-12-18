@@ -1,0 +1,20 @@
+.home {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .text p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #fff;
+  }
+  
+  .text p:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .text p:last-child {
+    font-style: italic;
+  }
+  
