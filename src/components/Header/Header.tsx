@@ -1,6 +1,7 @@
 'use client';
 import styles from "./Header.module.css";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Header(){
     const [location, setLocation] = useState<string>('Localizando....');
@@ -52,7 +53,7 @@ export default function Header(){
                 </div>
                 <nav className={styles.navLinks}>
                     <a href="#projetos">Projetos</a>
-                    <a href="#sobre">Sobre</a>
+                    <Link href="/sobre">Sobre</Link>
                     <a href="#contato">Contato</a>
                 </nav>
             </div>
