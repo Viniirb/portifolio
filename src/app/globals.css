@@ -1,6 +1,7 @@
+/* global.css */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-main: #0a0a0a;
+  --foreground: #ededed;
   --accent: #3E0D64;
   --link-hover: #6a00ff;
   --font-family: 'Press Start 2P', Arial, Helvetica, sans-serif;
@@ -10,7 +11,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: rgba(10, 10, 10, 0.8);
     --foreground: #ededed;
   }
 }
@@ -26,21 +27,26 @@ html, body {
   width: 100%;
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  background-color: var(--background);
+  background-color: transparent;
   color: var(--foreground);
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 main {
-  flex: 1; /* força o conteúdo crescer e empurra o footer */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
   text-align: center;
+  border-radius: 8px;
+  margin: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 1;
 }
 
 a {
@@ -53,76 +59,16 @@ a:hover {
 }
 
 [data-theme="dark"] {
-  --background: #0a0a0a;
+  --background: rgba(10, 10, 10, 0.8);
   --foreground: #ededed;
 }
 
-.background {
+.background-canvas {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #000;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.background svg {
   width: 100vw;
   height: 100vh;
-}
-
-.circuitLine {
-  stroke: #3E0D64;
-  stroke-width: 2;
-  fill: none;
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  animation: pulse 3s linear infinite;
-  -webkit-animation: pulse 3s linear infinite;
-}
-
-@keyframes pulse {
-  0% {
-    stroke-dashoffset: 300;
-    stroke: #3E0D64;
-    filter: drop-shadow(0 0 2px #3E0D64);
-    -webkit-filter: drop-shadow(0 0 2px #3E0D64);
-  }
-  50% {
-    stroke-dashoffset: 0;
-    stroke: #8a47b0;
-    filter: drop-shadow(0 0 8px #8a47b0);
-    -webkit-filter: drop-shadow(0 0 8px #8a47b0);
-  }
-  100% {
-    stroke-dashoffset: 300;
-    stroke: #3E0D64;
-    filter: drop-shadow(0 0 2px #3E0D64);
-    -webkit-filter: drop-shadow(0 0 2px #3E0D64);
-  }
-}
-
-/* Adicione também para o .circuitNode */
-.circuitNode {
-  fill: #3E0D64;
-  filter: drop-shadow(0 0 3px #3E0D64);
-  -webkit-filter: drop-shadow(0 0 3px #3E0D64);
-  animation: glow 3s linear infinite;
-  -webkit-animation: glow 3s linear infinite;
-  animation-delay: 1.5s;
-}
-
-@keyframes glow {
-  0%, 100% {
-    fill: #3E0D64;
-    filter: drop-shadow(0 0 2px #3E0D64);
-    -webkit-filter: drop-shadow(0 0 2px #3E0D64);
-  }
-  50% {
-    fill: #8a47b0;
-    filter: drop-shadow(0 0 10px #8a47b0);
-    -webkit-filter: drop-shadow(0 0 10px #8a47b0);
-  }
+  z-index: -1;
+  background-color: black;
 }
