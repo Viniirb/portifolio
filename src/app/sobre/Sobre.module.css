@@ -1,44 +1,54 @@
 .container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 4rem auto;
   padding: 2rem;
-  background-color: var(--background);
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  background-color: #1c1c1c; /* tom mais escuro pra combinar com o tema */
+  border-radius: 1rem;
+  box-shadow: 0 0 16px rgba(62, 13, 100, 0.4);
+  font-family: var(--font-family);
 }
 
 .title {
-  font-size: var(--font-size-heading);
+  font-size: 1.5rem;
   color: var(--accent);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .section {
-  margin-bottom: 2rem;
-  text-align: left;
+  margin-bottom: 2.5rem;
 }
 
 .heading {
   font-size: 1rem;
   color: var(--link-hover);
   margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 2px var(--accent);
 }
 
 .text {
   font-size: var(--font-size-base);
   color: var(--foreground);
-  line-height: 1.6;
+  line-height: 1.8;
+  padding-left: 0.5rem;
 }
 
 .list {
-  padding-left: 1.25rem;
+  list-style: none;
+  padding-left: 0.5rem;
   color: var(--foreground);
-  line-height: 1.6;
-  list-style: disc;
+}
+
+.list li::before {
+  content: "★ ";
+  color: #facc15; /* amarelo retrô */
+  margin-right: 0.5rem;
+  font-size: 1rem;
 }
 
 .experiencia {
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--foreground);
+  padding-left: 0.5rem;
 }
