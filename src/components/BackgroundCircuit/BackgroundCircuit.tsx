@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 interface SpeedVector {
   x: number;
@@ -94,21 +94,18 @@ const BackgroundCircuit: React.FC = () => {
     };
 
     const pulse = () => {
-      // --- ALTERAÇÃO AQUI para a cor #3B0C60 ---
-      // Matiz (hue) central é 272 (do #3B0C60), com uma pequena variação
-      const minHue = 262; // Um pouco abaixo de 272
-      const maxHue = 282; // Um pouco acima de 272
+      const minHue = 262; 
+      const maxHue = 282;
       const h = Math.random() * (maxHue - minHue) + minHue;
 
-      // Saturação (saturation) alta para vibrar
+      
       const s = 100; // 100% de saturação
 
-      // Luminosidade (lightness) alta para brilhar no escuro
-      const minL = 50; // Mínimo de 50% de luminosidade (visível)
-      const maxL = 70; // Máximo de 70% de luminosidade (brilhante)
+      
+      const minL = 50; 
+      const maxL = 70; 
       const l = Math.random() * (maxL - minL) + minL;
-      // --- FIM DA ALTERAÇÃO ---
-
+      
       for (let i = 0; i < 56; i++) {
         particles.current.push(new Particle(
           ctx,
