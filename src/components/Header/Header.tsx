@@ -52,9 +52,10 @@ export default function Header(){
                     <span className={styles.clima}>{location} {temperature}</span>
                 </div>
                 <nav className={styles.navLinks}>
-                    <a href="#projetos">Projetos</a>
+                    <Link href="/">Home</Link>
+                    <Link href="#projetos">Projetos</Link>
                     <Link href="/sobre">Sobre</Link>
-                    <a href="#contato">Contato</a>
+                    <Link href="/contato">Contato</Link>
                 </nav>
             </div>
         </header>

@@ -1,54 +1,97 @@
 .container {
-  max-width: 800px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background-color: #1c1c1c; /* tom mais escuro pra combinar com o tema */
-  border-radius: 1rem;
-  box-shadow: 0 0 16px rgba(62, 13, 100, 0.4);
-  font-family: var(--font-family);
+  /* Permite scroll só aqui, mantendo seu body com overflow: hidden; */
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  width: min(920px, 92vw);
+  background: rgba(10, 10, 10, 0.85);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 0 18px rgba(62, 13, 100, 0.35),
+              inset 0 0 8px rgba(62, 13, 100, 0.35);
 }
 
 .title {
-  font-size: 1.5rem;
-  color: var(--accent);
-  margin-bottom: 2rem;
+  font-size: var(--font-size-heading);
   text-align: center;
+  letter-spacing: 1px;
+  color: #c9c9ff;
+  text-shadow: 0 0 6px rgba(106, 0, 255, 0.5);
+  margin-bottom: 1.25rem;
 }
 
-.section {
-  margin-bottom: 2.5rem;
-}
-
-.heading {
-  font-size: 1rem;
-  color: var(--link-hover);
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  text-shadow: 0 0 2px var(--accent);
-}
-
-.text {
-  font-size: var(--font-size-base);
+.bio {
+  text-align: center;
   color: var(--foreground);
-  line-height: 1.8;
-  padding-left: 0.5rem;
+  line-height: 1.7;
+  max-width: 72ch;
+  margin: 0 auto 1.75rem auto;
+  opacity: 0.95;
+}
+
+.sectionTitle {
+  margin: 1.5rem 0 0.75rem 0;
+  font-size: 0.9rem;
+  color: #d6b8ff;
+  text-align: center;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 160px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: 0 0 10px rgba(106, 0, 255, 0.6);
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0.75rem 0 1.5rem 0;
+}
+
+@media (min-width: 720px) {
+  .skillsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .list {
   list-style: none;
-  padding-left: 0.5rem;
-  color: var(--foreground);
+  margin: 0.5rem auto 0;
+  padding: 0;
+  max-width: 720px;
 }
 
-.list li::before {
-  content: "★ ";
-  color: #facc15; /* amarelo retrô */
-  margin-right: 0.5rem;
-  font-size: 1rem;
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border: 1px dashed rgba(214, 184, 255, 0.25);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.experiencia {
-  font-size: 0.85rem;
-  color: var(--foreground);
-  padding-left: 0.5rem;
+.bullet {
+  width: 10px;
+  height: 10px;
+  background: #ffd966;
+  box-shadow: 0 0 8px #ffd966, inset 0 0 2px #000;
+  border-radius: 2px;
 }

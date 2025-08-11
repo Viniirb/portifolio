@@ -1,48 +1,59 @@
-// app/sobre/page.tsx
+import BackgroundCircuit from "@/components/BackgroundCircuit/BackgroundCircuit";
 import styles from "./Sobre.module.css";
+import SkillBar from "@/components/SkillBar/SkillBar";
 
-export default function SobrePage() {
+export default function Sobre() {
+  const skills = [
+    { name: "JavaScript / TypeScript", value: 88 },
+    { name: "React / Next.js", value: 85 },
+    { name: "Node.js", value: 72 },
+    { name: "Banco de Dados", value: 65 },
+    { name: "CSS / SVG", value: 90 },
+  ];
+
+  const curiosidades = [
+    "Sou fanático por design retrô.",
+    "Adoro desafios criativos com CSS e SVG.",
+    "Gosto de xadrez e jogos lógicos.",
+  ];
+
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>Sobre Mim</h1>
+    <>
+      <BackgroundCircuit />
+      <main className={styles.container}>
+        <section className={styles.card}>
+          <h1 className={styles.title}>Sobre Mim</h1>
 
-      <section className={styles.section}>
-        <h2 className={styles.heading}>Biografia</h2>
-        <p className={styles.text}>
-          Sou um desenvolvedor apaixonado por criar experiências únicas na web...
-        </p>
-      </section>
+          <div className={styles.bio}>
+            {`Desenvolvedor fullstack há 5 anos, com foco em .NET/C# e front‑ends modernos com React e Next.js. No back‑end, projeto APIs e integrações performantes com SQL Server, MySQL, Oracle e Dapper. Experiência com Azure DevOps e CI/CD para entregas estáveis e previsíveis. Autista (TEA), minha organização e atenção a padrões elevam a qualidade técnica e a comunicação; valorizo documentação, acessibilidade, testes e melhoria contínua. Vamos conversar sobre como posso contribuir com seu time ou projeto.`
+              .split(". ")
+              .map((sent, i, arr) => (
+                <span key={i}>
+                  {sent.trim()}
+                  {i < arr.length - 1 ? "." : ""}
+                  <br />
+                </span>
+              ))}
+          </div>
 
-      <section className={styles.section}>
-        <h2 className={styles.heading}>Habilidades</h2>
-        <ul className={styles.list}>
-          <li>JavaScript / TypeScript</li>
-          <li>React / Next.js</li>
-          <li>Node.js</li>
-          <li>Banco de Dados</li>
-        </ul>
-      </section>
+          <h2 className={styles.sectionTitle}>Skills</h2>
+          <div className={styles.skillsGrid}>
+            {skills.map((s) => (
+              <SkillBar key={s.name} label={s.name} value={s.value} />
+            ))}
+          </div>
 
-      <section className={styles.section}>
-        <h2 className={styles.heading}>Experiências</h2>
-        <div className={styles.experiencia}>
-          <strong>Empresa X</strong> - Desenvolvedor Frontend (2022 - atual)
-          <p>Responsável por criar interfaces modernas e animadas.</p>
-        </div>
-        <div className={styles.experiencia}>
-          <strong>Empresa Y</strong> - Estágio (2021 - 2022)
-          <p>Participação em projetos internos de automação.</p>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.heading}>Curiosidades</h2>
-        <ul className={styles.list}>
-          <li>Sou fanático por design retrô</li>
-          <li>Adoro desafios com CSS e SVG</li>
-          <li>Gosto de xadrez e jogos lógicos</li>
-        </ul>
-      </section>
-    </main>
+          <h2 className={styles.sectionTitle}>Curiosidades</h2>
+          <ul className={styles.list}>
+            {curiosidades.map((c, i) => (
+              <li key={i} className={styles.listItem}>
+                <span className={styles.bullet} />
+                {c}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+    </>
   );
 }
