@@ -41,9 +41,9 @@ export default function App() {
 
   return (
     <>
-      <BackgroundCircuit />
+    <BackgroundCircuit />
       <main className={styles.container}>
-        <section className={styles.card}>
+        <section className={`${styles.card} animate__animated animate__fadeIn ${styles.cardEnter}`}>
           <h1 className={styles.title}>Contato</h1>
           <p className={styles.subtitle}>
             Fique à vontade para me chamar por qualquer canal abaixo. Normalmente respondo no mesmo dia.

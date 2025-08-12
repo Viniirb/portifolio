@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import 'animate.css/animate.min.css';
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 

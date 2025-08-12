@@ -14,3 +14,8 @@
   line-height: 1.6;
   color: var(--foreground);
 }
+
+/* controla tempos do animate.css */
+.animMain { --animate-duration: 600ms; }
+.animTitle { --animate-duration: 700ms; }
+.animSubtitle { --animate-duration: 800ms; --animate-delay: 120ms; }

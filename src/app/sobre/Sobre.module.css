@@ -1,46 +1,90 @@
+:root {
+  /* ajuste estes valores conforme a altura real do seu header/rodapé */
+  --header-height: 64px;
+  --footer-height: 40px;
+}
+
 .container {
-  /* Permite scroll só aqui, mantendo seu body com overflow: hidden; */
+  /* ocupa a área visível útil (body está com overflow:hidden) */
   width: 100%;
-  height: 100%;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  max-height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable both-edges;
+
+  /* centralização real */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+
+  /* não ficar por baixo de header/rodapé fixos */
+  padding-top: calc(var(--header-height) + 16px);
+  padding-bottom: calc(var(--footer-height) + 16px + env(safe-area-inset-bottom, 0px));
+  padding-left: 1rem;
+  padding-right: 1rem;
+
   position: relative;
   z-index: 1;
+
+  /* neutraliza possíveis estilos do main global */
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.wrap {
+  width: min(980px, 96vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* em telas maiores: coloca skills/curiosidades lado a lado se quiser.
+   Se preferir manter tudo em uma coluna, remova este @media. */
+@media (min-width: 1024px) {
+  .wrap {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(0, auto);
+  }
+  /* bio ocupa as duas colunas no topo */
+  .wrap > .card:first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 .card {
-  width: min(920px, 92vw);
   background: rgba(10, 10, 10, 0.85);
   border: 2px solid var(--accent);
   border-radius: 12px;
-  padding: 2rem 1.5rem;
+  padding: 1.25rem 1rem; /* menor que antes */
   box-shadow: 0 0 18px rgba(62, 13, 100, 0.35),
               inset 0 0 8px rgba(62, 13, 100, 0.35);
+  width: 100%;
+  scroll-margin-top: calc(var(--header-height) + 12px); /* âncoras não escondem o topo */
 }
 
 .title {
-  font-size: var(--font-size-heading);
+  font-size: calc(var(--font-size-heading) * 0.95);
   text-align: center;
   letter-spacing: 1px;
   color: #c9c9ff;
   text-shadow: 0 0 6px rgba(106, 0, 255, 0.5);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.8rem;
 }
 
 .bio {
   text-align: center;
   color: var(--foreground);
   line-height: 1.7;
-  max-width: 72ch;
-  margin: 0 auto 1.75rem auto;
+  max-width: 70ch;
+  margin: 0 auto;
   opacity: 0.95;
+  font-size: 0.92rem; /* levemente menor */
 }
 
 .sectionTitle {
-  margin: 1.5rem 0 0.75rem 0;
+  margin: 0 0 0.6rem 0;
   font-size: 0.9rem;
   color: #d6b8ff;
   text-align: center;
@@ -61,7 +105,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
-  margin: 0.75rem 0 1.5rem 0;
+  margin: 0.25rem 0 0 0;
 }
 
 @media (min-width: 720px) {
@@ -72,7 +116,7 @@
 
 .list {
   list-style: none;
-  margin: 0.5rem auto 0;
+  margin: 0.25rem auto 0;
   padding: 0;
   max-width: 720px;
 }
@@ -95,3 +139,7 @@
   box-shadow: 0 0 8px #ffd966, inset 0 0 2px #000;
   border-radius: 2px;
 }
+
+.cardEnter { --animate-duration: 600ms; }
+.cardEnterDelay80 { --animate-duration: 600ms; --animate-delay: 80ms; }
+.cardEnterDelay160 { --animate-duration: 600ms; --animate-delay: 160ms; }
