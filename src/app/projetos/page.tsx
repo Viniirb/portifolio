@@ -8,21 +8,16 @@ export const metadata = {
 
 const projects: Project[] = [
   {
-    id: 'b2b-portal',
-    title: 'Desenvolvedor Full Stack - Blump LTDA',
-    company: 'ACME S.A.',
-    period: '2023 — 2024',
-    short: 'Portal para clientes corporativos com catálogo, carrinho e aprovação por hierarquia.',
+    id: 'blump',
+    title: 'Desenvolvedor Full Stack ',
+    company: 'Blump-LTDA',
+    period: '2024 — 2024',
+    short: 'Portal para clientes corporativos com catálogo, carrinho, planos.',
     description: [
       'Implementei catálogo com busca e filtros, carrinho multi-lista e fluxo de aprovação por níveis.',
-      'Integração com ERP para preços, estoque e pedidos; cache de dados e SSR para melhorar TTFB.',
-      'Observabilidade com logs estruturados e métricas de performance na pipeline de CI/CD.',
+      'Integração com ERP para preços, estoque e pedidos.',
     ],
-    tech: ['nextjs', 'react', 'typescript', 'node', 'sqlserver'],
-    links: {
-      repo: 'https://github.com/Viniirb',   // ajuste se tiver repo específico
-      demo: '#',
-    },
+    tech: ['csharp', 'vue', 'typescript', 'sqlserver']
   },
   {
     id: 'erp-integrations',

@@ -11,10 +11,11 @@ export const techIcons = {
   node:        { src: '/tech/nodejs.svg',      alt: 'Node.js' },
   dotnet:      { src: '/tech/dotnet.svg',      alt: '.NET' },
   csharp:      { src: '/tech/csharp.svg',      alt: 'C#' },
-  sqlserver:   { src: '/tech/sqlserver.svg',   alt: 'SQL Server' },
+  sqlserver:   { src: '/tech/microsoftsqlserver.svg',   alt: 'SQL Server' },
   azuredevops: { src: '/tech/azuredevops.svg', alt: 'Azure DevOps' },
   docker:      { src: '/tech/docker.svg',      alt: 'Docker' },
   dapper:      { src: '/tech/dapper.svg',      alt: 'Dapper' },
+  vue:         { src: '/tech/vuejs.svg',         alt: 'Vue.js' },
 } as const;
 
 export type TechKey = keyof typeof techIcons;

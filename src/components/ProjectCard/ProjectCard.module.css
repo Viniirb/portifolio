@@ -6,6 +6,10 @@
   box-shadow: 0 0 18px rgba(62, 13, 100, 0.35),
               inset 0 0 8px rgba(62, 13, 100, 0.35);
   width: 100%;
+
+  /* Vars para os ícones de tecnologia */
+  --icon-size: 28px;
+  --icon-color: #fff; /* troque para #3E0D64 para usar a cor do tema */
 }
 
 .headerRow {
@@ -125,6 +129,38 @@
   border: 1px dashed rgba(214, 184, 255, 0.25);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.02);
+}
+
+/* Tamanho do ícone quando usar <Image> (não recolore) */
+.techIcon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+/* Recolorir via SVGR (importando o .svg como componente) */
+.svgIcon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--icon-color); /* requer paths com fill/stroke="currentColor" */
+  flex: 0 0 auto;
+}
+
+/* Recolorir via MÁSCARA usando SVG de public/tech (recomendado com <span>) */
+.maskIcon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex: 0 0 auto;
+  background-color: var(--icon-color);
+  -webkit-mask-image: var(--icon-url);
+          mask-image: var(--icon-url);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
 }
 
 .techLabel {
