@@ -6,6 +6,9 @@
   --font-family: 'Press Start 2P', Arial, Helvetica, sans-serif;
   --font-size-base: 12px;
   --font-size-heading: 18px;
+
+  --header-height: 64px;
+  --footer-height: 40px;
 }
 
 @media (prefers-color-scheme: dark) {
