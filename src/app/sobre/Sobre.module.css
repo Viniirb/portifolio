@@ -1,9 +1,7 @@
-:root {
-  /* ajuste estes valores conforme a altura real do seu header/rodapé */
+:global(:root) {
   --header-height: 64px;
   --footer-height: 40px;
 }
-
 .container {
   /* ocupa a área visível útil (body está com overflow:hidden) */
   width: 100%;

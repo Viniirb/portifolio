@@ -1,4 +1,4 @@
-:root {
+:global(:root) {
   --header-height: 64px;
   --footer-height: 40px;
 }
