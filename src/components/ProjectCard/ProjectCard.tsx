@@ -6,16 +6,27 @@ import styles from './ProjectCard.module.css';
 
 export const techIcons = {
   react:       { src: '/tech/react.svg',       alt: 'React' },
-  nextjs:      { src: '/tech/nextjs.svg',      alt: 'Next.js' },
+  nextjs:      { src: '/tech/nextdotjs.svg',      alt: 'Next.js' },
   typescript:  { src: '/tech/typescript.svg',  alt: 'TypeScript' },
   node:        { src: '/tech/nodejs.svg',      alt: 'Node.js' },
   dotnet:      { src: '/tech/dotnet.svg',      alt: '.NET' },
   csharp:      { src: '/tech/csharp.svg',      alt: 'C#' },
   sqlserver:   { src: '/tech/microsoftsqlserver.svg',   alt: 'SQL Server' },
   azuredevops: { src: '/tech/azuredevops.svg', alt: 'Azure DevOps' },
-  docker:      { src: '/tech/docker.svg',      alt: 'Docker' },
-  dapper:      { src: '/tech/dapper.svg',      alt: 'Dapper' },
   vue:         { src: '/tech/vuejs.svg',         alt: 'Vue.js' },
+  jira:        { src: '/tech/jira.svg',       alt: 'Jira' },
+  postman:     { src: '/tech/postman.svg',    alt: 'Postman' },
+  git:         { src: '/tech/git.svg',        alt: 'Git' },
+  javascript:  { src: '/tech/javascript.svg',  alt: 'JavaScript' },
+  bitbucket:   { src: '/tech/bitbucket.svg',   alt: 'Bitbucket' },
+  angular:     { src: '/tech/angular.svg',    alt: 'Angular' },
+  bootstrap:   { src: '/tech/bootstrap.svg',   alt: 'Bootstrap' },
+  styledcomponents: { src: '/tech/styledcomponents.svg', alt: 'Styled Components' },
+  minio: { src: '/tech/minio.svg', alt: 'MinIO' },
+  dotenv: { src: '/tech/dotenv.svg', alt: 'Dotenv' },
+  graphql: { src: '/tech/graphql.svg', alt: 'GraphQL' },
+  vscode: { src: '/tech/vscode.svg', alt: 'Visual Studio Code' },
+  mysql: { src: '/tech/mysql.svg', alt: 'MySQL' }
 } as const;
 
 export type TechKey = keyof typeof techIcons;
@@ -36,25 +47,24 @@ type Props = {
   className?: string;
 };
 
+import ReactDOM from 'react-dom';
+
+function Modal({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
+  return ReactDOM.createPortal(
+    <div className={styles.modalOverlay} onClick={onClose} role="dialog" aria-modal="true">
+      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+        <button className={styles.modalCloseBtn} onClick={onClose} aria-label="Fechar modal">×</button>
+        {children}
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 export default function ProjectCard({ project, className }: Props) {
-  const [expanded, setExpanded] = React.useState(false);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const [maxH, setMaxH] = React.useState(0);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    if (expanded && contentRef.current) {
-      setMaxH(contentRef.current.scrollHeight);
-    }
-  }, [expanded]);
-
-  React.useEffect(() => {
-    if (!expanded) return;
-    const onResize = () => setMaxH(contentRef.current?.scrollHeight ?? 0);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [expanded]);
-
-  const detailsId = `details-${project.id}`;
+  const improvedDescription = project.description.map((para) => para.trim());
 
   return (
     <article className={`${styles.card} animate__animated animate__fadeInUp ${className ?? ''}`}>
@@ -72,57 +82,62 @@ export default function ProjectCard({ project, className }: Props) {
         <button
           type="button"
           className={styles.btn}
-          aria-expanded={expanded}
-          aria-controls={detailsId}
-          onClick={() => setExpanded(v => !v)}
+          onClick={() => setModalOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={modalOpen}
         >
-          {expanded ? 'Fechar' : 'Detalhes'}
+          Detalhes
         </button>
       </div>
 
-      <div
-        id={detailsId}
-        ref={contentRef}
-        className={`${styles.details} ${expanded ? styles.expanded : ''}`}
-        style={{ maxHeight: expanded ? maxH : 0 }}
-      >
-        <div className={styles.section}>
-          <h4 className={styles.sectionTitle}>Descrição</h4>
-          {project.description.map((para, i) => (
-            <p key={i} className={styles.desc}>{para}</p>
-          ))}
-        </div>
-
-        <div className={styles.section}>
-          <h4 className={styles.sectionTitle}>Tecnologias</h4>
-          <ul className={styles.techList}>
-            {project.tech.map((t) => {
-              const icon = techIcons[t];
-              return (
-                <li key={t} className={styles.techItem} title={icon.alt}>
-                  <Image src={icon.src} alt={icon.alt} width={28} height={28} />
-                  <span className={styles.techLabel}>{icon.alt}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        {project.links && (project.links.repo || project.links.demo) ? (
-          <div className={styles.actions}>
-            {project.links.repo ? (
-              <a className={styles.btn} href={project.links.repo} target="_blank" rel="noreferrer noopener">
-                Repositório
-              </a>
-            ) : null}
-            {project.links.demo ? (
-              <a className={styles.btn} href={project.links.demo} target="_blank" rel="noreferrer noopener">
-                Demo
-              </a>
-            ) : null}
+      {modalOpen && (
+        <Modal onClose={() => setModalOpen(false)}>
+          <div className={styles.section}>
+            <h4 className={styles.sectionTitle}>Descrição</h4>
+            {improvedDescription.map((para, i) => (
+              <p key={i} className={styles.desc}>{para}</p>
+            ))}
           </div>
-        ) : null}
-      </div>
+
+          <div className={styles.section}>
+            <h4 className={styles.sectionTitle}>Tecnologias</h4>
+            <ul className={styles.techList}>
+              {project.tech.map((t) => {
+                const icon = techIcons[t];
+                if (!icon) return null;
+                return (
+                  <li
+                    key={t}
+                    className={`${styles.techItem} ${(t === 'vue' || t === 'typescript' || t === 'dotnet' || t === 'git'
+                      || t === 'javascript' || t === 'angular' || t === 'bootstrap' || t === 'jira' || t === 'bitbucket' || t === 'styledcomponents'
+                      || t === 'minio' || t === 'dotenv' || t === 'graphql' || t === 'react' || t === 'nextjs'
+                    ) ? styles.whiteIcon : ''}`}
+                    title={icon.alt}
+                  >
+                    <Image src={icon.src} alt={icon.alt} width={28} height={28} />
+                    <span className={styles.techLabel}>{icon.alt}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {project.links && (project.links.repo || project.links.demo) && (
+            <div className={styles.actions}>
+              {project.links.repo && (
+                <a className={styles.btn} href={project.links.repo} target="_blank" rel="noreferrer noopener">
+                  Repositório
+                </a>
+              )}
+              {project.links.demo && (
+                <a className={styles.btn} href={project.links.demo} target="_blank" rel="noreferrer noopener">
+                  Demo
+                </a>
+              )}
+            </div>
+          )}
+        </Modal>
+      )}
     </article>
   );
 }

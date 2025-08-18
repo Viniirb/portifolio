@@ -36,20 +36,22 @@
 /* Masonry com columns */
 .grid {
   column-count: 1;
-  column-gap: 16px;
-  margin-top: 8px;
-  min-height: 0; /* idem */
+  column-gap: 24px; /* mais espaçamento */
+  margin-top: 16px;
+  min-height: 0;
 }
 
 @media (min-width: 960px) {
-  .grid { column-count: 2; }
+  .grid {
+    column-count: 2;
+    column-gap: 32px; /* mais espaçamento */
+  }
 }
 
-/* Cada card é um bloco “inteiro” por coluna */
 .grid > * {
   display: inline-block;
   width: 100%;
-  margin: 0 0 16px;
+  margin: 0 0 24px;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   vertical-align: top;

@@ -1,22 +1,27 @@
 .card {
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(10, 10, 10, 0.9);
   border: 2px solid var(--accent);
-  border-radius: 12px;
-  padding: 1rem 1rem;
-  box-shadow: 0 0 18px rgba(62, 13, 100, 0.35),
-              inset 0 0 8px rgba(62, 13, 100, 0.35);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 0 20px rgba(106, 0, 255, 0.4);
   width: 100%;
+  min-height: 220px; /* altura mínima para alinhamento */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
+}
 
-  /* Vars para os ícones de tecnologia */
-  --icon-size: 28px;
-  --icon-color: #fff; /* troque para #3E0D64 para usar a cor do tema */
+.card:hover {
+  box-shadow: 0 0 30px rgba(106, 0, 255, 0.8);
 }
 
 .headerRow {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 12px;
+  margin-bottom: 1rem;
 }
 
 .titleWrap {
@@ -25,54 +30,87 @@
 }
 
 .title {
-  font-size: calc(var(--font-size-heading) * 0.95);
+  font-size: 1.3rem;
   color: #c9c9ff;
-  text-shadow: 0 0 6px rgba(106, 0, 255, 0.5);
-  margin: 0 0 6px 0;
+  text-shadow: 0 0 8px rgba(106, 0, 255, 0.7);
+  margin: 0 0 8px 0;
+  text-align: left;
+  font-weight: 700;
 }
 
 .meta {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: #d6b8ff;
-  opacity: 0.95;
+  opacity: 0.9;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
+  text-align: left;
 }
 
-.company { font-weight: 600; }
-.period { opacity: 0.9; }
-.dot { opacity: 0.5; }
+.company {
+  font-weight: 600;
+}
+
+.period {
+  opacity: 0.85;
+}
+
+.dot {
+  opacity: 0.5;
+}
 
 .short {
   opacity: 0.95;
   line-height: 1.5;
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid rgba(214, 184, 255, 0.35);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(106,0,255,0.25), rgba(106,0,255,0.15));
+  align-self: flex-start;
+  padding: 8px 14px;
+  border: 1.5px solid rgba(214, 184, 255, 0.5);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(106,0,255,0.3), rgba(106,0,255,0.15));
   color: var(--foreground);
   cursor: pointer;
-  text-decoration: none;
-  transition: transform 120ms ease, box-shadow 120ms ease;
   font-family: var(--font-family);
-  font-size: 0.75rem;
-  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
 }
 
 .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(106, 0, 255, 0.45);
+  background-color: rgba(106, 0, 255, 0.5);
+  box-shadow: 0 0 15px rgba(106, 0, 255, 0.7);
 }
-.btn:active { transform: translateY(0); }
+
+.btn:active {
+  background-color: rgba(106, 0, 255, 0.7);
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .card {
+    min-height: auto;
+    padding: 1rem 1.25rem;
+  }
+  .title {
+    font-size: 1.1rem;
+  }
+  .short {
+    font-size: 0.9rem;
+  }
+  .btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
 
 .details {
   overflow: hidden;
@@ -172,4 +210,71 @@
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+
+/* Estilo para ícones brancos */
+.whiteIcon img {
+  filter: invert(1) brightness(2);
+}
+/* Overlay da modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.5); /* mais transparente para não escurecer tanto */
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.modalContent {
+  background: rgba(10, 10, 10, 0.95);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  width: 80vw;       /* ocupa 80% da largura da viewport */
+  max-width: 900px;  /* largura máxima para telas grandes */
+  height: auto;      /* altura automática */
+  max-height: 80vh;  /* limita altura para 80% da viewport */
+  overflow: visible; /* sem scroll interno */
+  box-shadow: 0 0 30px rgba(106, 0, 255, 0.8);
+  position: relative;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #d6b8ff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.modalCloseBtn:hover {
+  color: var(--accent);
+}
+
+.desc {
+  text-align: left;
+  white-space: pre-line;
+  line-height: 1.6;
+  opacity: 0.95;
+  margin: 0 0 12px 0;
 }
