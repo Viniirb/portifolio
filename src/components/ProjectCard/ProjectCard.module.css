@@ -153,20 +153,43 @@
 .techList {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 12px;
-  margin: 4px 0 4px 0;
-  padding: 0;
-  list-style: none;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: flex-start;
 }
 
 .techItem {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  border: 1px dashed rgba(214, 184, 255, 0.25);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1.5px solid rgba(214, 184, 255, 0.5);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  cursor: default;
+  user-select: none;
+  background: rgba(255 255 255 / 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.techItem:hover {
+  background-color: rgba(106, 0, 255, 0.2);
+}
+
+.techItem img {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 480px) {
+  .techItem {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  .techItem img {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Tamanho do ícone quando usar <Image> (não recolore) */
@@ -223,7 +246,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(10, 10, 10, 0.5); /* mais transparente para não escurecer tanto */
+  background: rgba(10, 10, 10, 0.6);
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
@@ -236,13 +259,23 @@
   border: 2px solid var(--accent);
   border-radius: 16px;
   padding: 2rem 2.5rem;
-  width: 80vw;       /* ocupa 80% da largura da viewport */
-  max-width: 900px;  /* largura máxima para telas grandes */
-  height: auto;      /* altura automática */
-  max-height: 80vh;  /* limita altura para 80% da viewport */
-  overflow: visible; /* sem scroll interno */
+  width: 80vw;
+  max-width: 900px;
+  height: auto;
+  max-height: 80vh;
+  overflow: auto;
   box-shadow: 0 0 30px rgba(106, 0, 255, 0.8);
   position: relative;
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 95vw;
+    max-width: none;
+    padding: 1rem 1.25rem;
+    max-height: 90vh;
+    border-radius: 12px;
+  }
 }
 
 @keyframes modalFadeIn {

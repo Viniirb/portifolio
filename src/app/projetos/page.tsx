@@ -71,6 +71,18 @@ const projects: Project[] = [
   }
 ];
 
+const sortedProjects = projects.slice().sort((a, b) => {
+  const getEndYear = (period: string | undefined) => {
+    if (!period) return 0;
+    if (period.toLowerCase().includes('atualmente')) return new Date().getFullYear();
+    const match = period.match(/(\d{4})\s*[-—]\s*(\d{4})/);
+    if (match) return parseInt(match[2], 10);
+    const yearMatch = period.match(/(\d{4})/);
+    return yearMatch ? parseInt(yearMatch[1], 10) : 0;
+  };
+  return getEndYear(b.period) - getEndYear(a.period);
+});
+
 export default function ProjetosPage() {
   return (
     <>
@@ -84,7 +96,7 @@ export default function ProjetosPage() {
           </p>
 
           <div className={styles.grid}>
-            {projects.map((p, i) => {
+            {sortedProjects.map((p, i) => {
               const delayClass =
                 i % 3 === 1 ? styles.cardEnterDelay80 :
                 i % 3 === 2 ? styles.cardEnterDelay160 :

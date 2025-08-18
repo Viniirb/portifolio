@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import 'animate.css/animate.min.css';
-import Header from "@/components/Header/Header";
+import NavigationWrapper from "@/components/NavigationWrapper/NavigationWrapper";
 import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
       </head>
       <body suppressHydrationWarning>
-        <Header />
+        <NavigationWrapper />
         {children}
         <Footer />
       </body>
