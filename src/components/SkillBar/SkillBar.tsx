@@ -15,9 +15,8 @@ export default function SkillBar({ label, value }: Props) {
     <div className={styles.row} aria-label={`Skill ${label} ${pct}%`}>
       <div className={styles.label}>{label}</div>
       <div className={styles.bar} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
-        <div className={styles.fill} style={{ width: `${pct}%` }}>
-          <span className={styles.badge}>{pct}%</span>
-        </div>
+        <div className={styles.fill} style={{ width: `${pct}%` }} />
+        <span className={styles.badge}>{pct}%</span>
       </div>
     </div>
   );

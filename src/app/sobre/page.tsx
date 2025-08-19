@@ -36,13 +36,7 @@ export default function Sobre() {
           <section className={`${styles.card} animate__animated animate__fadeInUp ${styles.cardEnter}`}>
             <h1 className={styles.title}>Sobre Mim</h1>
             <div className={styles.bio}>
-              {bioText.split(". ").map((sent, i, arr) => (
-                <span key={i}>
-                  {sent.trim()}
-                  {i < arr.length - 1 ? "." : ""}
-                  <br />
-                </span>
-              ))}
+              {bioText}
             </div>
           </section>
 

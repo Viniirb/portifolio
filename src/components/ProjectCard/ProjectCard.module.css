@@ -311,3 +311,33 @@
   opacity: 0.95;
   margin: 0 0 12px 0;
 }
+@media (max-width: 400px) {
+  .card {
+    padding: 0.5rem 0.25rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    min-width: 0;
+    max-width: 98vw;
+    margin: 0 auto 12px auto;
+  }
+  .title {
+    font-size: 0.95rem;
+    word-break: normal;
+    white-space: normal;
+  }
+  .short,
+  .desc,
+  .meta {
+    font-size: 0.75rem;
+    word-break: normal;
+    white-space: normal;
+  }
+  .headerRow {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .btn {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}

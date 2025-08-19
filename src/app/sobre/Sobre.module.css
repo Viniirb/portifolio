@@ -1,20 +1,14 @@
 .container {
   /* ocupa a área visível útil (body está com overflow:hidden) */
   width: 100%;
-  min-height: calc(100vh - var(--header-height) - var(--footer-height));
-  max-height: calc(100vh - var(--header-height) - var(--footer-height));
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-gutter: stable both-edges;
-
-  /* centralização real */
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-  /* não ficar por baixo de header/rodapé fixos */
-  padding-top: calc(var(--header-height) + 16px);
-  padding-bottom: calc(var(--footer-height) + 16px + env(safe-area-inset-bottom, 0px));
+  justify-content: center; /* Centraliza verticalmente */
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  padding-top: 20px; /* Menor padding-top */
+  padding-bottom: 20px; /* Espaço para o footer */
   padding-left: 1rem;
   padding-right: 1rem;
 
@@ -24,6 +18,23 @@
   /* neutraliza possíveis estilos do main global */
   border-radius: 0;
   box-shadow: none;
+  /* Não use overflow-y no desktop */
+}
+
+/* Mobile: scroll interno e altura limitada */
+@media (max-width: 600px) {
+  .container {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: calc(var(--header-height) + 8px);
+    padding-bottom: calc(var(--footer-height) + 8px + env(safe-area-inset-bottom, 0px));
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 .wrap {
@@ -74,7 +85,8 @@
   max-width: 70ch;
   margin: 0 auto;
   opacity: 0.95;
-  font-size: 0.92rem; /* levemente menor */
+  font-size: 0.92rem;
+  white-space: pre-line; /* <-- Adicione esta linha */
 }
 
 .sectionTitle {
@@ -137,3 +149,104 @@
 .cardEnter { --animate-duration: 600ms; }
 .cardEnterDelay80 { --animate-duration: 600ms; --animate-delay: 80ms; }
 .cardEnterDelay160 { --animate-duration: 600ms; --animate-delay: 160ms; }
+@media (max-width: 600px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: calc(var(--header-height) + 8px);
+    padding-bottom: calc(var(--footer-height) + 8px + env(safe-area-inset-bottom, 0px));
+    min-height: auto;
+    max-height: none;
+    overflow-y: auto;
+    align-items: flex-start;
+  }
+
+  .wrap {
+    width: 100%;
+    padding: 0;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .card {
+    padding: 1rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    min-width: 0;
+    max-width: 100vw;
+    margin: 0 auto 12px auto;
+  }
+
+  .title {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .bio {
+    font-size: 0.85rem;
+    max-width: 95vw;
+    margin: 0 auto;
+  }
+
+  .sectionTitle {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  .sectionTitle::after {
+    width: 90px;
+    margin-top: 4px;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .list {
+    max-width: 98vw;
+  }
+
+  .listItem {
+    font-size: 0.85rem;
+    padding: 8px 6px;
+    margin-bottom: 8px;
+  }
+}
+@media (max-width: 600px) {
+  .container,
+  .wrap,
+  .card,
+  .skillsGrid,
+  .list,
+  .listItem,
+  .title,
+  .bio,
+  .sectionTitle {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .bio {
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .list {
+    padding: 0;
+    margin: 0;
+  }
+  .listItem {
+    padding: 6px 4px;
+    font-size: 0.8rem;
+  }
+  .skillsGrid {
+    gap: 6px;
+  }
+  .card {
+    padding: 0.75rem 0.5rem;
+    margin: 0 0 10px 0;
+  }
+}
