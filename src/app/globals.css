@@ -89,3 +89,8 @@ a:hover {
   background-color: black;
   pointer-events: none;
 }
+@media (max-width: 600px) {
+  body {
+    font-size: 0.95rem;
+  }
+}
