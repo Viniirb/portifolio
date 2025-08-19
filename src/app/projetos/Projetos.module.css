@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   margin: 0 auto;
-  padding-top: calc(var(--header-height) + 8px);
+  padding-top: 35px;
   padding-bottom: 0;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -88,7 +88,8 @@
 }
 
 @media (max-width: 600px) {
-  body, .container, .wrap {
+  .container,
+  .wrap {
     font-size: 0.95rem;
   }
 }
