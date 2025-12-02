@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import 'animate.css/animate.min.css';
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import { Footer, Header } from "@/components";
 
 export const metadata: Metadata = {
   title: "Vinicius Rolim Barbosa - Portifólio",
@@ -15,13 +13,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="dark" suppressHydrationWarning>
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body suppressHydrationWarning>
         <Header />
-        {children}
+        <div className="pt-16 sm:pt-20">{children}</div>
         <Footer />
       </body>
     </html>
