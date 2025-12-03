@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import 'animate.css/animate.min.css';
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import { Footer, Header } from "@/components";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Vinicius Rolim Barbosa - Portifólio",
@@ -15,13 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <head>
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-      </head>
-      <body suppressHydrationWarning>
+    <html lang="pt-BR" className="dark" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
         <Header />
-        {children}
+        <div className="pt-16 sm:pt-20">{children}</div>
         <Footer />
       </body>
     </html>
