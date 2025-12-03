@@ -40,9 +40,9 @@ export default function Sobre() {
   ];
 
   const bioParagraphs = [
-    "Desenvolvedor fullstack há 5 anos, especializado em criar soluções robustas e escaláveis. Minha expertise abrange desde o backend com .NET/C# até frontends modernos e responsivos com React e Next.js.",
-    "No backend, projeto e implemento APIs RESTful de alta performance, integrações complexas e arquiteturas escaláveis utilizando SQL Server, MySQL, Oracle e Dapper. Tenho experiência sólida com Azure DevOps, implementando pipelines de CI/CD que garantem entregas estáveis e previsíveis.",
-    "Autista (TEA), minha forma única de pensar traz benefícios significativos ao desenvolvimento: atenção aos detalhes, identificação de padrões, consistência no código e comunicação técnica precisa. Valorizo profundamente documentação clara, acessibilidade, testes automatizados e melhoria contínua.",
+    "Natural de , Mato Grosso do Sul, atualmente residindo em Joinville, Santa Catarina. Com 5 anos de experiência como desenvolvedor fullstack, especializo-me em criar soluções robustas e escaláveis que transformam desafios complexos em produtos eficientes.",
+    "Cursando Ciência da Computação na UNISOCIESC (previsão de formatura em 2027), minha expertise técnica abrange desde o desenvolvimento backend com .NET/C# e APIs RESTful de alta performance, até frontends modernos e responsivos com React e Next.js. Domino bancos de dados relacionais (SQL Server, MySQL, Oracle) e ferramentas de DevOps, com foco em pipelines de CI/CD que garantem entregas contínuas e estáveis.",
+    "Autista (TEA), transformo minha neurodivergência em vantagem competitiva: atenção excepcional aos detalhes, identificação eficiente de padrões, código consistente e comunicação técnica precisa. Sou apaixonado por documentação clara, acessibilidade, testes automatizados e aprendizado contínuo, sempre buscando excelência técnica em cada projeto.",
   ];
 
   const containerVariants = {

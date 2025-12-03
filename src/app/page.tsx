@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Code2, Database, GitBranch, Server, Terminal, Zap, BookOpen, ChefHat, BookMarked, Gamepad2, Plane, Lightbulb, Mail, Phone, Github, Linkedin } from "lucide-react";
+import { ArrowDown, Code2, Database, GitBranch, Server, Terminal, Zap, BookOpen, ChefHat, BookMarked, Gamepad2, Plane, Lightbulb, Mail, Phone, Github, Linkedin, Award, Shield, Cloud, Network, Settings } from "lucide-react";
 import { ProjectCard } from "@/components";
-import { projects } from "@/constants";
+import { projects, certifications } from "@/constants";
+import { useState } from "react";
 
 const sortedProjects = projects.slice().sort((a, b) => {
   const getEndYear = (period: string | undefined) => {
@@ -69,8 +70,8 @@ export default function Home() {
   ];
 
   const bioParagraphs = [
-    "Desenvolvedor fullstack há 5 anos, especializado em criar soluções robustas e escaláveis. Minha expertise abrange desde o backend com .NET/C# até frontends modernos e responsivos com React e Next.js.",
-    "No backend, projeto e implemento APIs RESTful de alta performance, integrações complexas e arquiteturas escaláveis utilizando SQL Server, MySQL, Oracle e Dapper. Tenho experiência sólida com Azure DevOps, implementando pipelines de CI/CD que garantem entregas estáveis e previsíveis.",
+    "Natural de Rio Verde de Mato Grosso, Mato Grosso do Sul, atualmente morando em Joinville, Santa Catarina. Desenvolvedor fullstack há 5 anos, especializado em criar soluções robustas e escaláveis. Minha expertise abrange desde o backend com .NET/C# até frontends modernos e responsivos com React e Next.js.",
+    "Cursando Ciência da Computação na UNISOCIESC em Joinville, com previsão de formação em 2027. No backend, projeto e implemento APIs RESTful de alta performance, integrações complexas e arquiteturas escaláveis utilizando SQL Server, MySQL, Oracle e Dapper. Tenho experiência sólida com Azure DevOps, implementando pipelines de CI/CD que garantem entregas estáveis e previsíveis.",
     "Autista (TEA), minha forma única de pensar traz benefícios significativos ao desenvolvimento: atenção aos detalhes, identificação de padrões, consistência no código e comunicação técnica precisa. Valorizo profundamente documentação clara, acessibilidade, testes automatizados e melhoria contínua.",
   ];
 
@@ -112,6 +113,36 @@ export default function Home() {
       description: "Projetos e contribuições",
     },
   ];
+
+  const categories = {
+    all: "Todos",
+    cybersecurity: "Cibersegurança",
+    cloud: "Cloud",
+    development: "Desenvolvimento",
+    networking: "Redes",
+    other: "Outros",
+  };
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "cybersecurity":
+        return Shield;
+      case "cloud":
+        return Cloud;
+      case "development":
+        return Code2;
+      case "networking":
+        return Network;
+      default:
+        return Settings;
+    }
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState<keyof typeof categories>("all");
+
+  const filteredCertifications = selectedCategory === "all"
+    ? certifications
+    : certifications.filter(cert => cert.category === selectedCategory);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -326,7 +357,109 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Seção 4: Contato */}
+      {/* Seção 4: Certificações */}
+      <section className="min-h-screen px-4 py-12 sm:py-16">
+        <motion.div
+          className="max-w-5xl mx-auto w-full"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.div variants={itemVariants} className="mb-12">
+            <div className="flex items-center gap-3 mb-4">
+              <Award className="w-8 h-8 text-primary" />
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+                Certificações
+              </h2>
+            </div>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8">
+              {certifications.length} certificações conquistadas em diversas áreas da tecnologia.
+            </p>
+
+            {/* Filtros */}
+            <div className="flex flex-wrap gap-2">
+              {(Object.keys(categories) as Array<keyof typeof categories>).map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    selectedCategory === cat
+                      ? "bg-foreground text-background"
+                      : "bg-muted hover:bg-accent text-foreground"
+                  }`}
+                >
+                  {categories[cat]}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Grid de Certificações */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            variants={containerVariants}
+          >
+            {filteredCertifications.map((cert) => {
+              const CategoryIcon = getCategoryIcon(cert.category);
+              return (
+                <motion.div
+                  key={cert.id}
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="group relative bg-card border border-border rounded-lg p-5 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Ícone da categoria */}
+                    <div className="flex-shrink-0 p-3 rounded-lg bg-muted group-hover:bg-primary/10 transition-colors">
+                      <CategoryIcon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                    </div>
+
+                    {/* Conteúdo */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                        {cert.title}
+                      </h3>
+                      <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Award className="w-4 h-4" />
+                          <span>{cert.institution}</span>
+                        </div>
+                        <span className="text-xs">{cert.date}</span>
+                      </div>
+                    </div>
+
+                    {/* Tag da categoria */}
+                    <div className="flex-shrink-0">
+                      <span className="inline-block px-2.5 py-1 bg-muted rounded-full text-xs font-medium">
+                        {categories[cert.category]}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Borda animada no hover */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-lg" />
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {filteredCertifications.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12 text-muted-foreground"
+            >
+              Nenhuma certificação encontrada nesta categoria.
+            </motion.div>
+          )}
+        </motion.div>
+      </section>
+
+      {/* Seção 5: Contato */}
       <section className="min-h-screen px-4 py-12 sm:py-16">
         <motion.div
           className="max-w-5xl mx-auto w-full"

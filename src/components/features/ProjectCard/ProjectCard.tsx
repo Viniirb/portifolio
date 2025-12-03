@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { Project } from "@/types";
-import { techIcons, whiteIconTechs } from "@/constants";
+import { techIcons } from "@/constants";
 
 type Props = {
   project: Project;
@@ -75,6 +75,8 @@ const Modal = React.memo(({
     </motion.div>
   );
 });
+
+Modal.displayName = 'Modal';
 
 export default function ProjectCard({ project, className }: Props) {
   const [modalOpen, setModalOpen] = React.useState(false);
