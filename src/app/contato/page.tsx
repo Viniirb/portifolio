@@ -63,7 +63,7 @@ export default function ContatoPage() {
   };
 
   return (
-    <main className="min-h-screen py-12 sm:py-16">
+    <main className="min-h-screen py-20 sm:py-24 relative z-10">
       <motion.div
         className="max-w-5xl mx-auto w-full px-4"
         variants={containerVariants}
