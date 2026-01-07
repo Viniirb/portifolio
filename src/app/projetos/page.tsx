@@ -38,15 +38,15 @@ export default function ProjetosPage() {
   };
 
   return (
-    <main className="min-h-screen py-20 sm:py-24">
+    <main className="min-h-screen py-12 sm:py-16">
       <motion.div
         className="max-w-5xl mx-auto w-full px-4"
         variants={containerVariants}
-        initial="hidden"
+        initial={false}
         animate="visible"
       >
         <motion.div variants={itemVariants} className="mb-12">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
             Projetos
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground">

@@ -56,17 +56,17 @@ export default function CertificacoesPage() {
   };
 
   return (
-    <main className="min-h-screen py-20 sm:py-24">
+    <main className="min-h-screen py-12 sm:py-16">
       <motion.div
         className="max-w-5xl mx-auto w-full px-4"
         variants={containerVariants}
-        initial="hidden"
+        initial={false}
         animate="visible"
       >
         <motion.div variants={itemVariants} className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <Award className="w-8 h-8 text-primary" />
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
               Certificações
             </h1>
           </div>
@@ -100,7 +100,7 @@ export default function CertificacoesPage() {
 
         {/* Grid de Certificações */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4"
           variants={containerVariants}
         >
           {filteredCertifications.map((cert) => {
@@ -149,8 +149,6 @@ export default function CertificacoesPage() {
 
         {filteredCertifications.length === 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
             className="text-center py-12 text-muted-foreground"
           >
             Nenhuma certificação encontrada nesta categoria.

@@ -65,34 +65,28 @@ export default function Sobre() {
   };
 
   return (
-    <main className="min-h-screen py-20 sm:py-24">
+    <main className="min-h-screen py-12 sm:py-16">
       <motion.div
         className="max-w-5xl mx-auto w-full px-4"
         variants={containerVariants}
-        initial="hidden"
+        initial={false}
         animate="visible"
       >
         {/* Bio Section */}
-        <motion.section variants={itemVariants} className="mb-16">
+        <motion.section variants={itemVariants} className="mb-10 sm:mb-16">
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 tracking-tight"
           >
             Sobre Mim
           </motion.h1>
           <div className="space-y-4">
             {bioParagraphs.map((paragraph, index) => (
-              <motion.p
+              <p
                 key={index}
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               >
                 {paragraph}
-              </motion.p>
+              </p>
             ))}
           </div>
         </motion.section>

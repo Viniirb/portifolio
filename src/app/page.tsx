@@ -169,24 +169,16 @@ export default function Home() {
       <section className="min-h-screen flex items-center px-4 relative overflow-hidden">
         <div className="max-w-5xl mx-auto w-full relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={false}
           >
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6"
             >
               Vinicius Rolim Barbosa
             </motion.h1>
 
             <motion.p
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mb-16 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
             >
               Desenvolvedor Full Stack especializado em criar experiências digitais
               modernas e escaláveis
@@ -195,9 +187,6 @@ export default function Home() {
             <motion.button
               onClick={scrollToNext}
               className="cursor-pointer hover:opacity-70 transition-opacity"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
               aria-label="Rolar para baixo"
             >
               <motion.div
@@ -218,32 +207,23 @@ export default function Home() {
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          initial={false}
+          animate="visible"
         >
           <motion.section variants={itemVariants} className="mb-16">
             <motion.h2
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 tracking-tight"
             >
               Sobre Mim
             </motion.h2>
             <div className="space-y-4">
               {bioParagraphs.map((paragraph, index) => (
-                <motion.p
+                <p
                   key={index}
                   className="text-base sm:text-lg text-muted-foreground leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                 >
                   {paragraph}
-                </motion.p>
+                </p>
               ))}
             </div>
           </motion.section>
@@ -257,9 +237,6 @@ export default function Home() {
                 <motion.div
                   key={skill.name}
                   variants={itemVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
                   whileHover={{ scale: 1.02 }}
                   className="group"
                 >
@@ -275,12 +252,9 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                    <motion.div
+                    <div
                       className="h-full bg-foreground rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.value}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
+                      style={{ width: `${skill.value}%` }}
                     />
                   </div>
                 </motion.div>
@@ -297,9 +271,6 @@ export default function Home() {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
                   whileHover={{ scale: 1.03, y: -4 }}
                   className="group relative p-5 rounded-lg border border-border bg-card/50 hover:bg-accent/50 transition-all duration-300 cursor-pointer overflow-hidden"
                 >
@@ -325,12 +296,11 @@ export default function Home() {
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          initial={false}
+          animate="visible"
         >
           <motion.div variants={itemVariants} className="mb-12">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
               Projetos
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground">
@@ -346,9 +316,6 @@ export default function Home() {
               <motion.div
                 key={project.id}
                 variants={itemVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
               >
                 <ProjectCard project={project} />
               </motion.div>
@@ -362,14 +329,13 @@ export default function Home() {
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          initial={false}
+          animate="visible"
         >
           <motion.div variants={itemVariants} className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <Award className="w-8 h-8 text-primary" />
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
                 Certificações
               </h2>
             </div>
@@ -397,7 +363,7 @@ export default function Home() {
 
           {/* Grid de Certificações */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4"
             variants={containerVariants}
           >
             {filteredCertifications.map((cert) => {
@@ -406,9 +372,6 @@ export default function Home() {
                 <motion.div
                   key={cert.id}
                   variants={itemVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
                   whileHover={{ y: -4, scale: 1.01 }}
                   className="group relative bg-card border border-border rounded-lg p-5 hover:shadow-lg transition-all duration-300"
                 >
@@ -449,8 +412,6 @@ export default function Home() {
 
           {filteredCertifications.length === 0 && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
               className="text-center py-12 text-muted-foreground"
             >
               Nenhuma certificação encontrada nesta categoria.
@@ -464,9 +425,8 @@ export default function Home() {
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          initial={false}
+          animate="visible"
         >
           <motion.section variants={itemVariants} className="mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
@@ -494,9 +454,6 @@ export default function Home() {
                 }
                 className="group relative p-8 border border-border rounded-lg bg-card/50 hover:bg-accent/50 transition-all duration-300 overflow-hidden"
                 variants={itemVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
                 whileHover={{ scale: 1.02, y: -4 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -528,9 +485,6 @@ export default function Home() {
 
           <motion.div
             variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
             className="mt-12 text-sm text-muted-foreground"
           >
             <p>
