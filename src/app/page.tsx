@@ -383,23 +383,31 @@ export default function Home() {
 
                     {/* Conteúdo */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        {cert.title}
-                      </h3>
-                      <div className="flex flex-col gap-1 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                          <Award className="w-4 h-4" />
-                          <span>{cert.institution}</span>
-                        </div>
-                        <span className="text-xs">{cert.date}</span>
-                      </div>
-                    </div>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="flex-1 min-w-0 font-semibold text-base sm:mb-2 sm:line-clamp-2 group-hover:text-primary transition-colors">
+                            {cert.title}
+                          </h3>
 
-                    {/* Tag da categoria */}
-                    <div className="flex-shrink-0">
-                      <span className="inline-block px-2.5 py-1 bg-muted rounded-full text-xs font-medium">
-                        {categories[cert.category]}
-                      </span>
+                          {/* Tag da categoria (desktop/tablet) */}
+                          <span className="hidden sm:inline-block flex-shrink-0 px-2.5 py-1 bg-muted rounded-full text-xs font-medium">
+                            {categories[cert.category]}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <Award className="w-4 h-4" />
+                            <span>{cert.institution}</span>
+                          </div>
+                          <span className="text-xs">{cert.date}</span>
+                        </div>
+
+                        {/* Tag da categoria (mobile) */}
+                        <span className="sm:hidden inline-block w-fit px-2.5 py-1 bg-muted rounded-full text-xs font-medium">
+                          {categories[cert.category]}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
