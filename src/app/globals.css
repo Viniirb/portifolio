@@ -54,6 +54,10 @@
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   /* Scrollbar personalizada minimalista */
   ::-webkit-scrollbar {
     width: 6px;
@@ -85,6 +89,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   /* Wallpaper de floresta com névoa - Light Mode */
@@ -102,9 +109,12 @@
         hsl(var(--background) / 0.9) 70%,
         hsl(var(--background)) 100%
       ),
-      url('/forest-bg.jpg') center/cover no-repeat fixed;
+      url('/forest-bg.jpg') center/cover no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; /* Melhor compatibilidade mobile */
     pointer-events: none;
-    z-index: -2;
+    z-index: 0;
   }
 
   /* Dark mode: Floresta mais escura e nevoenta */
@@ -116,7 +126,10 @@
         hsl(var(--background) / 0.9) 60%,
         hsl(var(--background)) 100%
       ),
-      url('/forest-bg.jpg') center/cover no-repeat fixed;
+      url('/forest-bg.jpg') center/cover no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
     filter: brightness(0.7) contrast(1.1);
   }
 
@@ -137,7 +150,7 @@
         transparent 80px
       );
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
     animation: forestFog 25s ease-in-out infinite alternate;
   }
 
@@ -165,7 +178,7 @@
 
   /* Tipografia elegante */
   h1, h2, h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.1;
