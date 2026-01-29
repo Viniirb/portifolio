@@ -105,6 +105,9 @@ export default function CertificacoesPage() {
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-4"
           variants={containerVariants}
+          key={selectedCategory}
+          initial="hidden"
+          animate="visible"
         >
           {filteredCertifications.map((cert) => {
             const CategoryIcon = getCategoryIcon(cert.category);

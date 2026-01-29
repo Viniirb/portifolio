@@ -408,9 +408,8 @@ export default function Home() {
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          initial={false}
+          animate="visible"
         >
           <motion.div variants={itemVariants} className="mb-12">
             <div className="flex items-center gap-3 mb-4">
