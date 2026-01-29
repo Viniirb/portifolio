@@ -18,6 +18,16 @@ export const certifications: Certification[] = [
     image: "",
     category: "cybersecurity",
   },
+
+  // Rocketseat
+  {
+    id: "rocketseat-redes-neurais",
+    title: "Redes Neurais",
+    institution: "Rockeseat",
+    date: "27/01/2026",
+    image: "",
+    category: "neural-networks"
+  },
   
   // DIO - Cibersegurança
   {
