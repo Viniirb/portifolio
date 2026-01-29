@@ -30,7 +30,7 @@ export default function ContatoPage() {
     {
       label: "LinkedIn",
       value: "vinicius-rolim-barbosa",
-      href: "https://www.linkedin.com/in/vinicius-rolim-barbosa-15b066374/",
+      href: "https://www.linkedin.com/in/viniciusrolimbarbosa/",
       icon: Linkedin,
       description: "Networking profissional",
     },

@@ -281,7 +281,7 @@ Rio Verde, MS 🏠 Joinville, SC
 <br />
 
 [![GitHub](https://img.shields.io/badge/GitHub-Viniirb-181717?style=for-the-badge&logo=github)](https://github.com/Viniirb)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-vinicius--rolim--barbosa-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/vinicius-rolim-barbosa-15b066374/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-vinicius--rolim--barbosa-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/viniciusrolimbarbosa/)
 [![Email](https://img.shields.io/badge/Email-viiniirb@proton.me-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:viiniirb@proton.me)
 
 </div>
@@ -352,7 +352,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 **Vinicius Rolim Barbosa**
 
 - GitHub: [@Viniirb](https://github.com/Viniirb)
-- LinkedIn: [vinicius-rolim-barbosa](https://www.linkedin.com/in/vinicius-rolim-barbosa-15b066374/)
+- LinkedIn: [vinicius-rolim-barbosa](https://www.linkedin.com/in/viniciusrolimbarbosa/)
 - Email: contato@viniciusrb.dev
 - Localização: Joinville, SC - Brasil
 

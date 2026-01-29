@@ -106,7 +106,7 @@ export default function Home() {
     {
       label: "LinkedIn",
       value: "vinicius-rolim-barbosa",
-      href: "https://www.linkedin.com/in/vinicius-rolim-barbosa-15b066374/",
+      href: "https://www.linkedin.com/in/viniciusrolimbarbosa/",
       icon: lucideReact.Linkedin,
       description: "Networking profissional",
     },
