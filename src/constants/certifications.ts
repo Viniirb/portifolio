@@ -26,7 +26,7 @@ export const certifications: Certification[] = [
     institution: "Rockeseat",
     date: "27/01/2026",
     image: "",
-    category: "neural-networks"
+    category: "neuralnetworks"
   },
   
   // DIO - Cibersegurança
