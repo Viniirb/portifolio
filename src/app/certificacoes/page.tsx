@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Filter, Shield, Cloud, Code, Network, Settings } from "lucide-react";
+import { Award, Filter, Shield, Cloud, Code, Network, Settings, BrainCircuit  } from "lucide-react";
 import { certifications } from "@/constants";
 import { useState } from "react";
 
@@ -11,7 +11,8 @@ const categories = {
   cloud: "Cloud",
   development: "Desenvolvimento",
   networking: "Redes",
-  other: "Outros",
+  neuralnetworks: "Redes Neurais",
+  other: "Outras"
 };
 
 const getCategoryIcon = (category: string) => {
@@ -24,6 +25,8 @@ const getCategoryIcon = (category: string) => {
       return Code;
     case "networking":
       return Network;
+    case "neuralnetworks":
+      return BrainCircuit;
     default:
       return Settings;
   }
