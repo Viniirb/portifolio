@@ -353,7 +353,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 - GitHub: [@Viniirb](https://github.com/Viniirb)
 - LinkedIn: [vinicius-rolim-barbosa](https://www.linkedin.com/in/vinicius-rolim-barbosa-15b066374/)
-- Email: viiniirb@proton.me
+- Email: contato@viniciusrb.dev
 - Localização: Joinville, SC - Brasil
 
 ## 🙏 Agradecimentos

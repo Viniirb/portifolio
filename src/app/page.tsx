@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Code2, Database, GitBranch, Server, Terminal, Zap, BookOpen, ChefHat, BookMarked, Gamepad2, Plane, Lightbulb, Mail, Phone, Github, Linkedin, Award, Shield, Cloud, Network, Settings } from "lucide-react";
+import { ArrowDown, Brain, Code2, Database, GitBranch, Server, Terminal, Zap, BookOpen, ChefHat, BookMarked, Gamepad2, Plane, Lightbulb, Mail, Phone, Github, Linkedin, Award, Shield, Cloud, Network, Settings } from "lucide-react";
 import { ProjectCard } from "@/components";
 import { projects, certifications } from "@/constants";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const sortedProjects = projects.slice().sort((a, b) => {
   const getEndYear = (period: string | undefined) => {
@@ -20,45 +20,44 @@ const sortedProjects = projects.slice().sort((a, b) => {
 });
 
 export default function Home() {
+  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const [sections, setSections] = useState<HTMLElement[]>([]);
+  const [activeSection, setActiveSection] = useState(0);
+
+  const scrollToSection = (index: number) => {
+    const target = sections[index] ?? sectionRefs.current[index];
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const scrollToNext = () => {
-    const scrollTarget = window.innerHeight;
-    const startPosition = window.pageYOffset;
-    const distance = scrollTarget - startPosition;
-    const duration = 800;
-    let start: number | null = null;
-
-    const animation = (currentTime: number) => {
-      if (start === null) start = currentTime;
-      const timeElapsed = currentTime - start;
-      const progress = Math.min(timeElapsed / duration, 1);
-      
-      // Easing function (easeInOutCubic)
-      const ease = progress < 0.5
-        ? 4 * progress * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-      
-      window.scrollTo(0, startPosition + distance * ease);
-      
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animation);
-      }
-    };
-
-    requestAnimationFrame(animation);
+    if (sections.length === 0 && sectionRefs.current.length === 0) return;
+    const length = sections.length || sectionRefs.current.length;
+    const nextIndex = Math.min(activeSection + 1, length - 1);
+    if (nextIndex !== activeSection) {
+      scrollToSection(nextIndex);
+    }
   };
 
   const skills = [
-    { name: "JavaScript / TypeScript", value: 88, icon: Code2 },
-    { name: "React / Next.js", value: 90, icon: Code2 },
-    { name: "Node.js", value: 72, icon: Server },
     { name: "C# / .NET", value: 100, icon: Code2 },
+    { name: "JavaScript / TypeScript", value: 85, icon: Code2 },
+    { name: "React / Next.js", value: 85, icon: Code2 },
+    { name: "Solid-js", value: 20, icon: Code2 },
+    { name: "Python", value: 60, icon: Code2 },
+    { name: "Node.js", value: 45, icon: Code2 },
     { name: "Banco de Dados", value: 100, icon: Database },
     { name: "Azure DevOps", value: 100, icon: Zap },
     { name: "Git", value: 100, icon: GitBranch },
-    { name: "Linux", value: 80, icon: Terminal },
-    { name: "CI/CD", value: 90, icon: Zap },
+    { name: "Linux", value: 55, icon: Terminal },
+    { name: "Redes Neurais / Deep Learning", value: 30, icon: Brain },
+    { name: "CI/CD", value: 70, icon: Zap },
     { name: "Testes", value: 90, icon: Code2 },
+    { name: "Cibersegurança", value: 40, icon: Shield },
+    { name: "Infraestrutura / Servidores", value: 50, icon: Server },
   ];
+
+  const sortedSkills = [...skills].sort((a, b) => b.value - a.value);
 
   const curiosidades = [
     { text: "Amo estudar e aprender", icon: BookOpen },
@@ -89,8 +88,8 @@ export default function Home() {
     },
     {
       label: "Email",
-      value: "viiniirb@proton.me",
-      href: `mailto:viiniirb@proton.me?subject=${encodeURIComponent(
+      value: "contato@viniciusrb.dev",
+      href: `mailto:contato@viniciusrb.dev?subject=${encodeURIComponent(
         "Contato via portfólio"
       )}&body=${encodeURIComponent(
         "Olá Vinícius, tudo bem? Vi seu portfólio e gostaria de falar sobre..."
@@ -120,6 +119,7 @@ export default function Home() {
     cloud: "Cloud",
     development: "Desenvolvimento",
     networking: "Redes",
+    neuralnetworks: "Redes Neurais",
     other: "Outros",
   };
 
@@ -133,6 +133,8 @@ export default function Home() {
         return Code2;
       case "networking":
         return Network;
+      case "neuralnetworks":
+        return Brain;
       default:
         return Settings;
     }
@@ -154,6 +156,27 @@ export default function Home() {
     },
   };
 
+  const heroEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+  const heroContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const heroItemVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: heroEase },
+    },
+  };
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -163,52 +186,88 @@ export default function Home() {
     },
   };
 
+  useEffect(() => {
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-section]")
+    );
+
+    if (elements.length === 0) return;
+    sectionRefs.current = elements;
+    setSections(elements);
+
+    const handleScroll = () => {
+      const marker = window.scrollY + window.innerHeight * 0.3;
+      let index = 0;
+      for (let i = 0; i < elements.length; i += 1) {
+        if (elements[i].offsetTop <= marker) {
+          index = i;
+        }
+      }
+      setActiveSection(index);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       {/* Seção 1: Home / Hero */}
-      <section className="min-h-screen flex items-center px-4 relative overflow-hidden">
+      <section
+        className="min-h-screen flex items-center px-4 relative overflow-hidden"
+        data-section
+        ref={(el) => {
+          sectionRefs.current[0] = el;
+        }}
+      >
         <div className="max-w-5xl mx-auto w-full relative z-10">
           <motion.div
-            initial={false}
+            variants={heroContainerVariants}
+            initial="hidden"
+            animate="visible"
           >
             <motion.h1
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6"
+              variants={heroItemVariants}
             >
               Vinicius Rolim Barbosa
             </motion.h1>
 
             <motion.p
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mb-16 leading-relaxed"
+              variants={heroItemVariants}
             >
               Desenvolvedor Full Stack especializado em criar experiências digitais
               modernas e escaláveis
             </motion.p>
 
-            <motion.button
-              onClick={scrollToNext}
-              className="cursor-pointer hover:opacity-70 transition-opacity"
-              aria-label="Rolar para baixo"
-            >
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ArrowDown className="w-6 h-6 text-muted-foreground" />
-              </motion.div>
-            </motion.button>
           </motion.div>
         </div>
 
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <motion.div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none"
+          animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.06, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden="true"
+        />
       </section>
 
       {/* Seção 2: Sobre */}
-      <section className="min-h-screen px-4 py-12 sm:py-16">
+      <section
+        className="min-h-screen px-4 py-12 sm:py-16"
+        data-section
+        ref={(el) => {
+          sectionRefs.current[1] = el;
+        }}
+      >
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial={false}
-          animate="visible"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <motion.section variants={itemVariants} className="mb-16">
             <motion.h2
@@ -233,7 +292,7 @@ export default function Home() {
               Habilidades Técnicas
             </h3>
             <div className="grid gap-4">
-              {skills.map((skill, index) => (
+              {sortedSkills.map((skill) => (
                 <motion.div
                   key={skill.name}
                   variants={itemVariants}
@@ -242,7 +301,7 @@ export default function Home() {
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <skill.icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <skill.icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors group-hover:drop-shadow-[0_0_8px_hsl(var(--foreground)/0.35)]" />
                       <span className="font-medium text-sm sm:text-base">
                         {skill.name}
                       </span>
@@ -278,7 +337,7 @@ export default function Home() {
 
                   <div className="relative flex items-center gap-4">
                     <div className="p-2.5 rounded-lg bg-secondary group-hover:bg-primary/10 transition-colors duration-300">
-                      <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors group-hover:drop-shadow-[0_0_8px_hsl(var(--foreground)/0.35)]" />
                     </div>
                     <span className="text-sm sm:text-base font-medium">{item.text}</span>
                   </div>
@@ -292,12 +351,19 @@ export default function Home() {
       </section>
 
       {/* Seção 3: Projetos */}
-      <section className="min-h-screen px-4 py-12 sm:py-16">
+      <section
+        className="min-h-screen px-4 py-12 sm:py-16"
+        data-section
+        ref={(el) => {
+          sectionRefs.current[2] = el;
+        }}
+      >
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial={false}
-          animate="visible"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <motion.div variants={itemVariants} className="mb-12">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
@@ -316,6 +382,7 @@ export default function Home() {
               <motion.div
                 key={project.id}
                 variants={itemVariants}
+                className="rounded-lg transition-shadow hover:shadow-lg"
               >
                 <ProjectCard project={project} />
               </motion.div>
@@ -325,12 +392,19 @@ export default function Home() {
       </section>
 
       {/* Seção 4: Certificações */}
-      <section className="min-h-screen px-4 py-12 sm:py-16">
+      <section
+        className="min-h-screen px-4 py-12 sm:py-16"
+        data-section
+        ref={(el) => {
+          sectionRefs.current[3] = el;
+        }}
+      >
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial={false}
-          animate="visible"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <motion.div variants={itemVariants} className="mb-12">
             <div className="flex items-center gap-3 mb-4">
@@ -365,6 +439,9 @@ export default function Home() {
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-2 gap-4"
             variants={containerVariants}
+            key={selectedCategory}
+            initial="hidden"
+            animate="visible"
           >
             {filteredCertifications.map((cert) => {
               const CategoryIcon = getCategoryIcon(cert.category);
@@ -373,12 +450,12 @@ export default function Home() {
                   key={cert.id}
                   variants={itemVariants}
                   whileHover={{ y: -4, scale: 1.01 }}
-                  className="group relative bg-card border border-border rounded-lg p-5 hover:shadow-lg transition-all duration-300"
+                  className="group relative bg-card border border-border rounded-lg p-5 transition-all duration-300 hover:shadow-[0_18px_40px_hsl(var(--foreground)/0.12)]"
                 >
                   <div className="flex items-start gap-4">
                     {/* Ícone da categoria */}
                     <div className="flex-shrink-0 p-3 rounded-lg bg-muted group-hover:bg-primary/10 transition-colors">
-                      <CategoryIcon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <CategoryIcon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors group-hover:drop-shadow-[0_0_10px_hsl(var(--primary)/0.35)]" />
                     </div>
 
                     {/* Conteúdo */}
@@ -429,12 +506,19 @@ export default function Home() {
       </section>
 
       {/* Seção 5: Contato */}
-      <section className="min-h-screen px-4 py-12 sm:py-16">
+      <section
+        className="min-h-screen px-4 py-12 sm:py-16"
+        data-section
+        ref={(el) => {
+          sectionRefs.current[4] = el;
+        }}
+      >
         <motion.div
           className="max-w-5xl mx-auto w-full"
           variants={containerVariants}
-          initial={false}
-          animate="visible"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <motion.section variants={itemVariants} className="mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
@@ -460,7 +544,7 @@ export default function Home() {
                     ? "noreferrer noopener"
                     : undefined
                 }
-                className="group relative p-8 border border-border rounded-lg bg-card/50 hover:bg-accent/50 transition-all duration-300 overflow-hidden"
+                className="group relative p-8 border border-border rounded-lg bg-card/50 hover:bg-accent/50 transition-all duration-300 overflow-hidden hover:shadow-lg"
                 variants={itemVariants}
                 whileHover={{ scale: 1.02, y: -4 }}
                 whileTap={{ scale: 0.98 }}
@@ -470,7 +554,7 @@ export default function Home() {
                 <div className="relative">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="p-3 rounded-lg bg-secondary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                      <contato.icon className="w-6 h-6" />
+                      <contato.icon className="w-6 h-6 group-hover:drop-shadow-[0_0_10px_hsl(var(--primary-foreground)/0.5)]" />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-lg mb-1">
@@ -504,6 +588,27 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
+      {sections.length > 0 && activeSection < sections.length - 1 && (
+        <motion.button
+          onClick={scrollToNext}
+          className="fixed bottom-8 left-8 p-3 rounded-full bg-background/30 backdrop-blur-lg border border-border/40 text-foreground hover:bg-background/50 transition-colors shadow-lg z-50"
+          aria-label="Ir para a próxima seção"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          whileHover={{ scale: 1.1, y: -4 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            animate={{ y: [-2, 2, -2] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ArrowDown className="w-5 h-5 text-muted-foreground" />
+          </motion.div>
+        </motion.button>
+      )}
     </>
   );
 }

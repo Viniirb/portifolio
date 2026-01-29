@@ -18,8 +18,8 @@ export default function ContatoPage() {
     },
     {
       label: "Email",
-      value: "viiniirb@proton.me",
-      href: `mailto:viiniirb@proton.me?subject=${encodeURIComponent(
+      value: "contato@viniciusrb.dev",
+      href: `mailto:contato@viniciusrb.dev?subject=${encodeURIComponent(
         "Contato via portfólio"
       )}&body=${encodeURIComponent(
         "Olá Vinícius, tudo bem? Vi seu portfólio e gostaria de falar sobre..."

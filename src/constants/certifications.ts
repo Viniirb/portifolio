@@ -22,7 +22,7 @@ export const certifications: Certification[] = [
   // Rocketseat
   {
     id: "rocketseat-redes-neurais",
-    title: "Redes Neurais",
+    title: "Redes Neurais e Deep Learning",
     institution: "Rockeseat",
     date: "27/01/2026",
     image: "",
