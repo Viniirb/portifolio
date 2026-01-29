@@ -92,12 +92,12 @@ export default function ProjectCard({ project, className }: Props) {
 
   return (
     <motion.article
-      className={`group relative p-6 border border-border rounded-lg bg-card hover:bg-accent/50 transition-colors ${className ?? ""}`}
+      className={`group relative p-6 border border-border rounded-lg bg-card hover:bg-accent/50 transition-colors h-full flex flex-col ${className ?? ""}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 h-full">
         <div className="flex-1">
           <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
             {project.title}
@@ -118,7 +118,7 @@ export default function ProjectCard({ project, className }: Props) {
 
         <motion.button
           type="button"
-          className="self-start px-4 py-2 text-sm font-medium rounded-md border border-border hover:bg-foreground hover:text-background transition-colors"
+          className="self-start mt-auto px-4 py-2 text-sm font-medium rounded-md border border-border hover:bg-foreground hover:text-background transition-colors"
           onClick={handleOpenModal}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

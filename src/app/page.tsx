@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Brain, Code2, Database, GitBranch, Server, Terminal, Zap, BookOpen, ChefHat, BookMarked, Gamepad2, Plane, Lightbulb, Mail, Phone, Github, Linkedin, Award, Shield, Cloud, Network, Settings } from "lucide-react";
+import * as lucideReact from "lucide-react";
 import { ProjectCard } from "@/components";
 import { projects, certifications } from "@/constants";
 import { useEffect, useRef, useState } from "react";
@@ -40,32 +40,38 @@ export default function Home() {
   };
 
   const skills = [
-    { name: "C# / .NET", value: 100, icon: Code2 },
-    { name: "JavaScript / TypeScript", value: 85, icon: Code2 },
-    { name: "React / Next.js", value: 85, icon: Code2 },
-    { name: "Solid-js", value: 20, icon: Code2 },
-    { name: "Python", value: 60, icon: Code2 },
-    { name: "Node.js", value: 45, icon: Code2 },
-    { name: "Banco de Dados", value: 100, icon: Database },
-    { name: "Azure DevOps", value: 100, icon: Zap },
-    { name: "Git", value: 100, icon: GitBranch },
-    { name: "Linux", value: 55, icon: Terminal },
-    { name: "Redes Neurais / Deep Learning", value: 30, icon: Brain },
-    { name: "CI/CD", value: 70, icon: Zap },
-    { name: "Testes", value: 90, icon: Code2 },
-    { name: "Cibersegurança", value: 40, icon: Shield },
-    { name: "Infraestrutura / Servidores", value: 50, icon: Server },
+    { name: "C# / .NET", value: 100, icon: lucideReact.Code2 },
+    { name: "JavaScript / TypeScript", value: 85, icon: lucideReact.Code2 },
+    { name: "React / Next.js", value: 85, icon: lucideReact.Code2 },
+    { name: "Solid-js", value: 20, icon: lucideReact.Code2 },
+    { name: "Python", value: 60, icon: lucideReact.Code2 },
+    { name: "Node.js", value: 45, icon: lucideReact.Code2 },
+    { name: "Banco de Dados", value: 100, icon: lucideReact.Database },
+    { name: "Azure DevOps", value: 100, icon: lucideReact.Zap },
+    { name: "Git", value: 100, icon: lucideReact.GitBranch },
+    { name: "Linux", value: 55, icon: lucideReact.Terminal },
+    { name: "Redes Neurais / Deep Learning", value: 30, icon: lucideReact.Brain },
+    { name: "CI/CD", value: 70, icon: lucideReact.Zap },
+    { name: "Testes", value: 90, icon: lucideReact.Code2 },
+    { name: "Cibersegurança", value: 40, icon: lucideReact.Shield },
+    { name: "Infraestrutura / Servidores", value: 50, icon: lucideReact.Server },
   ];
 
   const sortedSkills = [...skills].sort((a, b) => b.value - a.value);
 
   const curiosidades = [
-    { text: "Amo estudar e aprender", icon: BookOpen },
-    { text: "Gosto de cozinhar", icon: ChefHat },
-    { text: "Leitor de histórias em quadrinhos", icon: BookMarked },
-    { text: "Entusiasta de videogames", icon: Gamepad2 },
-    { text: "Apaixonado por viajar", icon: Plane },
-    { text: "Sempre buscando novos conhecimentos", icon: Lightbulb },
+    { text: "Amo estudar e aprender assuntos novos", icon: lucideReact.BookOpen },
+    { text: "Amo o astronomia e observar as estrelas", icon: lucideReact.Telescope },
+    { text: "Gosto de cozinhar", icon: lucideReact.ChefHat },
+    { text: "Leitor de histórias em quadrinhos", icon: lucideReact.BookMarked },
+    { text: "Leitor de livros de fantasia e ficção científica", icon: lucideReact.BookMarked },
+    { text: "Entusiasta de videogames", icon: lucideReact.Gamepad2 },
+    { text: "Apaixonado por viajar", icon: lucideReact.Plane },
+    { text: "Amo ficar natureza e ar livre", icon: lucideReact.Zap },
+    { text: "Gosto de assistir filmes, animes e séries", icon: lucideReact.Film },
+    { text: "Sempre buscando novos conhecimentos", icon: lucideReact.Lightbulb },
+    { text: "Gosto de música, especialmente Rock e Metal", icon: lucideReact.Guitar},
+    { text: "Prato favorito: Hambúrguer artesanal", icon: lucideReact.Hamburger },
   ];
 
   const bioParagraphs = [
@@ -83,7 +89,7 @@ export default function Home() {
       label: "WhatsApp",
       value: "+55 (47) 98890-3621",
       href: `https://wa.me/5547988903621?text=${wpMsg}`,
-      icon: Phone,
+      icon: lucideReact.Phone,
       description: "Disponível em horário comercial",
     },
     {
@@ -94,21 +100,21 @@ export default function Home() {
       )}&body=${encodeURIComponent(
         "Olá Vinícius, tudo bem? Vi seu portfólio e gostaria de falar sobre..."
       )}`,
-      icon: Mail,
+      icon: lucideReact.Mail,
       description: "Respondo em até 24h",
     },
     {
       label: "LinkedIn",
       value: "vinicius-rolim-barbosa",
       href: "https://www.linkedin.com/in/vinicius-rolim-barbosa-15b066374/",
-      icon: Linkedin,
+      icon: lucideReact.Linkedin,
       description: "Networking profissional",
     },
     {
       label: "GitHub",
       value: "Viniirb",
       href: "https://github.com/Viniirb",
-      icon: Github,
+      icon: lucideReact.Github,
       description: "Projetos e contribuições",
     },
   ];
@@ -126,17 +132,17 @@ export default function Home() {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "cybersecurity":
-        return Shield;
+        return lucideReact.Shield;
       case "cloud":
-        return Cloud;
+        return lucideReact.Cloud;
       case "development":
-        return Code2;
+        return lucideReact.Code2;
       case "networking":
-        return Network;
+        return lucideReact.Network;
       case "neuralnetworks":
-        return Brain;
+        return lucideReact.Brain;
       default:
-        return Settings;
+        return lucideReact.Settings;
     }
   };
 
@@ -382,7 +388,7 @@ export default function Home() {
               <motion.div
                 key={project.id}
                 variants={itemVariants}
-                className="rounded-lg transition-shadow hover:shadow-lg"
+                className="rounded-lg transition-shadow hover:shadow-lg h-full"
               >
                 <ProjectCard project={project} />
               </motion.div>
@@ -408,7 +414,7 @@ export default function Home() {
         >
           <motion.div variants={itemVariants} className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <Award className="w-8 h-8 text-primary" />
+              <lucideReact.Award className="w-8 h-8 text-primary" />
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
                 Certificações
               </h2>
@@ -474,7 +480,7 @@ export default function Home() {
 
                         <div className="flex flex-col gap-1 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
-                            <Award className="w-4 h-4" />
+                            <lucideReact.Award className="w-4 h-4" />
                             <span>{cert.institution}</span>
                           </div>
                           <span className="text-xs">{cert.date}</span>
@@ -605,7 +611,7 @@ export default function Home() {
             animate={{ y: [-2, 2, -2] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ArrowDown className="w-5 h-5 text-muted-foreground" />
+            <lucideReact.ArrowDown className="w-5 h-5 text-muted-foreground" />
           </motion.div>
         </motion.button>
       )}
