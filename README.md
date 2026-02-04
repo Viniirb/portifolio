@@ -313,8 +313,8 @@ MIT License - Copyright (c) 2025 Vinicius Rolim Barbosa
 <br />
 
 [![GitHub](https://img.shields.io/badge/GitHub-Viniirb-181717?style=for-the-badge&logo=github)](https://github.com/Viniirb)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-vinicius--rolim--barbosa-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/viniciusrolimbarbosa/)
-[![Email](https://img.shields.io/badge/Email-viiniirb@proton.me-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:viiniirb@proton.me)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-viniciusrolimbarbosa-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/viniciusrolimbarbosa/)
+[![Email](https://img.shields.io/badge/Email-contato@viniciusrb.dev-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:contato@viniciusrb.dev)
 
 </div>
 
