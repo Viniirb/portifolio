@@ -41,7 +41,7 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 | 📱 **Totalmente Responsivo** | Adaptado para desktop, tablet e mobile |
 | ⚡ **Animações Suaves** | Transições fluidas com Framer Motion |
 | 🎯 **SPA com Scroll** | Navegação intuitiva por scroll entre seções |
-| 🎓 **33 Certificações** | Filtros por categoria (Cibersegurança, Cloud, etc) |
+| 🎓 **34 Certificações** | Filtros por categoria (Cibersegurança, Cloud, etc) |
 | 💼 **4 Projetos Profissionais** | Experiências detalhadas com modal expansível |
 | 🚀 **Performance** | Next.js 15 com Turbopack para builds ultra-rápidos |
 | ♿ **Acessibilidade** | Desenvolvido seguindo práticas WCAG |
@@ -182,7 +182,7 @@ Seção inicial com apresentação profissional, nome e descrição. Inclui:
 - 🟡 **Inovvati** (2021-2023) - Junior Dev
 
 ### 🎓 Certificações
-**33 Certificações** organizadas por categoria:
+**34 Certificações** organizadas por categoria:
 
 | Categoria | Quantidade |
 |-----------|------------|
