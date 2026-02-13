@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUpRightIcon } from '@phosphor-icons/react'
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -69,7 +69,7 @@ function Footer() {
             animate={{ y: [-2, 2, -2] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUpRightIcon className="w-5 h-5" />
           </motion.div>
         </motion.button>
       )}

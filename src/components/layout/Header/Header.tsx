@@ -1,71 +1,90 @@
-"use client";
+'use client'
 
-import React from "react";
-import { motion } from "framer-motion";
-import { MapPin, Cloud, CloudRain, Sun, CloudDrizzle } from "lucide-react";
-import { useState, useEffect } from "react";
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ListIcon, X, GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
 
-function Header() {
-  const [time, setTime] = useState("");
-  const [weather] = useState({ temp: "24", condition: "clear" });
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Projetos', href: '/projetos' },
+  { name: 'Sobre', href: '/sobre' },
+  { name: 'Contato', href: '/contato' },
+]
 
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      );
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const getWeatherIcon = () => {
-    switch (weather.condition) {
-      case "rain":
-        return <CloudRain className="w-4 h-4" />;
-      case "drizzle":
-        return <CloudDrizzle className="w-4 h-4" />;
-      case "cloudy":
-        return <Cloud className="w-4 h-4" />;
-      default:
-        return <Sun className="w-4 h-4" />;
-    }
-  };
+export function Header() {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <motion.header
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/20 bg-background/30 backdrop-blur-lg"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Localização, Clima e Hora */}
-          <div className="flex items-center gap-3 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4" />
-              <span className="hidden sm:inline">Joinville, BR</span>
-              <span className="sm:hidden">JVE, BR</span>
-            </div>
-            <span>•</span>
-            <div className="flex items-center gap-1.5">
-              {getWeatherIcon()}
-              <span>{weather.temp}°C</span>
-            </div>
-            <span>•</span>
-            <span>{time}</span>
+    <header className="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-corporate-border">
+      <div className="grid grid-cols-2 md:grid-cols-12 h-16 sm:h-20">
+        
+        {/* Logo Area */}
+        <div className="col-span-1 md:col-span-2 flex items-center pl-6 sm:pl-8 border-r border-corporate-border h-full">
+          <Link href="/" className="text-xl font-bold tracking-tighter uppercase">
+            VINI.DEV
+          </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex col-span-10 justify-end items-center pr-8 h-full">
+          <ul className="flex gap-8">
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <Link 
+                  href={item.href} 
+                  className="text-sm font-medium uppercase tracking-widest hover:text-corporate-accent transition-colors"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="ml-8 pl-8 border-l border-corporate-border h-1/2 flex items-center gap-4">
+            {/* weight="bold" dá o visual brutalista */}
+            <Link href="https://github.com/Viniirb" target="_blank">
+              <GithubLogoIcon weight="bold" className="w-6 h-6 hover:text-corporate-accent transition-colors" />
+            </Link>
+            <Link href="https://linkedin.com" target="_blank">
+              <LinkedinLogoIcon weight="bold" className="w-6 h-6 hover:text-corporate-accent transition-colors" />
+            </Link>
           </div>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden col-span-1 flex justify-end items-center pr-6 h-full">
+          <button onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
+            {isOpen ? <X weight="bold" className="w-6 h-6" /> : <ListIcon weight="bold" className="w-6 h-6" />}
+          </button>
         </div>
       </div>
-    </motion.header>
-  );
-}
 
-export default React.memo(Header);
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <motion.div 
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          className="md:hidden border-t border-corporate-border bg-background"
+        >
+          <nav className="flex flex-col p-6 gap-4">
+            {navItems.map((item) => (
+              <Link 
+                key={item.name} 
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-medium uppercase tracking-widest py-2 border-b border-gray-100"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="flex gap-4 mt-4">
+              <Link href="https://github.com/Viniirb" target="_blank"><GithubLogoIcon weight="fill" className="w-8 h-8" /></Link>
+              <Link href="https://linkedin.com" target="_blank"><LinkedinLogoIcon weight="fill" className="w-8 h-8" /></Link>
+              <Link href="mailto:seuemail@exemplo.com"><EnvelopeSimpleIcon weight="bold" className="w-8 h-8" /></Link>
+            </div>
+          </nav>
+        </motion.div>
+      )}
+    </header>
+  )
+}

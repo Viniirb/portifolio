@@ -1,2 +1,2 @@
-export { default as ProjectCard } from "./ProjectCard/ProjectCard";
+export { default as ProjectList } from "./ProjectList/index";
 export { default as MapEmbed } from "./MapEmbed/MapEmbed";

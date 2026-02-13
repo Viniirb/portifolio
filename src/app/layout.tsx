@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { Footer, Header } from "@/components";
+import Footer from "../components/layout/Footer/Footer";
+import { Header } from "../components/layout/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ 
@@ -27,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" suppressHydrationWarning>
-      <body className={`${inter.className} ${playfair.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className="dark">
+      <body className={`${inter.className} ${playfair.variable}`}>
         <Header />
         <div className="pt-16 sm:pt-20 relative z-10">{children}</div>
         <Footer />
