@@ -2,24 +2,15 @@
 
 import { MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div className="w-10 h-10" />;
-  }
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   return (
     <motion.button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
       className="relative p-2 rounded-md hover:bg-accent transition-colors"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -28,8 +19,8 @@ export default function ThemeToggle() {
       <motion.div
         initial={false}
         animate={{
-          scale: theme === "dark" ? 0 : 1,
-          rotate: theme === "dark" ? 90 : 0,
+          scale: isDark ? 0 : 1,
+          rotate: isDark ? 90 : 0,
         }}
         transition={{ duration: 0.2 }}
         className="absolute inset-0 flex items-center justify-center"
@@ -39,8 +30,8 @@ export default function ThemeToggle() {
       <motion.div
         initial={false}
         animate={{
-          scale: theme === "dark" ? 1 : 0,
-          rotate: theme === "dark" ? 0 : -90,
+          scale: isDark ? 1 : 0,
+          rotate: isDark ? 0 : -90,
         }}
         transition={{ duration: 0.2 }}
         className="absolute inset-0 flex items-center justify-center"
