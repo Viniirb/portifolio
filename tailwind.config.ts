@@ -9,20 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#ffffff",
-        foreground: "#111111",
+        background: "rgb(var(--background) / <alpha-value>)",
+        foreground: "rgb(var(--foreground) / <alpha-value>)",
         corporate: {
-          gray: "#f5f5f5",
-          border: "#e5e5e5",
-          accent: "#2563eb",
-          dark: "#1a1a1a",
+          gray: "rgb(var(--corporate-gray) / <alpha-value>)",
+          border: "rgb(var(--corporate-border) / <alpha-value>)",
+          accent: "rgb(var(--corporate-accent) / <alpha-value>)",
+          dark: "rgb(var(--corporate-dark) / <alpha-value>)",
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
       },
       backgroundImage: {
-        "grid-pattern": "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+        "grid-pattern": "linear-gradient(to right, rgb(var(--corporate-border)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--corporate-border)) 1px, transparent 1px)",
       },
     },
   },

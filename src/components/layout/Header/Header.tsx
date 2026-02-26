@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ListIcon, X, GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
+import ThemeToggle from '../../ui/ThemeToggle/ThemeToggle'
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -48,11 +49,13 @@ export function Header() {
             <Link href="https://linkedin.com" target="_blank">
               <LinkedinLogoIcon weight="bold" className="w-6 h-6 hover:text-corporate-accent transition-colors" />
             </Link>
+            <ThemeToggle />
           </div>
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden col-span-1 flex justify-end items-center pr-6 h-full">
+        <div className="md:hidden col-span-1 flex justify-end items-center pr-6 h-full gap-2">
+          <ThemeToggle />
           <button onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
             {isOpen ? <X weight="bold" className="w-6 h-6" /> : <ListIcon weight="bold" className="w-6 h-6" />}
           </button>

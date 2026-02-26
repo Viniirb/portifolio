@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={`${inter.className} ${playfair.variable}`}>
+      <body className={`${inter.className} ${playfair.variable}`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

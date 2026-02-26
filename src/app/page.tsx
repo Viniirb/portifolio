@@ -7,7 +7,7 @@ export default function Home() {
   const recentProjects = projects.slice(0, 4);
 
   return(
-    <main className="min-h-screen flex flex-col w-full overflow-x-hidden">
+    <main className="min-h-screen flex flex-col w-full">
       <Hero />
       <ProjectList projects={recentProjects} />
     </main>

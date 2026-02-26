@@ -6,9 +6,31 @@
   :root {
     --background: 255 255 255;
     --foreground: 17 17 17;
+    --corporate-gray: 245 245 245;
+    --corporate-border: 229 229 229;
+    --corporate-accent: 37 99 235;
+    --corporate-dark: 26 26 26;
+  }
+
+  .dark {
+    --background: 10 10 10;
+    --foreground: 237 237 237;
+    --corporate-gray: 24 24 24;
+    --corporate-border: 63 63 63;
+    --corporate-accent: 96 165 250;
+    --corporate-dark: 245 245 245;
+  }
+
+  html {
+    height: 100%;
+    overflow: hidden;
   }
 
   body {
+    height: 100%;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
     color: rgb(var(--foreground));
     background: rgb(var(--background));
     font-family: var(--font-inter), sans-serif;
