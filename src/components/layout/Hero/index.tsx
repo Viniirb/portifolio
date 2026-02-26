@@ -11,14 +11,14 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">
+                <h2 className="text-sm font-bold tracking-widest text-foreground/60 uppercase mb-4">
                   Full Stack Developer
                 </h2>
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground mb-8">
                   SOLUÇÕES COMPLEXAS <br />
                   DESIGN & CÓDIGO.
                 </h1>
-                <p className="text-lg text-gray-600 max-w-xl leading-relaxed">
+                <p className="text-lg text-foreground/70 max-w-xl leading-relaxed">
                   Especialista em construir arquiteturas escaláveis e interfaces performáticas.
                   Transformando requisitos técnicos em produtos digitais robustos.
                 </p>
@@ -28,11 +28,11 @@ export function Hero() {
             <div className="md:col-span-4 grid grid-rows-2">
               <div className="p-8 border-b border-corporate-border flex flex-col justify-center bg-corporate-gray/30">
                 <h3 className="text-4xl font-bold mb-2">30+</h3>
-                <p className="text-sm text-gray-500 uppercase">Certificações Técnicas</p>
+                <p className="text-sm text-foreground/60 uppercase">Certificações Técnicas</p>
               </div>
               <div className="p-8 flex flex-col justify-center">
                 <h3 className="text-4xl font-bold mb-2">5 Anos</h3>
-                <p className="text-sm text-gray-500 uppercase">Experiência de Mercado</p>
+                <p className="text-sm text-foreground/60 uppercase">Experiência de Mercado</p>
               </div>
             </div>
       </div>

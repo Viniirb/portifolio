@@ -108,7 +108,7 @@ const ProjectModal = React.memo(({ project, onClose }: { project: Project; onClo
               <a
                 href={project.links.demo}
                 target="_blank"
-                className="px-6 py-3 bg-corporate-accent text-white text-sm font-bold uppercase hover:bg-blue-700 transition-colors flex items-center gap-2"
+                className="px-6 py-3 bg-corporate-accent text-background text-sm font-bold uppercase hover:bg-corporate-accent/80 transition-colors flex items-center gap-2"
               >
                 Ver Demo <ArrowUpRightIcon className="w-4 h-4" />
               </a>

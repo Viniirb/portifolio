@@ -75,7 +75,7 @@ export function Header() {
                 key={item.name} 
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="text-lg font-medium uppercase tracking-widest py-2 border-b border-gray-100"
+                className="text-lg font-medium uppercase tracking-widest py-2 border-b border-corporate-border"
               >
                 {item.name}
               </Link>
