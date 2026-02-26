@@ -1,5 +1,5 @@
 name: Task
-description: Tarefa de sprint do portfolio
+description: Tarefa de sprint
 title: "[Task]: "
 labels: ["task"]
 assignees:
@@ -10,63 +10,18 @@ body:
     id: objective
     attributes:
       label: Objective
-      description: Expected result
-      placeholder: Ex. Fix broken ProjectCard import
-    validations:
-      required: true
-
-  - type: dropdown
-    id: sprint
-    attributes:
-      label: Sprint
-      options:
-        - Sprint 1
-        - Sprint 2
-    validations:
-      required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      options:
-        - High
-        - Medium
-        - Low
-    validations:
-      required: true
-
-  - type: dropdown
-    id: estimate
-    attributes:
-      label: Estimate
-      options:
-        - "1"
-        - "2"
-        - "3"
-        - "5"
-        - "8"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: type
-    attributes:
-      label: Type
-      options:
-        - Feature
-        - Bug
-        - Design
-        - Tech Debt
+      description: Resultado esperado da task
+      placeholder: Ex. Corrigir import quebrado de ProjectCard
     validations:
       required: true
 
   - type: textarea
-    id: acceptance
+    id: acceptance_criteria
     attributes:
       label: Acceptance criteria
+      description: Critérios para considerar a task concluída
       placeholder: |
-        - [ ] Criterion 1
-        - [ ] Criterion 2
+        - [ ] Critério 1
+        - [ ] Critério 2
     validations:
       required: true
