@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Filter, Shield, Cloud, Code, Network, Settings, BrainCircuit  } from "lucide-react";
+import { CertificateIcon as Award, FunnelIcon as Filter, ShieldCheckIcon as Shield, CloudIcon as Cloud, CodeIcon as Code, GlobeIcon as Network, GearIcon as Settings, BrainIcon as BrainCircuit } from "@phosphor-icons/react";
 import { certifications } from "@/constants";
 import { useState } from "react";
 

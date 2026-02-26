@@ -2,19 +2,19 @@
 
 import { motion } from "framer-motion";
 import {
-  Code2,
-  Database,
-  GitBranch,
-  Server,
-  Terminal,
-  Zap,
-  BookOpen,
-  ChefHat,
-  BookMarked,
-  Gamepad2,
-  Plane,
-  Lightbulb,
-} from "lucide-react";
+  CodeIcon as Code2,
+  DatabaseIcon as Database,
+  GitBranchIcon as GitBranch,
+  HardDrivesIcon as Server,
+  TerminalWindowIcon as Terminal,
+  LightningIcon as Zap,
+  BookOpenIcon as BookOpen,
+  CookingPotIcon as ChefHat,
+  BookBookmarkIcon as BookMarked,
+  GameControllerIcon as Gamepad2,
+  AirplaneTiltIcon as Plane,
+  LightbulbIcon as Lightbulb,
+} from "@phosphor-icons/react";
 
 export default function Sobre() {
   const skills = [

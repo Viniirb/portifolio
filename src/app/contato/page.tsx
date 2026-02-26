@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, Github, Linkedin } from "lucide-react";
+import { EnvelopeSimpleIcon as Mail, PhoneIcon as Phone, GithubLogoIcon as Github, LinkedinLogoIcon as Linkedin } from "@phosphor-icons/react";
 
 export default function ContatoPage() {
   const wpMsg = encodeURIComponent(
