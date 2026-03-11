@@ -67,20 +67,19 @@ src/
 │   │   ├── CertificationsSection.tsx
 │   │   └── ContactSection.tsx
 │   ├── ui/
-│   │   ├── ParticleCanvas.tsx      # NEW — interactive canvas background
+│   │   ├── ParticleCanvas.tsx      # NEW — interactive canvas background ("use client", no SSR)
 │   │   ├── ProjectModal.tsx        # NEW — animated project detail modal
 │   │   ├── SectionReveal.tsx       # NEW — scroll reveal wrapper
-│   │   ├── CustomCursor.tsx        # NEW — custom cursor
-│   │   ├── GlowBorder.tsx          # NEW — reusable glow border wrapper
+│   │   ├── CustomCursor.tsx        # NEW — custom cursor ("use client", disabled on touch, no SSR)
 │   │   └── ThemeToggle/            # Kept
 │   ├── layout/
 │   │   ├── Header/                 # Refactored — scroll spy nav
-│   │   └── Footer/                 # Kept, simplified
+│   │   ├── Footer/                 # Kept, simplified
+│   │   └── PageCurtain.tsx         # NEW — inline in layout.tsx, purple curtain enter animation
 │   └── providers/
 ├── constants/                  # Kept — projects, certifications, stack data
 ├── hooks/
-│   ├── useScrollSpy.ts             # NEW — highlights active nav item
-│   └── useCountUp.ts               # NEW — animated number counter
+│   └── useScrollSpy.ts             # NEW — signature: useScrollSpy(sectionIds: string[]): string — returns the id of the section currently most in view; returns sectionIds[0] on initialization and whenever no section is intersecting
 └── types/                      # Kept
 ```
 
@@ -119,18 +118,35 @@ src/
 - Centered vertical timeline with animated glowing purple line
 - Line animates from top to bottom using SVG pathLength (Framer Motion) as user scrolls
 - Cards alternate left/right on desktop, stack on mobile
-- Each card: glass style, company name, role, period, tech chips, short description
+- Each card (glass style) maps data fields as follows:
+  - `company` → company name (heading)
+  - `title` → role (subheading)
+  - `period` → period badge
+  - `tech[]` → tech chips
+  - `short` → short description (card body — one sentence)
 - Cards animate in as the timeline line reaches them
+- **Data source:** `src/constants/projects.ts` (same dataset as Projects section — compact, chronological view)
 
 ### 5. Projetos (Projects)
+- Uses the **same `projects.ts` data** as Experience — these are the same 4 employment records intentionally shown twice: Experience as a chronological timeline, Projects as a detailed showcase grid
+- Personal/open-source projects are out of scope for this redesign
 - 2-column grid on desktop, 1 on mobile
-- Large glass cards with: company name, role, period, tech chips, short description, "Ver detalhes" button
-- On click: modal slides up from bottom with AnimatePresence
-  - Modal content: full description list, complete tech stack, role highlights
-  - Modal has backdrop blur overlay, close on outside click or ESC key
+- Card (glass style) maps data fields as follows:
+  - `company` → company name (heading)
+  - `title` → role (subheading)
+  - `period` → period badge
+  - `tech[]` → tech chips (up to 5 visible, rest truncated with "+N")
+  - `short` → short description
+  - "Ver detalhes" button → opens modal
+- Modal maps data fields as follows:
+  - `company` + `title` + `period` → modal header
+  - `description[]` → full bullet list of responsibilities
+  - `tech[]` → complete tech stack chips
+  - `links` field is not used (no GitHub/demo links in current data)
+- Modal has backdrop blur overlay, close on outside click or ESC key
 
 ### 6. Certificações (Certifications)
-- Section header: animated counter from 0 to 30+ when in viewport
+- Section header: animated counter from 0 to `certifications.length` (data-driven, currently 35+) when in viewport
 - Filter bar by category (animated active state)
 - Masonry/grid layout of compact glass badges
 - Each badge: certification name, issuer, small icon
@@ -155,18 +171,19 @@ src/
 | Animation | Implementation | Trigger |
 |-----------|---------------|---------|
 | Hero glitch | CSS keyframes, clip-path offset ±2px | On mount, 3 cycles |
-| Page enter | Purple curtain slides down then up | Route load |
+| Page enter | `PageCurtain` component in `layout.tsx` — purple div `y: "-100%" → 0 → "100%"`, duration 1.2s, fires on initial page load only (one-page app, no route changes) | Initial load |
 | Timeline line | SVG pathLength 0→1, Framer Motion | Scroll into view |
-| Counter | Custom `useCountUp` hook, rAF | Scroll into view |
+| Counter | Inline `useEffect` + `requestAnimationFrame` in `CertificationsSection.tsx` (single-use, no shared hook) | Scroll into view |
 | Particles | Canvas API, requestAnimationFrame | Always running |
-| Custom cursor | CSS + JS position tracking | Always active |
+| Custom cursor | CSS + JS position tracking | Always active, disabled on touch |
 | Card hover | scale(1.02) + glow box-shadow | Hover |
 | Modal enter | y: "100%" → y: 0, AnimatePresence | Click |
 
 ### Custom Cursor
 - Small white circle (8px) follows mouse natively
-- On hover over interactive elements: scales to 40px with blur and opacity reduction
+- On hover over `a`, `button`, `[role="button"]` elements: scales to 40px with blur and opacity reduction
 - Implemented with `position: fixed`, `pointer-events: none`, Framer Motion `useSpring`
+- Disabled on touch devices (`window.matchMedia("(pointer: coarse)")`)
 
 ---
 
@@ -176,21 +193,29 @@ src/
 ```
 @fontsource/space-grotesk
 @fontsource/jetbrains-mono
+tailwindcss@4          # upgrade from v3
+@tailwindcss/postcss   # required for Tailwind v4
 ```
 
+Note: `Inter` continues to be loaded via `next/font/google` in `layout.tsx` — no fontsource package needed.
+Note: `@phosphor-icons/react` is already installed — no action needed.
+
 ### Update
-- `tailwindcss`: v3 → v4 (config migration from `tailwind.config.ts` to CSS-native `@theme`)
-- All other deps already at latest versions
+- All other deps already at latest versions (tailwindcss v4 listed above in Add)
 
 ### Remove
-- `tailwindcss-animate` — replaced by Framer Motion animations
+- `tailwindcss-animate` — replaced by Framer Motion animations. The pulsing availability badge in Hero uses Framer Motion `animate` (not `animate-pulse`), so no Tailwind animate utilities remain after removal.
+- `autoprefixer` — not needed in Tailwind v4
+- `next-themes` — removed (dark-only, no theme toggling)
+- `tailwind.config.ts` — replaced by `@theme` in CSS
+- `Playfair_Display` import from `layout.tsx` — replaced by Space Grotesk as display font
 
 ---
 
 ## Tailwind v4 Migration Notes
 - Config moves from `tailwind.config.ts` to `globals.css` using `@theme` directive
 - Custom colors defined as CSS variables under `@theme`
-- `postcss.config.mjs` updated to use `@tailwindcss/postcss`
+- `postcss.config.mjs` updated to use `@tailwindcss/postcss` (remove `autoprefixer`)
 - `tailwind.config.ts` deleted
 
 ---
@@ -213,8 +238,17 @@ src/
 
 ---
 
+## Theme / Light Mode
+The design is dark-only. `ThemeToggle` is **removed** from the component tree — it is unnecessary complexity for a dark-only portfolio. The `next-themes` provider and `ThemeProvider` components are also removed. The `dark` CSS class is hardcoded on `<html>` in `layout.tsx`.
+
+## SSR Safety
+`ParticleCanvas` and `CustomCursor` use Canvas API and DOM event listeners — unavailable during SSR. Both components must:
+- Use `"use client"` directive
+- Be imported with `dynamic(() => import(...), { ssr: false })` in `page.tsx`
+
 ## Out of Scope
 - Blog/articles section
-- Dark/light toggle removal (ThemeToggle kept for accessibility)
+- Light mode / ThemeToggle (removed — dark-only design)
+- Personal/open-source project showcase (deferred)
 - Backend/API (pure static/SSG)
 - Internationalization (PT-BR only)
