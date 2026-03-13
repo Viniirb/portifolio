@@ -3,7 +3,6 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/layout/Footer/Footer";
 import { Header } from "../components/layout/Header/Header";
-import { ThemeProvider } from "../components/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ 
@@ -31,16 +30,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${inter.className} ${playfair.variable}`} suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          storageKey="portfolio-theme"
-        >
-          <Header />
-          <div className="pt-16 sm:pt-20 relative z-10">{children}</div>
-          <Footer />
-        </ThemeProvider>
+        <Header />
+        <div className="pt-16 sm:pt-20 relative z-10">{children}</div>
+        <Footer />
       </body>
     </html>
   );
