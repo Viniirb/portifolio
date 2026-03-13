@@ -1,0 +1,97 @@
+// src/components/sections/ProjectsSection.tsx
+'use client'
+import { useState } from 'react'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { ArrowUpRightIcon } from '@phosphor-icons/react'
+import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
+import { ProjectModal } from '@/components/ui/ProjectModal'
+import { projects } from '@/constants/projects'
+import { techIcons } from '@/constants/tech-icons'
+import type { Project } from '@/types'
+import type { TechKey } from '@/types'
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+}
+
+export function ProjectsSection() {
+  const [selected, setSelected] = useState<Project | null>(null)
+
+  return (
+    <section id="projetos" className="py-24 sm:py-32 px-6 max-w-6xl mx-auto">
+      <SectionReveal>
+        <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
+          // projetos
+        </span>
+      </SectionReveal>
+
+      <SectionReveal delay={0.1}>
+        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-16">
+          O que eu <span className="text-gradient">Construí</span>
+        </h2>
+      </SectionReveal>
+
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+      >
+        {projects.map((project) => {
+          const visibleTech = project.tech.slice(0, 5)
+          const remaining = project.tech.length - 5
+
+          return (
+            <motion.div
+              key={project.id}
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              className="glass-card glow-border rounded-xl p-6 flex flex-col gap-4 group cursor-pointer"
+              onClick={() => setSelected(project)}
+              role="button"
+              tabIndex={0}
+              aria-label={`Ver detalhes de ${project.company}`}
+              onKeyDown={(e) => { if (e.key === 'Enter') setSelected(project) }}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-white text-xl">{project.company}</h3>
+                  <p className="text-purple-glow font-mono text-sm mt-0.5">{project.title}</p>
+                </div>
+                <ArrowUpRightIcon
+                  weight="bold"
+                  className="w-5 h-5 text-white-dim group-hover:text-purple-glow transition-colors flex-shrink-0 mt-1"
+                />
+              </div>
+
+              <span className="font-mono text-xs text-white-dim bg-purple-deep/50 px-2 py-1 rounded w-fit">
+                {project.period}
+              </span>
+
+              <p className="text-white-muted text-sm leading-relaxed flex-1">{project.short}</p>
+
+              <div className="flex items-center gap-1.5">
+                {visibleTech.map((tech) => {
+                  const icon = techIcons[tech as TechKey]
+                  return icon ? (
+                    <div key={tech} className="w-5 h-5 relative opacity-60 group-hover:opacity-100 transition-opacity" title={icon.alt}>
+                      <Image src={icon.src} alt={icon.alt} fill className="object-contain" />
+                    </div>
+                  ) : null
+                })}
+                {remaining > 0 && (
+                  <span className="font-mono text-xs text-white-dim">+{remaining}</span>
+                )}
+              </div>
+            </motion.div>
+          )
+        })}
+      </motion.div>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+    </section>
+  )
+}
