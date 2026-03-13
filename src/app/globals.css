@@ -67,6 +67,14 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  @keyframes glitch {
+    0%, 100% { transform: translateX(0); clip-path: inset(0 0 0 0); }
+    20%       { transform: translateX(-2px); clip-path: inset(20% 0 60% 0); }
+    40%       { transform: translateX(2px);  clip-path: inset(60% 0 20% 0); }
+    60%       { transform: translateX(-1px); clip-path: inset(80% 0 0 0); }
+    80%       { transform: translateX(1px);  clip-path: inset(0 0 80% 0); }
+  }
 }
 
 @layer utilities {
