@@ -1,4 +1,3 @@
-// src/components/layout/Header/Header.tsx
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -29,7 +28,6 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-bg-primary/80 backdrop-blur-md border-b border-purple-subtle/50">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6 sm:px-8">
-        {/* Logo */}
         <button
           onClick={() => scrollTo('hero')}
           className="font-display text-xl font-bold tracking-tighter text-white hover:text-purple-glow transition-colors"
@@ -37,7 +35,6 @@ export function Header() {
           VB.DEV
         </button>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Navegação principal">
           {navItems.map((item) => {
             const isActive = activeSection === item.id
@@ -61,7 +58,6 @@ export function Header() {
           })}
         </nav>
 
-        {/* Social icons */}
         <div className="hidden md:flex items-center gap-4">
           <a
             href="https://github.com/Viniirb"
@@ -83,7 +79,6 @@ export function Header() {
           </a>
         </div>
 
-        {/* Mobile button */}
         <button
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
@@ -93,7 +88,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}

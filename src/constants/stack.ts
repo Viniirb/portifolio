@@ -1,4 +1,3 @@
-// src/constants/stack.ts
 export interface StackItem {
   name: string
   icon: string

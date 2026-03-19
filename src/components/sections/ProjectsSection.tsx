@@ -1,4 +1,3 @@
-// src/components/sections/ProjectsSection.tsx
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -63,7 +62,7 @@ export function ProjectsSection() {
                 </div>
                 <ArrowUpRightIcon
                   weight="bold"
-                  className="w-5 h-5 text-white-dim group-hover:text-purple-glow transition-colors flex-shrink-0 mt-1"
+                  className="w-5 h-5 text-white-dim group-hover:text-purple-glow transition-colors shrink-0 mt-1"
                 />
               </div>
 

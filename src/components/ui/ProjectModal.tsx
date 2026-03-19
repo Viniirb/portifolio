@@ -1,4 +1,3 @@
-// src/components/ui/ProjectModal.tsx
 'use client'
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'

@@ -1,4 +1,3 @@
-// src/components/sections/AboutSection.tsx
 'use client'
 import { motion } from 'framer-motion'
 import {
@@ -44,7 +43,6 @@ export function AboutSection() {
       </SectionReveal>
 
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-        {/* Bio — left */}
         <div className="lg:col-span-3 space-y-6">
           <SectionReveal delay={0.1}>
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-gradient">
@@ -68,7 +66,6 @@ export function AboutSection() {
             </p>
           </SectionReveal>
 
-          {/* Status items */}
           <SectionReveal delay={0.4}>
             <div className="flex flex-wrap gap-4 pt-2">
               {statusItems.map(({ icon: Icon, label, value }) => (
@@ -81,7 +78,6 @@ export function AboutSection() {
           </SectionReveal>
         </div>
 
-        {/* Curiosidades — right */}
         <div className="lg:col-span-2">
           <SectionReveal delay={0.2}>
             <h3 className="font-mono text-xs text-purple-glow uppercase tracking-widest mb-6">

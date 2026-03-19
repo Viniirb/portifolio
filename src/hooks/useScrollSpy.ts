@@ -4,7 +4,6 @@ export function useScrollSpy(sectionIds: string[]): string {
   const [active, setActive] = useState<string>(sectionIds[0] ?? '')
 
   useEffect(() => {
-    // Use document.body as root because html { overflow: hidden } makes body the scroll container
     const scrollRoot = document.body
     const observers = new Map<string, IntersectionObserver>()
 

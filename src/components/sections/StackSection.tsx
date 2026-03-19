@@ -1,4 +1,3 @@
-// src/components/sections/StackSection.tsx
 'use client'
 import Image from 'next/image'
 import { motion } from 'framer-motion'

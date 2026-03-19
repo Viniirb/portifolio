@@ -1,4 +1,3 @@
-// src/components/sections/CertificationsSection.tsx
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
@@ -79,7 +78,6 @@ export function CertificationsSection() {
         </div>
       </SectionReveal>
 
-      {/* Filter bar */}
       <SectionReveal delay={0.2}>
         <div className="flex flex-wrap gap-2 mb-12">
           {categories.map((cat) => (

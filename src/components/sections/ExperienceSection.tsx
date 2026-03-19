@@ -1,4 +1,3 @@
-// src/components/sections/ExperienceSection.tsx
 'use client'
 import Image from 'next/image'
 import { useRef } from 'react'
@@ -31,9 +30,7 @@ export function ExperienceSection() {
       </SectionReveal>
 
       <div ref={timelineRef} className="relative">
-        {/* Static line */}
         <div className="absolute left-1/2 top-0 bottom-0 w-px bg-purple-subtle/30 -translate-x-1/2 hidden md:block" />
-        {/* Animated line */}
         <motion.div
           className="absolute left-1/2 top-0 w-px bg-purple-glow -translate-x-1/2 origin-top hidden md:block"
           style={{
@@ -54,7 +51,6 @@ export function ExperienceSection() {
                 viewport={{ once: true, margin: '-80px' }}
                 className="md:grid md:grid-cols-2 md:gap-16 relative"
               >
-                {/* Card */}
                 <div className={isEven ? 'md:pr-8' : 'md:col-start-2 md:pl-8'}>
                   <div className="glass-card rounded-xl p-6 glow-border group hover:border-purple-glow/50 transition-colors">
                     <h3 className="font-display font-bold text-white text-lg">{project.company}</h3>
@@ -80,7 +76,6 @@ export function ExperienceSection() {
                   </div>
                 </div>
 
-                {/* Timeline dot */}
                 <div className="hidden md:block absolute left-1/2 top-6 -translate-x-1/2">
                   <div className="w-3 h-3 rounded-full bg-purple-glow shadow-[0_0_12px_rgba(124,58,237,0.8)]" />
                 </div>

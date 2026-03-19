@@ -18,10 +18,8 @@ export function HeroSection() {
       id="hero"
       className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg-primary"
     >
-      {/* Particle background */}
       <ParticleCanvas />
 
-      {/* Aurora blob */}
       <div
         className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
@@ -32,9 +30,7 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto">
-        {/* Animated tag */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,7 +40,6 @@ export function HeroSection() {
           {'< Full Stack Developer />'}
         </motion.p>
 
-        {/* Name with glitch keyframe */}
         <motion.h1
           className="font-display text-[clamp(3.5rem,12vw,9rem)] font-bold leading-none tracking-tighter text-gradient select-none"
           initial={{ opacity: 0, y: 60 }}
@@ -57,7 +52,6 @@ export function HeroSection() {
           BARBOSA
         </motion.h1>
 
-        {/* Description */}
         <motion.p
           className="mt-8 text-white-muted text-lg max-w-xl leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
@@ -68,7 +62,6 @@ export function HeroSection() {
           Transformando requisitos técnicos em produtos digitais robustos.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           className="mt-10 flex flex-col sm:flex-row gap-4"
           initial={{ opacity: 0, y: 20 }}
@@ -95,7 +88,6 @@ export function HeroSection() {
           </button>
         </motion.div>
 
-        {/* Availability badge */}
         <motion.div
           className="mt-10 flex items-center gap-2 font-mono text-xs text-white-muted"
           initial={{ opacity: 0 }}
@@ -111,7 +103,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.button
         onClick={() => scrollTo('sobre')}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white-dim hover:text-white transition-colors"

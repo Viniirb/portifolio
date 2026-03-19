@@ -27,21 +27,3 @@ export const techIcons: Record<
   vscode: { src: "/tech/vscode.svg", alt: "Visual Studio Code" },
   mysql: { src: "/tech/mysql.svg", alt: "MySQL" },
 };
-
-export const whiteIconTechs: TechKey[] = [
-  "vue",
-  "typescript",
-  "dotnet",
-  "git",
-  "javascript",
-  "angular",
-  "bootstrap",
-  "jira",
-  "bitbucket",
-  "styledcomponents",
-  "minio",
-  "dotenv",
-  "graphql",
-  "react",
-  "nextjs",
-];

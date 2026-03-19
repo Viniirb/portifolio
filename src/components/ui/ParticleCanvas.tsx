@@ -1,4 +1,3 @@
-// src/components/ui/ParticleCanvas.tsx
 'use client'
 import { useEffect, useRef } from 'react'
 

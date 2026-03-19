@@ -1,4 +1,3 @@
-// src/components/ui/CustomCursor.tsx
 'use client'
 import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
@@ -49,7 +48,7 @@ export function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9997] rounded-full border border-white/50 mix-blend-difference"
+      className="fixed top-0 left-0 pointer-events-none z-9997 rounded-full border border-white/50 mix-blend-difference"
       style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
       animate={{
         width: isHovering ? 40 : 8,

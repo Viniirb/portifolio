@@ -30,5 +30,4 @@ export type Project = {
   short: string;
   description: string[];
   tech: TechKey[];
-  links?: { repo?: string; demo?: string };
 };
