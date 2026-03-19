@@ -98,7 +98,7 @@ export function AboutSection() {
                 variants={itemVariants}
                 className="glass-card glow-border p-3 flex items-center gap-3 text-sm text-white-muted"
               >
-                <Icon weight="bold" className="w-4 h-4 text-purple-glow flex-shrink-0" />
+                <Icon weight="bold" className="w-4 h-4 text-purple-glow shrink-0" />
                 {text}
               </motion.li>
             ))}

@@ -110,7 +110,7 @@ export function CertificationsSection() {
             className="glass-card rounded-lg p-4 glow-border group"
           >
             <div className="flex items-start gap-3">
-              <div className="w-2 h-2 rounded-full bg-purple-glow mt-1.5 flex-shrink-0" />
+              <div className="w-2 h-2 rounded-full bg-purple-glow mt-1.5 shrink-0" />
               <div>
                 <p className="text-white text-sm font-medium leading-tight">
                   {cert.title}

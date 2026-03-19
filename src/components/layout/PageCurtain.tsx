@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 export function PageCurtain() {
   return (
     <motion.div
-      className="fixed inset-0 z-[9998] pointer-events-none"
+      className="fixed inset-0 z-9998 pointer-events-none"
       style={{ background: '#7c3aed' }}
       initial={{ y: '-100%' }}
       animate={{ y: ['-100%', '0%', '100%'] }}

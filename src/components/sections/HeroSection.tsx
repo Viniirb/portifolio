@@ -21,7 +21,7 @@ export function HeroSection() {
       <ParticleCanvas />
 
       <div
-        className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full pointer-events-none"
+        className="absolute top-[-10%] right-[-5%] w-150 h-150 rounded-full pointer-events-none"
         style={{
           background:
             'radial-gradient(circle, rgba(76,29,149,0.4) 0%, rgba(22,8,46,0.2) 50%, transparent 70%)',

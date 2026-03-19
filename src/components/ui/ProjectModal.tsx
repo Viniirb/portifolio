@@ -29,7 +29,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       {project && (
         <>
           <motion.div
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-100 bg-black/60 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -40,7 +40,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             role="dialog"
             aria-modal="true"
             aria-label={`Detalhes: ${project.company}`}
-            className="fixed bottom-0 left-0 right-0 z-[101] max-h-[85vh] overflow-y-auto rounded-t-2xl border-t border-purple-subtle"
+            className="fixed bottom-0 left-0 right-0 z-101 max-h-[85vh] overflow-y-auto rounded-t-2xl border-t border-purple-subtle"
             style={{ background: '#0f0f1a' }}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -66,7 +66,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <ul className="space-y-3 mb-8">
                 {project.description.map((item, i) => (
                   <li key={i} className="flex gap-3 text-white-muted text-sm leading-relaxed">
-                    <span className="text-purple-glow mt-0.5 flex-shrink-0">▸</span>
+                    <span className="text-purple-glow mt-0.5 shrink-0">▸</span>
                     {item}
                   </li>
                 ))}

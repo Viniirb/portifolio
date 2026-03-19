@@ -62,7 +62,7 @@ export function StackSection() {
                   <span className="font-mono text-xs text-white-dim uppercase tracking-widest">
                     {label}
                   </span>
-                  <div className="flex-1 h-px bg-gradient-to-r from-purple-subtle to-transparent" />
+                  <div className="flex-1 h-px bg-linear-to-r from-purple-subtle to-transparent" />
                 </div>
                 <motion.div
                   className="flex flex-wrap gap-2"

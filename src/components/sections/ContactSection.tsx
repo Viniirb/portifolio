@@ -49,39 +49,40 @@ export function ContactSection() {
       </SectionReveal>
 
       <div className="space-y-4">
-        {contacts.map((contact, index) => (
-          <motion.div
-            key={contact.label}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-          >
-            <a
-              href={contact.href}
-              target={contact.href.startsWith('http') ? '_blank' : undefined}
-              rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group flex items-center gap-6 py-5 border-b border-purple-subtle/30 hover:border-purple-glow/50 transition-all"
-              aria-label={`${contact.label}: ${contact.handle}`}
+        {contacts.map((contact, index) => {
+          return (
+            <motion.div
+              key={contact.label}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
-              <contact.icon
-                weight="bold"
-                className="w-8 h-8 text-white-dim group-hover:text-purple-glow transition-colors flex-shrink-0"
-              />
-              <div className="flex-1">
-                <p className="font-mono text-xs text-white-dim uppercase tracking-widest">
-                  {contact.label}
-                </p>
-                <p className="font-display text-xl font-bold text-white group-hover:text-gradient transition-all">
-                  {contact.handle}
-                </p>
-              </div>
-              <span className="text-white-dim group-hover:text-purple-glow group-hover:translate-x-1 transition-all font-mono text-sm">
-                →
-              </span>
-            </a>
-          </motion.div>
-        ))}
+              <a
+                href={contact.href}
+                target={contact.href.startsWith('http') ? '_blank' : undefined}
+                rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="group flex items-center gap-6 py-5 border-b border-purple-subtle/30 hover:border-purple-glow/50 transition-all"
+                aria-label={`${contact.label}: ${contact.handle}`}
+              >
+                <contact.icon
+                  weight="bold"
+                  className="w-8 h-8 text-white-dim group-hover:text-purple-glow transition-colors shrink-0" />
+                <div className="flex-1">
+                  <p className="font-mono text-xs text-white-dim uppercase tracking-widest">
+                    {contact.label}
+                  </p>
+                  <p className="font-display text-xl font-bold text-white group-hover:text-gradient transition-all">
+                    {contact.handle}
+                  </p>
+                </div>
+                <span className="text-white-dim group-hover:text-purple-glow group-hover:translate-x-1 transition-all font-mono text-sm">
+                  →
+                </span>
+              </a>
+            </motion.div>
+          )
+        })}
       </div>
     </section>
   )
