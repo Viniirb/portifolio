@@ -23,7 +23,7 @@ const curiosidades = [
 ]
 
 const statusItems = [
-  { icon: BriefcaseIcon, label: 'Empresa', value: 'NTecnologias' },
+  { icon: BriefcaseIcon, label: 'Empresa', value: 'N Tecnologias' },
   { icon: MapPinIcon, label: 'Localização', value: 'Joinville, SC' },
   { icon: StarIcon, label: 'Experiência', value: '5 anos' },
 ]
@@ -52,17 +52,18 @@ export function AboutSection() {
 
           <SectionReveal delay={0.2}>
             <p className="text-white-muted leading-relaxed">
-              Natural de Mato Grosso do Sul, atualmente residindo em Joinville, Santa Catarina.
-              Com 5 anos de experiência como desenvolvedor fullstack, especializo-me em criar
-              soluções robustas e escaláveis que transformam desafios complexos em produtos eficientes.
+              Natural de Campo Grande, Mato Grosso do Sul, hoje em Joinville, Santa Catarina.
+              Sou autista — e enxergo nisso uma vantagem real: foco profundo, pensamento sistemático
+              e atenção a detalhes que fazem a diferença em sistemas críticos.
             </p>
           </SectionReveal>
 
           <SectionReveal delay={0.3}>
             <p className="text-white-muted leading-relaxed">
-              Minha trajetória é marcada por uma busca constante por aprendizado e inovação,
-              aplicando as melhores práticas de desenvolvimento para entregar soluções de alta qualidade
-              que superam as expectativas dos clientes.
+              Com 5 anos de experiência como Engenheiro de Software Sênior, especializo-me em .NET
+              e na modernização de sistemas legados. Já projetei evoluções arquiteturais de monólito
+              para serviços, implementei agentes de IA em produção (RAG) e automatizei operações
+              críticas com n8n — sempre com foco em entrega confiável e impacto mensurável.
             </p>
           </SectionReveal>
 
