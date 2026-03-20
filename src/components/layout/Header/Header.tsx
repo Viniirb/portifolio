@@ -96,15 +96,20 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           className="md:hidden border-t border-purple-subtle/50 bg-bg-surface"
         >
           <nav className="flex flex-col p-6 gap-4" aria-label="Menu mobile">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavigate(item.id)}
-                className="font-mono text-sm uppercase tracking-widest text-left py-2 border-b border-purple-subtle/30 text-white-muted hover:text-white transition-colors"
-              >
-                {item.name}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavigate(item.id)}
+                  className={`font-mono text-sm uppercase tracking-widest text-left py-2 border-b border-purple-subtle/30 transition-colors ${
+                    isActive ? 'text-purple-glow' : 'text-white-muted hover:text-white'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              )
+            })}
           </nav>
         </motion.div>
       )}

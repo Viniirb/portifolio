@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden flex flex-col">
       <Header activeSection={active} onNavigate={setActive} />
       <AnimatePresence mode="wait">
         <motion.div
@@ -36,7 +36,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.25, ease: 'easeInOut' }}
-          className="h-screen overflow-y-auto"
+          className="flex-1 overflow-y-auto"
         >
           {renderSection()}
         </motion.div>
