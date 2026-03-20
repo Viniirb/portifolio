@@ -30,14 +30,14 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="font-mono text-sm text-purple-glow mb-6 tracking-widest"
         >
-          {'< Full Stack Developer />'}
+          {'< Engenheiro de Software Sênior />'}
         </motion.p>
 
         <motion.h1
@@ -58,8 +58,8 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          Especialista em construir arquiteturas escaláveis e interfaces performáticas.
-          Transformando requisitos técnicos em produtos digitais robustos.
+          Especializado em .NET e modernização de sistemas críticos.
+          5 anos construindo arquiteturas escaláveis, automações de alto impacto e IA aplicada em produção.
         </motion.p>
 
         <motion.div
