@@ -15,6 +15,7 @@ function TechChip({ item }: { item: StackItem }) {
       variants={itemVariants}
       whileHover={{ scale: 1.05 }}
       className="glass-card glow-border flex items-center gap-2 px-3 py-2 rounded-lg cursor-default"
+      style={{ boxShadow: `0 0 8px ${item.color}22` }}
     >
       <Image
         src={item.icon}
@@ -22,8 +23,11 @@ function TechChip({ item }: { item: StackItem }) {
         width={16}
         height={16}
         className="w-4 h-4 object-contain"
+        style={{ filter: `drop-shadow(0 0 4px ${item.color})` }}
       />
-      <span className="font-mono text-xs text-white-muted whitespace-nowrap">{item.name}</span>
+      <span className="font-mono text-xs whitespace-nowrap" style={{ color: item.color }}>
+        {item.name}
+      </span>
     </motion.div>
   )
 }
