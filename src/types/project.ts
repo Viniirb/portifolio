@@ -20,7 +20,13 @@ export type TechKey =
   | "dotenv"
   | "graphql"
   | "vscode"
-  | "mysql";
+  | "mysql"
+  | "supabase"
+  | "postgresql"
+  | "docker"
+  | "n8n"
+  | "ionic"
+  | "python";
 
 export type Project = {
   id: string;

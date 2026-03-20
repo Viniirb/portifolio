@@ -26,4 +26,10 @@ export const techIcons: Record<
   graphql: { src: "/tech/graphql.svg", alt: "GraphQL" },
   vscode: { src: "/tech/vscode.svg", alt: "Visual Studio Code" },
   mysql: { src: "/tech/mysql.svg", alt: "MySQL" },
+  supabase: { src: "/tech/supabase.svg", alt: "Supabase" },
+  postgresql: { src: "/tech/postgresql.svg", alt: "PostgreSQL" },
+  docker: { src: "/tech/docker.svg", alt: "Docker" },
+  n8n: { src: "/tech/n8n.svg", alt: "n8n" },
+  ionic: { src: "/tech/ionic.svg", alt: "Ionic" },
+  python: { src: "/tech/python.svg", alt: "Python" },
 };
