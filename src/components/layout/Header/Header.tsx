@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ListIcon, X, GithubLogoIcon, LinkedinLogoIcon } from '@phosphor-icons/react'
-import { useScrollSpy } from '@/hooks/useScrollSpy'
 
 const navItems = [
   { name: 'Início', id: 'hero' },
@@ -14,22 +13,24 @@ const navItems = [
   { name: 'Contato', id: 'contato' },
 ]
 
-const SECTION_IDS = navItems.map((i) => i.id)
+interface HeaderProps {
+  activeSection: string
+  onNavigate: (id: string) => void
+}
 
-export function Header() {
+export function Header({ activeSection, onNavigate }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const activeSection = useScrollSpy(SECTION_IDS)
 
-  const scrollTo = (id: string) => {
+  const handleNavigate = (id: string) => {
     setIsOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    onNavigate(id)
   }
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-bg-primary/80 backdrop-blur-md border-b border-purple-subtle/50">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6 sm:px-8">
         <button
-          onClick={() => scrollTo('hero')}
+          onClick={() => handleNavigate('hero')}
           className="font-display text-xl font-bold tracking-tighter text-white hover:text-purple-glow transition-colors"
         >
           VB.DEV
@@ -41,7 +42,7 @@ export function Header() {
             return (
               <button
                 key={item.id}
-                onClick={() => scrollTo(item.id)}
+                onClick={() => handleNavigate(item.id)}
                 className={`relative font-mono text-xs uppercase tracking-widest transition-colors ${
                   isActive ? 'text-purple-glow' : 'text-white-muted hover:text-white'
                 }`}
@@ -69,7 +70,7 @@ export function Header() {
             <GithubLogoIcon weight="bold" className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com/in/viniciusrb"
+            href="https://linkedin.com/in/viniciusrolimbarbosa"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -98,7 +99,7 @@ export function Header() {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollTo(item.id)}
+                onClick={() => handleNavigate(item.id)}
                 className="font-mono text-sm uppercase tracking-widest text-left py-2 border-b border-purple-subtle/30 text-white-muted hover:text-white transition-colors"
               >
                 {item.name}

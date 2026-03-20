@@ -1,18 +1,18 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
-import { ArrowDownIcon, ArrowRightIcon } from '@phosphor-icons/react'
+import { ArrowRightIcon } from '@phosphor-icons/react'
 
 const ParticleCanvas = dynamic(
   () => import('@/components/ui/ParticleCanvas').then((m) => m.ParticleCanvas),
   { ssr: false }
 )
 
-export function HeroSection() {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  }
+interface HeroSectionProps {
+  onNavigate: (id: string) => void
+}
 
+export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section
       id="hero"
@@ -69,7 +69,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 1.3 }}
         >
           <button
-            onClick={() => scrollTo('projetos')}
+            onClick={() => onNavigate('projetos')}
             className="glass-card glow-border px-8 py-3 font-mono text-sm tracking-widest uppercase text-white flex items-center gap-2 group transition-all"
             aria-label="Ver projetos"
           >
@@ -80,7 +80,7 @@ export function HeroSection() {
             />
           </button>
           <button
-            onClick={() => scrollTo('contato')}
+            onClick={() => onNavigate('contato')}
             className="px-8 py-3 font-mono text-sm tracking-widest uppercase text-white-muted hover:text-white border border-purple-subtle/50 hover:border-purple-glow transition-all"
             aria-label="Falar comigo"
           >
@@ -103,15 +103,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      <motion.button
-        onClick={() => scrollTo('sobre')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white-dim hover:text-white transition-colors"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        aria-label="Rolar para baixo"
-      >
-        <ArrowDownIcon weight="bold" className="w-6 h-6" />
-      </motion.button>
     </section>
   )
 }
