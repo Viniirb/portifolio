@@ -6,6 +6,10 @@
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/700.css";
 
+*, *::before, *::after {
+  cursor: none !important;
+}
+
 @theme {
   --color-bg-primary: #080810;
   --color-bg-surface: #0f0f1a;
