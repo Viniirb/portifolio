@@ -13,14 +13,14 @@ const contacts = [
   {
     icon: LinkedinLogoIcon,
     label: 'LinkedIn',
-    handle: '/in/viniciusrb',
-    href: 'https://linkedin.com/in/viniciusrb',
+    handle: '/in/viniciusrolimbarbosa',
+    href: 'https://linkedin.com/in/viniciusrolimbarbosa',
   },
   {
     icon: EnvelopeSimpleIcon,
     label: 'Email',
-    handle: 'vinicius@exemplo.com',
-    href: 'mailto:vinicius@exemplo.com',
+    handle: 'viiniirb@pm.me',
+    href: 'mailto:viiniirb@pm.me',
   },
 ]
 
