@@ -40,8 +40,8 @@ export function StackSection() {
   const categories = Object.entries(stackCategories) as [keyof typeof stackCategories, string][]
 
   return (
-    <section id="stack" className="py-24 sm:py-32 px-6 dot-grid">
-      <div className="max-w-6xl mx-auto">
+    <section id="stack" className="h-full flex flex-col justify-center py-6 sm:py-8 px-6 dot-grid">
+      <div className="max-w-6xl mx-auto w-full">
         <SectionReveal>
           <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
             // tecnologias
@@ -49,12 +49,12 @@ export function StackSection() {
         </SectionReveal>
 
         <SectionReveal delay={0.1}>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-16">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-6">
             Minha <span className="text-gradient">Stack</span>
           </h2>
         </SectionReveal>
 
-        <div className="space-y-12">
+        <div className="space-y-5">
           {categories.map(([key, label], catIndex) => {
             const items = stack.filter((s) => s.category === key)
             if (items.length === 0) return null
