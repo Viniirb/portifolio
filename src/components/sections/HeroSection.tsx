@@ -16,7 +16,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg-primary"
+      className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden bg-bg-primary"
     >
       <ParticleCanvas />
 

@@ -36,8 +36,7 @@
   body {
     height: 100%;
     margin: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     background: #080810;
     color: #f8f8ff;
     font-family: var(--font-inter), sans-serif;

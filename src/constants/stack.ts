@@ -3,6 +3,7 @@ export interface StackItem {
   icon: string
   color: string
   category: 'frontend' | 'backend' | 'mobile' | 'database' | 'devops' | 'tools'
+  invertOnDark?: boolean
 }
 
 export const stackCategories = {
@@ -17,7 +18,7 @@ export const stackCategories = {
 export const stack: StackItem[] = [
   // Frontend
   { name: 'React', icon: '/tech/react.svg', color: '#61DAFB', category: 'frontend' },
-  { name: 'Next.js', icon: '/tech/nextdotjs.svg', color: '#AAAAAA', category: 'frontend' },
+  { name: 'Next.js', icon: '/tech/nextdotjs.svg', color: '#AAAAAA', category: 'frontend', invertOnDark: true },
   { name: 'TypeScript', icon: '/tech/typescript.svg', color: '#3178C6', category: 'frontend' },
   { name: 'JavaScript', icon: '/tech/javascript.svg', color: '#F7DF1E', category: 'frontend' },
   { name: 'Vue.js', icon: '/tech/vuejs.svg', color: '#4FC08D', category: 'frontend' },

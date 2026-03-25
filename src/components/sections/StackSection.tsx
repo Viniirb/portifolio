@@ -23,7 +23,11 @@ function TechChip({ item }: { item: StackItem }) {
         width={16}
         height={16}
         className="w-4 h-4 object-contain"
-        style={{ filter: `drop-shadow(0 0 4px ${item.color})` }}
+        style={{
+          filter: item.invertOnDark
+            ? `brightness(0) invert(1) drop-shadow(0 0 4px ${item.color})`
+            : `drop-shadow(0 0 4px ${item.color})`,
+        }}
       />
       <span className="font-mono text-xs whitespace-nowrap" style={{ color: item.color }}>
         {item.name}

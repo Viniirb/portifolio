@@ -35,15 +35,15 @@ const containerVariants = {
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="py-24 sm:py-32 px-6 max-w-6xl mx-auto">
+    <section id="sobre" className="py-8 sm:py-10 px-6 max-w-6xl mx-auto h-full flex flex-col justify-center">
       <SectionReveal>
         <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
           // sobre mim
         </span>
       </SectionReveal>
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-        <div className="lg:col-span-3 space-y-6">
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+        <div className="lg:col-span-3 space-y-4">
           <SectionReveal delay={0.1}>
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-gradient">
               Olá, eu sou o Vinicius.
