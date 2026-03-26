@@ -26,7 +26,7 @@ const contacts = [
 
 export function ContactSection() {
   return (
-    <section id="contato" className="py-24 sm:py-40 px-6 max-w-6xl mx-auto">
+    <section id="contato" className="h-full flex flex-col justify-center py-8 sm:py-12 px-6 max-w-6xl mx-auto">
       <SectionReveal>
         <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
           // contato
@@ -54,8 +54,7 @@ export function ContactSection() {
             <motion.div
               key={contact.label}
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
               <a
