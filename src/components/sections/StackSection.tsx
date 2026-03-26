@@ -62,8 +62,7 @@ export function StackSection() {
               <motion.div
                 key={key}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: catIndex * 0.1 }}
               >
                 <div className="flex items-center gap-3 mb-4">
@@ -76,8 +75,7 @@ export function StackSection() {
                   className="flex flex-wrap gap-2"
                   variants={containerVariants}
                   initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
+                  animate="visible"
                 >
                   {items.map((item) => (
                     <TechChip key={item.name} item={item} />
