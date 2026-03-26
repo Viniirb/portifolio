@@ -33,7 +33,7 @@ export const stack: StackItem[] = [
   // Database
   { name: 'SQL Server', icon: '/tech/microsoftsqlserver.svg', color: '#CC2927', category: 'database' },
   { name: 'PostgreSQL', icon: '/tech/postgresql.svg', color: '#4169E1', category: 'database' },
-  { name: 'MySQL', icon: '/tech/mysql.svg', color: '#4479A1', category: 'database' },
+  { name: 'MySQL', icon: '/tech/mysql.svg', color: '#4479A1', category: 'database', invertOnDark: true },
   { name: 'Supabase', icon: '/tech/supabase.svg', color: '#3ECF8E', category: 'database' },
   // DevOps
   { name: 'Azure DevOps', icon: '/tech/azuredevops.svg', color: '#0078D7', category: 'devops' },
