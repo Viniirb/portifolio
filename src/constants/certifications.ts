@@ -2,6 +2,14 @@ import type { Certification } from "@/types/certification";
 
 export const certifications: Certification[] = [
   {
+    id: "rocketseat-engenharia-prompt",
+    title: "Engenharia de Prompt",
+    institution: "Rocketseat",
+    date: "25/03/2026",
+    image: "",
+    category: "development",
+  },
+  {
     id: "santander-ciberseguranca-2025",
     title: "Santander - Cibersegurança 2025",
     institution: "Santander",
