@@ -19,7 +19,7 @@ export function ProjectsSection() {
   const [selected, setSelected] = useState<Project | null>(null)
 
   return (
-    <section id="projetos" className="py-24 sm:py-32 px-6 max-w-6xl mx-auto">
+    <section id="projetos" className="h-full flex flex-col justify-center py-6 px-6 max-w-6xl mx-auto">
       <SectionReveal>
         <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
           // projetos
@@ -27,7 +27,7 @@ export function ProjectsSection() {
       </SectionReveal>
 
       <SectionReveal delay={0.1}>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-16">
+        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-6">
           O que eu <span className="text-gradient">Construí</span>
         </h2>
       </SectionReveal>
@@ -49,6 +49,7 @@ export function ProjectsSection() {
               variants={itemVariants}
               whileHover={{ y: -4 }}
               className="glass-card glow-border rounded-xl p-6 flex flex-col gap-4 group cursor-pointer"
+              style={{ borderLeftWidth: '3px', borderLeftColor: 'rgba(167,139,250,0.5)' }}
               onClick={() => setSelected(project)}
               role="button"
               tabIndex={0}
