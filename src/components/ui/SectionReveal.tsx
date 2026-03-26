@@ -26,8 +26,7 @@ export function SectionReveal({
       className={className}
       variants={itemVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-100px' }}
+      animate="visible"
       transition={{ delay }}
     >
       {children}

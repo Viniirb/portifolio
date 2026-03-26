@@ -111,4 +111,15 @@
     background-image: radial-gradient(circle, #2d1b69 1px, transparent 1px);
     background-size: 32px 32px;
   }
+
+  @keyframes certExitLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to   { transform: translateX(-40px); opacity: 0; }
+  }
+  @keyframes certEnterRight {
+    from { transform: translateX(40px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+  .cert-exit-left  { animation: certExitLeft  0.22s cubic-bezier(0.4,0,1,1)   both; }
+  .cert-enter-right { animation: certEnterRight 0.30s cubic-bezier(0,0,0.2,1) both; }
 }

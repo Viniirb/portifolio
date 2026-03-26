@@ -20,8 +20,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   }, [onClose])
 
   useEffect(() => {
-    document.body.style.overflow = project ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    const el = document.getElementById('spa-scroll')
+    if (!el) return
+    el.style.overflow = project ? 'hidden' : ''
+    return () => { el.style.overflow = '' }
   }, [project])
 
   return (
@@ -83,7 +85,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                       <div key={tech} className="glass-card flex items-center gap-2 px-3 py-1.5 rounded-lg">
                         {icon && (
                           <div className="w-4 h-4 relative">
-                            <Image src={icon.src} alt={icon.alt} fill className="object-contain" />
+                            <Image
+                              src={icon.src}
+                              alt={icon.alt}
+                              fill
+                              className="object-contain"
+                              style={icon.invertOnDark ? { filter: 'brightness(0) invert(1)' } : undefined}
+                            />
                           </div>
                         )}
                         <span className="font-mono text-xs text-white-muted">{icon?.alt ?? tech}</span>

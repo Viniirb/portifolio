@@ -1,12 +1,6 @@
 'use client'
-import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { ArrowRightIcon } from '@phosphor-icons/react'
-
-const ParticleCanvas = dynamic(
-  () => import('@/components/ui/ParticleCanvas').then((m) => m.ParticleCanvas),
-  { ssr: false }
-)
 
 interface HeroSectionProps {
   onNavigate: (id: string) => void
@@ -16,20 +10,8 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden bg-bg-primary"
+      className="relative w-full h-full flex flex-col items-center justify-center"
     >
-      <ParticleCanvas />
-
-      <div
-        className="absolute top-[-10%] right-[-5%] w-150 h-150 rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(76,29,149,0.4) 0%, rgba(22,8,46,0.2) 50%, transparent 70%)',
-          filter: 'blur(80px)',
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
