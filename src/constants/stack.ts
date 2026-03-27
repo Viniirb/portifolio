@@ -1,9 +1,10 @@
+import type { TechKey } from '@/types'
+
 export interface StackItem {
   name: string
-  icon: string
+  tech: TechKey
   color: string
   category: 'frontend' | 'backend' | 'mobile' | 'database' | 'devops' | 'tools'
-  invertOnDark?: boolean
 }
 
 export const stackCategories = {
@@ -16,31 +17,25 @@ export const stackCategories = {
 } as const
 
 export const stack: StackItem[] = [
-  // Frontend
-  { name: 'React', icon: '/tech/react.svg', color: '#61DAFB', category: 'frontend' },
-  { name: 'Next.js', icon: '/tech/nextdotjs.svg', color: '#AAAAAA', category: 'frontend', invertOnDark: true },
-  { name: 'TypeScript', icon: '/tech/typescript.svg', color: '#3178C6', category: 'frontend' },
-  { name: 'JavaScript', icon: '/tech/javascript.svg', color: '#F7DF1E', category: 'frontend' },
-  { name: 'Vue.js', icon: '/tech/vuejs.svg', color: '#4FC08D', category: 'frontend' },
-  // Backend
-  { name: 'C# / .NET', icon: '/tech/dotnet.svg', color: '#512BD4', category: 'backend' },
-  { name: 'Node.js', icon: '/tech/nodejs.svg', color: '#339933', category: 'backend' },
-  { name: 'GraphQL', icon: '/tech/graphql.svg', color: '#E10098', category: 'backend' },
-  { name: 'Python', icon: '/tech/python.svg', color: '#3776AB', category: 'backend' },
-  // Mobile
-  { name: 'Ionic', icon: '/tech/ionic.svg', color: '#3880FF', category: 'mobile' },
-  { name: 'React Native', icon: '/tech/react.svg', color: '#61DAFB', category: 'mobile' },
-  // Database
-  { name: 'SQL Server', icon: '/tech/microsoftsqlserver.svg', color: '#CC2927', category: 'database' },
-  { name: 'PostgreSQL', icon: '/tech/postgresql.svg', color: '#4169E1', category: 'database' },
-  { name: 'MySQL', icon: '/tech/mysql.svg', color: '#4479A1', category: 'database', invertOnDark: true },
-  { name: 'Supabase', icon: '/tech/supabase.svg', color: '#3ECF8E', category: 'database' },
-  // DevOps
-  { name: 'Azure DevOps', icon: '/tech/azuredevops.svg', color: '#0078D7', category: 'devops' },
-  { name: 'Docker', icon: '/tech/docker.svg', color: '#2496ED', category: 'devops' },
-  { name: 'n8n', icon: '/tech/n8n.svg', color: '#EA4B71', category: 'devops' },
-  // Tools
-  { name: 'Git', icon: '/tech/git.svg', color: '#F05032', category: 'tools' },
-  { name: 'Postman', icon: '/tech/postman.svg', color: '#FF6C37', category: 'tools' },
-  { name: 'VS Code', icon: '/tech/vscode.svg', color: '#007ACC', category: 'tools' },
+  { name: 'React', tech: 'react', color: '#61DAFB', category: 'frontend' },
+  { name: 'Next.js', tech: 'nextjs', color: '#AAAAAA', category: 'frontend' },
+  { name: 'TypeScript', tech: 'typescript', color: '#3178C6', category: 'frontend' },
+  { name: 'JavaScript', tech: 'javascript', color: '#F7DF1E', category: 'frontend' },
+  { name: 'Vue.js', tech: 'vue', color: '#4FC08D', category: 'frontend' },
+  { name: 'C# / .NET', tech: 'dotnet', color: '#512BD4', category: 'backend' },
+  { name: 'Node.js', tech: 'node', color: '#339933', category: 'backend' },
+  { name: 'GraphQL', tech: 'graphql', color: '#E10098', category: 'backend' },
+  { name: 'Python', tech: 'python', color: '#3776AB', category: 'backend' },
+  { name: 'Ionic', tech: 'ionic', color: '#3880FF', category: 'mobile' },
+  { name: 'React Native', tech: 'react', color: '#61DAFB', category: 'mobile' },
+  { name: 'SQL Server', tech: 'sqlserver', color: '#CC2927', category: 'database' },
+  { name: 'PostgreSQL', tech: 'postgresql', color: '#4169E1', category: 'database' },
+  { name: 'MySQL', tech: 'mysql', color: '#4479A1', category: 'database' },
+  { name: 'Supabase', tech: 'supabase', color: '#3ECF8E', category: 'database' },
+  { name: 'Azure DevOps', tech: 'azuredevops', color: '#0078D7', category: 'devops' },
+  { name: 'Docker', tech: 'docker', color: '#2496ED', category: 'devops' },
+  { name: 'n8n', tech: 'n8n', color: '#EA4B71', category: 'devops' },
+  { name: 'Git', tech: 'git', color: '#F05032', category: 'tools' },
+  { name: 'Postman', tech: 'postman', color: '#FF6C37', category: 'tools' },
+  { name: 'VS Code', tech: 'vscode', color: '#007ACC', category: 'tools' },
 ]

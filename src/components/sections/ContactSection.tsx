@@ -1,43 +1,47 @@
 'use client'
 import { motion } from 'framer-motion'
-import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
+import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
+
+const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5547988903621').replace(/\D/g, '')
+const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Olá, Vinicius! Vi seu portfólio e gostaria de conversar sobre um projeto.')}`
 
 const contacts = [
   {
     icon: GithubLogoIcon,
     label: 'GitHub',
-    handle: '@Viniirb',
+    ariaLabel: 'GitHub: Viniirb',
     href: 'https://github.com/Viniirb',
   },
   {
     icon: LinkedinLogoIcon,
     label: 'LinkedIn',
-    handle: '/in/viniciusrolimbarbosa',
+    ariaLabel: 'LinkedIn: viniciusrolimbarbosa',
     href: 'https://linkedin.com/in/viniciusrolimbarbosa',
   },
   {
     icon: EnvelopeSimpleIcon,
     label: 'Email',
-    handle: 'viiniirb@pm.me',
-    href: 'mailto:viiniirb@pm.me',
+    ariaLabel: 'Email: contato@viniciusrb.dev',
+    href: 'mailto:contato@viniciusrb.dev',
+  },
+  {
+    icon: WhatsappLogoIcon,
+    label: 'WhatsApp',
+    ariaLabel: 'WhatsApp: +55 47 98890-3621',
+    href: whatsappHref,
   },
 ]
 
 export function ContactSection() {
   return (
-    <section id="contato" className="h-full flex flex-col justify-center py-8 sm:py-12 px-6 max-w-6xl mx-auto">
-      <SectionReveal>
-        <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
-          // contato
-        </span>
-      </SectionReveal>
-
+    <section
+      id="contato"
+      className="h-full flex flex-col justify-center pt-14 sm:pt-16 md:pt-8 py-8 sm:py-12 px-6 max-w-6xl mx-auto w-full scroll-mt-28 sm:scroll-mt-32"
+    >
       <SectionReveal delay={0.1}>
-        <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-none tracking-tighter mt-6 mb-4">
-          <span className="text-gradient">Vamos construir</span>
-          <br />
-          <span className="text-white">algo.</span>
+        <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-none tracking-tighter mt-8 sm:mt-10 md:mt-6 mb-4">
+          <span className="text-gradient">Vamos construir algo.</span>
         </h2>
       </SectionReveal>
 
@@ -50,6 +54,8 @@ export function ContactSection() {
 
       <div className="space-y-4">
         {contacts.map((contact, index) => {
+          const isExternal = contact.href.startsWith('http')
+
           return (
             <motion.div
               key={contact.label}
@@ -59,20 +65,18 @@ export function ContactSection() {
             >
               <a
                 href={contact.href}
-                target={contact.href.startsWith('http') ? '_blank' : undefined}
-                rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
                 className="group flex items-center gap-6 py-5 border-b border-purple-subtle/30 hover:border-purple-glow/50 transition-all"
-                aria-label={`${contact.label}: ${contact.handle}`}
+                aria-label={contact.ariaLabel}
               >
                 <contact.icon
                   weight="bold"
-                  className="w-8 h-8 text-white-dim group-hover:text-purple-glow transition-colors shrink-0" />
+                  className="w-8 h-8 text-white-dim group-hover:text-purple-glow transition-colors shrink-0"
+                />
                 <div className="flex-1">
                   <p className="font-mono text-xs text-white-dim uppercase tracking-widest">
                     {contact.label}
-                  </p>
-                  <p className="font-display text-xl font-bold text-white group-hover:text-gradient transition-all">
-                    {contact.handle}
                   </p>
                 </div>
                 <span className="text-white-dim group-hover:text-purple-glow group-hover:translate-x-1 transition-all font-mono text-sm">

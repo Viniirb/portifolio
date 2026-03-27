@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
 import { stack, stackCategories, type StackItem } from '@/constants/stack'
+import { getTechIconComponent } from '@/lib/tech-icon-registry'
+import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
 
 const containerVariants = {
   hidden: {},
@@ -10,6 +12,9 @@ const containerVariants = {
 }
 
 function TechChip({ item }: { item: StackItem }) {
+  const IconComponent = getTechIconComponent(item.tech)
+  const legacyIcon = getLegacyTechIcon(item.tech)
+
   return (
     <motion.div
       variants={itemVariants}
@@ -17,18 +22,27 @@ function TechChip({ item }: { item: StackItem }) {
       className="glass-card glow-border flex items-center gap-2 px-3 py-2 rounded-lg cursor-default"
       style={{ boxShadow: `0 0 8px ${item.color}22` }}
     >
-      <Image
-        src={item.icon}
-        alt={item.name}
-        width={16}
-        height={16}
-        className="w-4 h-4 object-contain"
-        style={{
-          filter: item.invertOnDark
-            ? `brightness(0) invert(1) drop-shadow(0 0 4px ${item.color})`
-            : `drop-shadow(0 0 4px ${item.color})`,
-        }}
-      />
+      {legacyIcon ? (
+        <Image
+          src={legacyIcon.src}
+          alt={legacyIcon.alt}
+          width={16}
+          height={16}
+          className="w-4 h-4 shrink-0 object-contain"
+          style={
+            legacyIcon.invertOnDark
+              ? { filter: `brightness(0) invert(1) drop-shadow(0 0 4px ${item.color})` }
+              : { filter: `drop-shadow(0 0 4px ${item.color})` }
+          }
+        />
+      ) : (
+        <IconComponent
+          size={16}
+          className="w-4 h-4 shrink-0"
+          style={{ filter: `drop-shadow(0 0 4px ${item.color})` }}
+          aria-hidden="true"
+        />
+      )}
       <span className="font-mono text-xs whitespace-nowrap" style={{ color: item.color }}>
         {item.name}
       </span>
@@ -42,11 +56,6 @@ export function StackSection() {
   return (
     <section id="stack" className="h-full flex flex-col justify-center py-6 sm:py-8 px-6 dot-grid">
       <div className="max-w-6xl mx-auto w-full">
-        <SectionReveal>
-          <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
-            // tecnologias
-          </span>
-        </SectionReveal>
 
         <SectionReveal delay={0.1}>
           <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-6">

@@ -1,11 +1,9 @@
 'use client'
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
 import { X } from '@phosphor-icons/react'
-import { techIcons } from '@/constants/tech-icons'
+import { getTechIconComponent, getTechIconLabel } from '@/lib/tech-icon-registry'
 import type { Project } from '@/types'
-import type { TechKey } from '@/types'
 
 interface ProjectModalProps {
   project: Project | null
@@ -80,21 +78,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech) => {
-                    const icon = techIcons[tech as TechKey]
+                    const IconComponent = getTechIconComponent(tech)
+                    const label = getTechIconLabel(tech)
+
                     return (
                       <div key={tech} className="glass-card flex items-center gap-2 px-3 py-1.5 rounded-lg">
-                        {icon && (
-                          <div className="w-4 h-4 relative">
-                            <Image
-                              src={icon.src}
-                              alt={icon.alt}
-                              fill
-                              className="object-contain"
-                              style={icon.invertOnDark ? { filter: 'brightness(0) invert(1)' } : undefined}
-                            />
-                          </div>
-                        )}
-                        <span className="font-mono text-xs text-white-muted">{icon?.alt ?? tech}</span>
+                        <IconComponent size={16} className="w-4 h-4" aria-hidden="true" />
+                        <span className="font-mono text-xs text-white-muted">{label}</span>
                       </div>
                     )
                   })}

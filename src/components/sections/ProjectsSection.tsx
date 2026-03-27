@@ -1,14 +1,12 @@
 'use client'
 import { useState } from 'react'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowUpRightIcon } from '@phosphor-icons/react'
 import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
 import { ProjectModal } from '@/components/ui/ProjectModal'
 import { projects } from '@/constants/projects'
-import { techIcons } from '@/constants/tech-icons'
+import { getTechIconComponent, getTechIconLabel } from '@/lib/tech-icon-registry'
 import type { Project } from '@/types'
-import type { TechKey } from '@/types'
 
 const containerVariants = {
   hidden: {},
@@ -20,12 +18,6 @@ export function ProjectsSection() {
 
   return (
     <section id="projetos" className="h-full flex flex-col justify-center py-6 px-6 max-w-6xl mx-auto">
-      <SectionReveal>
-        <span className="font-mono text-xs text-purple-glow uppercase tracking-widest">
-          // projetos
-        </span>
-      </SectionReveal>
-
       <SectionReveal delay={0.1}>
         <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-6">
           O que eu <span className="text-gradient">Construí</span>
@@ -75,12 +67,14 @@ export function ProjectsSection() {
 
               <div className="flex items-center gap-1.5">
                 {visibleTech.map((tech) => {
-                  const icon = techIcons[tech as TechKey]
-                  return icon ? (
-                    <div key={tech} className="w-5 h-5 relative opacity-60 group-hover:opacity-100 transition-opacity" title={icon.alt}>
-                      <Image src={icon.src} alt={icon.alt} fill className="object-contain" />
+                  const IconComponent = getTechIconComponent(tech)
+                  const label = getTechIconLabel(tech)
+
+                  return (
+                    <div key={tech} className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" title={label}>
+                      <IconComponent size={18} className="w-5 h-5" aria-hidden="true" />
                     </div>
-                  ) : null
+                  )
                 })}
                 {remaining > 0 && (
                   <span className="font-mono text-xs text-white-dim">+{remaining}</span>

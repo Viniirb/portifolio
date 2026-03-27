@@ -112,14 +112,242 @@
     background-size: 32px 32px;
   }
 
-  @keyframes certExitLeft {
-    from { transform: translateX(0); opacity: 1; }
-    to   { transform: translateX(-40px); opacity: 0; }
+  .cert-carousel-stage {
+    perspective: 2400px;
+    perspective-origin: 50% 42%;
   }
-  @keyframes certEnterRight {
-    from { transform: translateX(40px); opacity: 0; }
-    to   { transform: translateX(0); opacity: 1; }
+
+  .cert-card-shell {
+    perspective: 2200px;
+    transform-style: preserve-3d;
   }
-  .cert-exit-left  { animation: certExitLeft  0.22s cubic-bezier(0.4,0,1,1)   both; }
-  .cert-enter-right { animation: certEnterRight 0.30s cubic-bezier(0,0,0.2,1) both; }
+
+  .cert-card-core {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transition:
+      transform 1120ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1120ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: auto;
+  }
+
+  .cert-card-shell[data-flipped="true"] .cert-card-core,
+  .cert-item-enter-next .cert-card-core,
+  .cert-item-enter-prev .cert-card-core,
+  .cert-item-exit-next .cert-card-core,
+  .cert-item-exit-prev .cert-card-core {
+    will-change: transform, filter;
+  }
+
+  .cert-card-shell[data-flipped="true"] .cert-card-core {
+    transform: rotateY(-180deg) translateZ(24px) scale(1.035);
+    filter: drop-shadow(0 28px 36px rgba(10, 8, 32, 0.46));
+  }
+
+  .cert-card-shell[data-flipped="false"] .cert-card-core {
+    transform: rotateY(0deg) translateZ(0) scale(1);
+    filter: drop-shadow(0 10px 18px rgba(10, 8, 32, 0.24));
+  }
+
+  .cert-card-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    contain: paint;
+  }
+
+  .cert-card-front {
+    transform: rotateY(0deg) translateZ(14px);
+  }
+
+  .cert-card-back {
+    transform: rotateY(180deg) translateZ(14px);
+  }
+
+  .cert-card-sheen {
+    position: absolute;
+    inset: -30%;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      linear-gradient(120deg,
+      rgba(248, 248, 255, 0) 24%,
+      rgba(248, 248, 255, 0.18) 46%,
+      rgba(167, 139, 250, 0.22) 56%,
+      rgba(248, 248, 255, 0) 72%);
+    transform: translate3d(-120%, 0, 22px) rotate(-14deg);
+    transition:
+      transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 560ms ease;
+  }
+
+  .cert-card-shell[data-flipped="true"] .cert-card-sheen {
+    opacity: 0.62;
+    transform: translate3d(120%, 0, 22px) rotate(-14deg);
+  }
+
+  @keyframes certItemEnterNext {
+    from {
+      transform: translate3d(72px, 22px, -180px) rotateY(-20deg) rotateX(-6deg) scale(0.86);
+      opacity: 0;
+      filter: blur(7px);
+    }
+    to {
+      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes certItemEnterPrev {
+    from {
+      transform: translate3d(-72px, 22px, -180px) rotateY(20deg) rotateX(-6deg) scale(0.86);
+      opacity: 0;
+      filter: blur(7px);
+    }
+    to {
+      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes certItemExitNext {
+    from {
+      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+    to {
+      transform: translate3d(-52px, -14px, -130px) rotateY(14deg) rotateX(5deg) scale(0.9);
+      opacity: 0;
+      filter: blur(5px);
+    }
+  }
+
+  @keyframes certItemExitPrev {
+    from {
+      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+    to {
+      transform: translate3d(52px, -14px, -130px) rotateY(-14deg) rotateX(5deg) scale(0.9);
+      opacity: 0;
+      filter: blur(5px);
+    }
+  }
+
+  .cert-item-enter-next,
+  .cert-item-enter-prev,
+  .cert-item-exit-next,
+  .cert-item-exit-prev {
+    will-change: transform, opacity, filter;
+  }
+
+  .cert-item-enter-next {
+    animation: certItemEnterNext 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .cert-item-enter-prev {
+    animation: certItemEnterPrev 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .cert-item-exit-next {
+    animation: certItemExitNext 320ms cubic-bezier(0.45, 0.02, 0.64, 0.99) both;
+  }
+
+  .cert-item-exit-prev {
+    animation: certItemExitPrev 320ms cubic-bezier(0.45, 0.02, 0.64, 0.99) both;
+  }
+
+  @keyframes certCarouselExitNext {
+    from {
+      transform: translate3d(0, 0, 0) scale(1) rotateY(0deg) rotateX(0deg);
+      opacity: 1;
+      filter: blur(0px) saturate(1);
+    }
+    to {
+      transform: translate3d(-126px, -8px, -80px) scale(0.9) rotateY(14deg) rotateX(6deg);
+      opacity: 0;
+      filter: blur(6px) saturate(0.8);
+    }
+  }
+
+  @keyframes certCarouselEnterNext {
+    from {
+      transform: translate3d(148px, 14px, -90px) scale(0.86) rotateY(-18deg) rotateX(-8deg);
+      opacity: 0;
+      filter: blur(8px) saturate(0.82);
+    }
+    to {
+      transform: translate3d(0, 0, 0) scale(1) rotateY(0deg) rotateX(0deg);
+      opacity: 1;
+      filter: blur(0px) saturate(1);
+    }
+  }
+
+  @keyframes certCarouselExitPrev {
+    from {
+      transform: translate3d(0, 0, 0) scale(1) rotateY(0deg) rotateX(0deg);
+      opacity: 1;
+      filter: blur(0px) saturate(1);
+    }
+    to {
+      transform: translate3d(126px, -8px, -80px) scale(0.9) rotateY(-14deg) rotateX(6deg);
+      opacity: 0;
+      filter: blur(6px) saturate(0.8);
+    }
+  }
+
+  @keyframes certCarouselEnterPrev {
+    from {
+      transform: translate3d(-148px, 14px, -90px) scale(0.86) rotateY(18deg) rotateX(-8deg);
+      opacity: 0;
+      filter: blur(8px) saturate(0.82);
+    }
+    to {
+      transform: translate3d(0, 0, 0) scale(1) rotateY(0deg) rotateX(0deg);
+      opacity: 1;
+      filter: blur(0px) saturate(1);
+    }
+  }
+
+  @keyframes certCarouselFadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.985); }
+  }
+
+  @keyframes certCarouselFadeIn {
+    from { opacity: 0; transform: scale(0.985); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .cert-carousel-exit-next {
+    animation: certCarouselExitNext 320ms cubic-bezier(0.45, 0.02, 0.64, 0.99) both;
+  }
+
+  .cert-carousel-enter-next {
+    animation: certCarouselEnterNext 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .cert-carousel-exit-prev {
+    animation: certCarouselExitPrev 320ms cubic-bezier(0.45, 0.02, 0.64, 0.99) both;
+  }
+
+  .cert-carousel-enter-prev {
+    animation: certCarouselEnterPrev 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .cert-carousel-fade-out {
+    animation: certCarouselFadeOut 160ms ease-out both;
+  }
+
+  .cert-carousel-fade-in {
+    animation: certCarouselFadeIn 220ms ease-out both;
+  }
 }
