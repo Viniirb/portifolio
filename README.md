@@ -25,7 +25,7 @@ Portfólio pessoal em formato SPA, desenvolvido com Next.js 15, apresentando pro
 
 ## 🎯 Sobre o Projeto
 
-Portfólio full-stack desenvolvido para apresentar minha trajetória profissional como desenvolvedor, incluindo projetos, stack tecnológica e mais de 30 certificações. O design segue uma abordagem minimalista e moderna.
+Portfólio full-stack desenvolvido para apresentar minha trajetória profissional como desenvolvedor, incluindo projetos, stack tecnológica e mais de 32 certificações. O design segue uma abordagem minimalista e moderna.
 
 
 
@@ -37,7 +37,7 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 | ⚡ **SPA Interativa** | Navegação por tabs, transições animadas e Particle Canvas |
 | 🧩 **Seções Modulares** | Home, Sobre, Stack, Experiência, Projetos, Certificações, Contato |
 | 💼 **Experiências Profissionais** | Cards detalhados, modal de projetos e timeline |
-| 🎓 **Certificações** | 30+ certificações filtráveis por categoria |
+| 🎓 **Certificações** | 37+ certificações filtráveis por categoria |
 | 🛠️ **Stack Visual** | Chips coloridos, ícones SVG e categorias |
 | 🚀 **Performance** | Next.js 15, Turbopack e otimização de assets |
 | ♿ **Acessibilidade** | Práticas WCAG, navegação por teclado |
@@ -117,7 +117,7 @@ Cards de experiências profissionais (N Tecnologias, EOS, Blump, Inovvati) com t
 Modal detalhado de projetos, tecnologias, desafios e resultados. Foco em modernização, automação e impacto.
 
 ### 🎓 Certificações
-Mais de 30 certificações filtráveis por categoria: Cibersegurança, Desenvolvimento, Cloud, Redes, IA, Outros.
+Mais de 32 certificações filtráveis por categoria: Cibersegurança, Desenvolvimento, Cloud, Redes, IA, Outros.
 
 ### 📧 Contato
 Links diretos para GitHub, LinkedIn, Email e WhatsApp. Disponível para freelas, vagas e networking.

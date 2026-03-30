@@ -47,15 +47,31 @@ export function CustomCursor() {
   if (isTouch) return null
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-9997 rounded-full border border-white/50 mix-blend-difference"
-      style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
-      animate={{
-        width: isHovering ? 40 : 8,
-        height: isHovering ? 40 : 8,
-        opacity: isVisible ? 1 : 0,
-      }}
-      transition={{ duration: 0.2 }}
-    />
+    <>
+      {/* Dot central — segue instantaneamente */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-white"
+        style={{ x, y, translateX: '-50%', translateY: '-50%' }}
+        animate={{
+          width: isHovering ? 6 : 4,
+          height: isHovering ? 6 : 4,
+          opacity: isVisible ? 1 : 0,
+          backgroundColor: isHovering ? '#a855f7' : '#ffffff',
+        }}
+        transition={{ duration: 0.15 }}
+      />
+      {/* Ring externo — segue com lag */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border"
+        style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
+        animate={{
+          width: isHovering ? 36 : 24,
+          height: isHovering ? 36 : 24,
+          opacity: isVisible ? 0.6 : 0,
+          borderColor: isHovering ? '#a855f7' : 'rgba(255,255,255,0.4)',
+        }}
+        transition={{ duration: 0.2 }}
+      />
+    </>
   )
 }

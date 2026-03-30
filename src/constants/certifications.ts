@@ -2,6 +2,22 @@ import type { Certification } from "@/types/certification";
 
 export const certifications: Certification[] = [
   {
+    id: "anthropic-claude-code-in-action",
+    title: "Claude Code in Action",
+    institution: "Anthropic",
+    date: "30/03/2026",
+    image: "",
+    category: "neuralnetworks",
+  },
+  {
+    id: "anthropic-claude-101",
+    title: "Claude 101",
+    institution: "Anthropic",
+    date: "30/03/2026",
+    image: "",
+    category: "neuralnetworks",
+  },
+  {
     id: "rocketseat-engenharia-prompt",
     title: "Engenharia de Prompt",
     institution: "Rocketseat",
