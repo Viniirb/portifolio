@@ -1,0 +1,27 @@
+name: Task
+description: Tarefa de sprint
+title: "[Task]: "
+labels: ["task"]
+assignees:
+  - Viniirb
+
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: Resultado esperado da task
+      placeholder: Ex. Corrigir import quebrado de ProjectCard
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Critérios para considerar a task concluída
+      placeholder: |
+        - [ ] Critério 1
+        - [ ] Critério 2
+    validations:
+      required: true
