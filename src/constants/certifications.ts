@@ -1,7 +1,14 @@
 import type { Certification } from "@/types/certification";
 
 export const certifications: Certification[] = [
-  // Santander
+  {
+    id: "rocketseat-engenharia-prompt",
+    title: "Engenharia de Prompt",
+    institution: "Rocketseat",
+    date: "25/03/2026",
+    image: "",
+    category: "neuralnetworks",
+  },
   {
     id: "santander-ciberseguranca-2025",
     title: "Santander - Cibersegurança 2025",
@@ -19,7 +26,6 @@ export const certifications: Certification[] = [
     category: "cybersecurity",
   },
 
-  // Rocketseat
   {
     id: "rocketseat-redes-neurais",
     title: "Redes Neurais e Deep Learning",
@@ -28,8 +34,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "neuralnetworks"
   },
-  
-  // DIO - Cibersegurança
+
   {
     id: "dio-exploracao-vulnerabilidades",
     title: "Exploração de Vulnerabilidades e Ataques",
@@ -158,8 +163,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "cybersecurity",
   },
-  
-  // DIO - Redes
+
   {
     id: "dio-varredura-rede",
     title: "Conceitos e Técnicas de Varredura de Rede",
@@ -176,8 +180,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "networking",
   },
-  
-  // DIO - Desenvolvimento
+
   {
     id: "dio-portfolio-projetos",
     title: "Desafios de Projetos: Crie Um Portfólio Vencedor",
@@ -194,8 +197,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "development",
   },
-  
-  // DIO - Outros
+
   {
     id: "dio-sistemas-operacionais",
     title: "Conceitos e Práticas de Sistemas Operacionais e Máquinas Virtuais",
@@ -212,8 +214,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "other",
   },
-  
-  // Microsoft & Azure
+
   {
     id: "microsoft-fabric",
     title: "Certificado Microsoft Fabric",
@@ -230,8 +231,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "cloud",
   },
-  
-  // Deal Group
+
   {
     id: "deal-ia-centric",
     title: "Introdução à Experiência AI Centric .NET com a Deal Group",
@@ -248,8 +248,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "development",
   },
-  
-  // Rocketseat - NLW
+
   {
     id: "nlw-nodejs",
     title: "Certificado NLW NodeJS",
@@ -282,8 +281,7 @@ export const certifications: Certification[] = [
     image: "",
     category: "development",
   },
-  
-  // PyStack Week
+
   {
     id: "pystack-week-9",
     title: "Certificado PyStack Week 9.0",

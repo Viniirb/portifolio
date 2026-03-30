@@ -1,2 +1,4 @@
-export { default as BackgroundCircuit } from "./BackgroundCircuit/BackgroundCircuit";
-export { default as ThemeToggle } from "./ThemeToggle/ThemeToggle";
+export { ParticleCanvas } from './ParticleCanvas'
+export { ProjectModal } from './ProjectModal'
+export { SectionReveal } from './SectionReveal'
+export { CustomCursor } from './CustomCursor'
