@@ -1,11 +1,14 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useEffect } from 'react'
 
 export function CustomCursor() {
+  const [isTouch] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+  )
   const [isVisible, setIsVisible] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
-  const [isTouch, setIsTouch] = useState(false)
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -13,10 +16,7 @@ export function CustomCursor() {
   const springY = useSpring(y, { stiffness: 300, damping: 30 })
 
   useEffect(() => {
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      setIsTouch(true)
-      return
-    }
+    if (isTouch) return
 
     const onMove = (e: MouseEvent) => {
       x.set(e.clientX)
@@ -26,7 +26,6 @@ export function CustomCursor() {
 
     const onLeave = () => setIsVisible(false)
     const onEnter = () => setIsVisible(true)
-
     const onOver = (e: MouseEvent) => {
       setIsHovering(!!(e.target as Element)?.closest('a, button, [role="button"]'))
     }
@@ -42,15 +41,14 @@ export function CustomCursor() {
       document.removeEventListener('mouseenter', onEnter)
       document.removeEventListener('mouseover', onOver)
     }
-  }, [])
+  }, [isTouch, x, y])
 
   if (isTouch) return null
 
   return (
     <>
-      {/* Dot central — segue instantaneamente */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-white"
+        className="fixed top-0 left-0 pointer-events-none z-9999 rounded-full bg-white"
         style={{ x, y, translateX: '-50%', translateY: '-50%' }}
         animate={{
           width: isHovering ? 6 : 4,
@@ -60,9 +58,8 @@ export function CustomCursor() {
         }}
         transition={{ duration: 0.15 }}
       />
-      {/* Ring externo — segue com lag */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border"
+        className="fixed top-0 left-0 pointer-events-none z-9998 rounded-full border"
         style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
         animate={{
           width: isHovering ? 36 : 24,
