@@ -1,8 +1,10 @@
+
 # 💼 Portfólio Profissional - Vinicius Rolim Barbosa
 
 <div align="center">
 
-Portfólio pessoal desenvolvido com Next.js 15, apresentando projetos, certificações e experiência profissional de forma minimalista e moderna.
+
+Portfólio pessoal em formato SPA, desenvolvido com Next.js 15, apresentando projetos, stack, certificações e experiência profissional de forma minimalista, moderna e interativa.
 
 <br />
 
@@ -15,7 +17,7 @@ Portfólio pessoal desenvolvido com Next.js 15, apresentando projetos, certifica
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](https://github.com/Viniirb/portifolio/pulls)
 
-[🌐 Ver Demo](https://seu-portfolio.vercel.app) · [📝 Reportar Bug](https://github.com/Viniirb/portifolio/issues) · [✨ Solicitar Feature](https://github.com/Viniirb/portifolio/issues)
+
 
 </div>
 
@@ -25,28 +27,20 @@ Portfólio pessoal desenvolvido com Next.js 15, apresentando projetos, certifica
 
 Portfólio full-stack desenvolvido para apresentar minha trajetória profissional como desenvolvedor, incluindo projetos, stack tecnológica e mais de 30 certificações. O design segue uma abordagem minimalista e moderna.
 
-<details>
-<summary><strong>🎨 Preview</strong></summary>
-<br>
 
-> Em breve: Screenshots do projeto
-
-</details>
 
 ### ✨ Características Principais
 
 | Feature | Descrição |
 |---------|-----------|
-| 🎨 **Design Minimalista** | Interface limpa e moderna com tema escuro fixo |
-| 📱 **Totalmente Responsivo** | Adaptado para desktop, tablet e mobile |
-| ⚡ **Animações Suaves** | Transições fluidas com Framer Motion |
-| 🎯 **SPA com Scroll** | Navegação intuitiva por scroll entre seções |
-| 🎓 **34 Certificações** | Filtros por categoria (Cibersegurança, Cloud, etc) |
-| 💼 **4 Projetos Profissionais** | Experiências detalhadas com modal expansível |
-| 🚀 **Performance** | Next.js 15 com Turbopack para builds ultra-rápidos |
-| ♿ **Acessibilidade** | Desenvolvido seguindo práticas WCAG |
-| 🎭 **Scrollbar Customizada** | Barra de rolagem minimalista de 6px |
-| 🔝 **Scroll to Top** | Botão flutuante para voltar ao início |
+| 🎨 **Design Minimalista** | Interface limpa, moderna e escura |
+| ⚡ **SPA Interativa** | Navegação por tabs, transições animadas e Particle Canvas |
+| 🧩 **Seções Modulares** | Home, Sobre, Stack, Experiência, Projetos, Certificações, Contato |
+| 💼 **Experiências Profissionais** | Cards detalhados, modal de projetos e timeline |
+| 🎓 **Certificações** | 30+ certificações filtráveis por categoria |
+| 🛠️ **Stack Visual** | Chips coloridos, ícones SVG e categorias |
+| 🚀 **Performance** | Next.js 15, Turbopack e otimização de assets |
+| ♿ **Acessibilidade** | Práticas WCAG, navegação por teclado |
 
 ---
 
@@ -56,23 +50,23 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 <tr>
 <td valign="top" width="50%">
 
+
 ### Frontend
 - ⚛️ **React 19** - Biblioteca UI
-- 🔷 **Next.js 15.4.4** - Framework React
+- 🔷 **Next.js 15 SPA** - Framework React
 - 📘 **TypeScript** - Tipagem estática
 - 🎨 **Tailwind CSS 3.4** - Utility-first CSS
 - 🎭 **Framer Motion 11** - Animações
-- 🖼️ **next/font** - Otimização de fontes
-- 🎯 **Lucide React** - Ícones modernos
+- 🖼️ **SVG Custom Icons** - Tech stack visual
 
 </td>
 <td valign="top" width="50%">
+
 
 ### DevTools
 - 📦 **Turbopack** - Bundler rápido
 - 🔍 **ESLint** - Linting de código
 - 🎨 **PostCSS** - Processamento CSS
-- 🔧 **TypeScript 5** - Compilador TS
 - 🚀 **Vercel** - Deploy e hosting
 - 📝 **Git** - Controle de versão
 
@@ -82,210 +76,63 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 
 ---
 
-## 📂 Estrutura do Projeto
+
+## 📂 Estrutura do Projeto (SPA)
 
 ```
 📦 portifolio/
 ┣ 📂 src/
 ┃ ┣ 📂 app/
-┃ ┃ ┣ 📄 page.tsx              # 🏠 Home (SPA com todas as seções)
-┃ ┃ ┣ 📄 layout.tsx            # 🎨 Layout raiz
-┃ ┃ ┣ 📄 globals.css           # 🎨 Estilos globais
-┃ ┃ ┣ 📂 sobre/                # 👤 Página Sobre (alternativa)
-┃ ┃ ┣ 📂 projetos/             # 💼 Página Projetos (alternativa)
-┃ ┃ ┣ 📂 certificacoes/        # 🎓 Página Certificações (alternativa)
-┃ ┃ ┗ 📂 contato/              # 📧 Página Contato (alternativa)
+┃ ┃ ┣ 📄 page.tsx              # SPA principal (todas as seções)
+┃ ┃ ┣ 📄 layout.tsx            # Layout raiz
+┃ ┃ ┣ 📄 globals.css           # Estilos globais
 ┃ ┣ 📂 components/
-┃ ┃ ┣ 📂 features/
-┃ ┃ ┃ ┗ 📂 ProjectCard/        # 💼 Card de projeto + modal
-┃ ┃ ┗ 📂 layout/
-┃ ┃   ┣ 📂 Header/             # 🔝 Cabeçalho fixo translúcido
-┃ ┃   ┗ 📂 Footer/             # ⬇️ Rodapé + scroll-to-top
-┃ ┣ 📂 constants/
-┃ ┃ ┣ 📄 projects.ts           # 💼 Dados dos projetos
-┃ ┃ ┣ 📄 certifications.ts     # 🎓 Dados das certificações
-┃ ┃ ┗ 📄 tech-icons.ts         # 🔧 Ícones de tecnologias
-┃ ┗ 📂 types/
-┃   ┣ 📄 project.ts            # 📝 Tipos para projetos
-┃   ┗ 📄 certification.ts      # 📝 Tipos para certificações
+┃ ┃ ┣ 📂 layout/               # Header, Footer, PageCurtain
+┃ ┃ ┣ 📂 sections/             # Hero, About, Stack, Experience, Projects, Certifications, Contact
+┃ ┃ ┗ 📂 ui/                   # CustomCursor, ParticleCanvas, SectionReveal, etc
+┃ ┣ 📂 constants/              # Dados: projects, certifications, stack
+┃ ┗ 📂 types/                  # Tipos para projetos, certificações, stack
 ┣ 📂 public/
-┃ ┗ 📂 tech/                   # 🎨 Ícones SVG de tecnologias
+┃ ┗ 📂 tech/                   # SVGs de tecnologias
 ┗ 📄 package.json
 ```
-
 ---
 
-## 🚀 Começando
 
-### Pré-requisitos
-
-- Node.js 18+ 
-- npm, yarn, pnpm ou bun
-
-### Instalação
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/Viniirb/portifolio.git
-cd portifolio
-```
-
-2. Instale as dependências:
-```bash
-npm install
-# ou
-yarn install
-# ou
-pnpm install
-```
-
-3. Execute o servidor de desenvolvimento:
-```bash
-npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
-```
-
-4. Abra [http://localhost:3000](http://localhost:3000) no navegador
-
-### Build para Produção
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## 📄 Seções do Portfólio
+## 📄 Seções do Portfólio (SPA)
 
 ### 🏠 Home
-Seção inicial com apresentação profissional, nome e descrição. Inclui:
-- Animação de scroll suave
-- Efeito de gradiente de fundo
-- Seta animada para próxima seção
+Apresentação profissional, nome, headline e chamada para ação. Destaque para especialização em .NET, IA e automação.
 
-### 👨‍💻 Sobre Mim
-- 📍 **Localização**: Rio Verde, MS → Joinville, SC
-- 🎓 **Formação**: Ciência da Computação (UNISOCIESC - 2027)
-- 💼 **Experiência**: 5 anos como desenvolvedor fullstack
-- 🎯 **10 Habilidades** com níveis de proficiência
-- 🎨 **6 Interesses** pessoais
+### 👤 Sobre
+Bio detalhada, trajetória, identidade autista, valores e curiosidades. Localização: Joinville, SC.
 
-### 💼 Projetos
-**4 Experiências Profissionais** detalhadas:
-- 🔵 **NTecnologias** (Atual) - Full Stack
-- 🟣 **Blump-LTDA** (2024) - Full Stack
-- 🟢 **Eos Systems** (2023-2024) - Web Dev
-- 🟡 **Inovvati** (2021-2023) - Junior Dev
+### 🛠️ Stack
+Stack visual por categoria (Frontend, Backend, Mobile, Database, DevOps, Ferramentas) com chips coloridos e ícones customizados.
+
+### 💼 Experiência
+Cards de experiências profissionais (N Tecnologias, EOS, Blump, Inovvati) com timeline, descrição expandida e tecnologias usadas.
+
+### 🚀 Projetos
+Modal detalhado de projetos, tecnologias, desafios e resultados. Foco em modernização, automação e impacto.
 
 ### 🎓 Certificações
-**34 Certificações** organizadas por categoria:
-
-| Categoria | Quantidade |
-|-----------|------------|
-| 🛡️ **Cibersegurança** | 19 certs |
-| 💻 **Desenvolvimento** | 8 certs |
-| ☁️ **Cloud** | 2 certs |
-| 🌐 **Redes** | 2 certs |
-| 🧠 **Redes Neurais e Deep Learning** | 1 certs |
-| ⚙️ **Outros** | 2 certs |
+Mais de 30 certificações filtráveis por categoria: Cibersegurança, Desenvolvimento, Cloud, Redes, IA, Outros.
 
 ### 📧 Contato
-Formulário de contato e links para redes sociais profissionais.
+Links diretos para GitHub, LinkedIn, Email e WhatsApp. Disponível para freelas, vagas e networking.
 
 ---
 
 ## 🎨 Customização
 
-<details>
-<summary><strong>🎨 Customizar Cores e Tema</strong></summary>
 
-As cores são definidas em `src/app/globals.css` usando CSS custom properties:
+### 🎨 Customização
 
-```css
-.dark {
-  --background: 0 0% 6%;
-  --foreground: 0 0% 96%;
-  --primary: 0 0% 96%;
-  --border: 0 0% 16%;
-  /* ... mais variáveis */
-}
-```
-
-</details>
-
-<details>
-<summary><strong>💼 Adicionar Novos Projetos</strong></summary>
-
-Edite `src/constants/projects.ts`:
-
-```typescript
-{
-  id: "meu-projeto",
-  title: "Nome do Projeto",
-  company: "Empresa XYZ",
-  period: "2024 — 2025",
-  short: "Descrição curta do projeto",
-  description: [
-    "Parágrafo detalhado 1",
-    "Parágrafo detalhado 2",
-    "Parágrafo detalhado 3"
-  ],
-  tech: ["react", "nextjs", "typescript", "tailwind"],
-  links: {
-    repo: "https://github.com/...",
-    demo: "https://..."
-  }
-}
-```
-
-</details>
-
-<details>
-<summary><strong>🎓 Adicionar Certificações</strong></summary>
-
-Edite `src/constants/certifications.ts`:
-
-```typescript
-{
-  id: "cert-id",
-  title: "Nome da Certificação",
-  institution: "Instituição",
-  date: "01/12/2025",
-  image: "",
-  category: "development" // ou cybersecurity, cloud, networking, neural-networks, other
-}
-```
-
-</details>
-
----
-
-## 🌐 Deploy
-
-### Vercel (Recomendado)
-
-<div align="center">
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Viniirb/portifolio)
-
-</div>
-
-**Passos:**
-1. 🔗 Conecte seu repositório GitHub
-2. ⚙️ Configure as variáveis de ambiente (se necessário)
-3. 🚀 Deploy automático a cada push
-
-### Outras Plataformas
-
-| Plataforma | Status | Documentação |
-|------------|--------|--------------|
-| **Netlify** | ✅ Suportado | [Docs](https://docs.netlify.com/integrations/frameworks/next-js/) |
-| **Railway** | ✅ Suportado | [Docs](https://docs.railway.app/) |
-| **AWS Amplify** | ✅ Suportado | [Docs](https://docs.amplify.aws/) |
+- **Cores:** Editar em `src/app/globals.css` via CSS custom properties.
+- **Stack:** Editar categorias e tecnologias em `src/constants/stack.ts`.
+- **Projetos:** Adicionar/editar em `src/constants/projects.ts`.
+- **Certificações:** Adicionar/editar em `src/constants/certifications.ts`.
 
 ---
 
@@ -299,6 +146,7 @@ MIT License - Copyright (c) 2025 Vinicius Rolim Barbosa
 
 ---
 
+
 ## 👤 Autor
 
 <div align="center">
@@ -306,11 +154,9 @@ MIT License - Copyright (c) 2025 Vinicius Rolim Barbosa
 <img src="https://github.com/Viniirb.png" width="100" style="border-radius: 50%"/>
 
 ### Vinicius Rolim Barbosa
-**Desenvolvedor Full Stack | Ciência da Computação**
+**Engenheiro de Software Sênior | .NET | IA | Automação**
 
-📍 Rio Verde, MS → Joinville, SC
-
-<br />
+📍 Joinville, SC
 
 [![GitHub](https://img.shields.io/badge/GitHub-Viniirb-181717?style=for-the-badge&logo=github)](https://github.com/Viniirb)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-viniciusrolimbarbosa-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/viniciusrolimbarbosa/)
@@ -320,33 +166,4 @@ MIT License - Copyright (c) 2025 Vinicius Rolim Barbosa
 
 ---
 
-## 🙏 Agradecimentos
 
-<table>
-<tr>
-<td align="center" width="33%">
-  <img src="https://img.shields.io/badge/Design-Echelon-FF6B6B?style=for-the-badge" /><br />
-  Design inspirado em <a href="https://echelon.framer.media/">Echelon</a>
-</td>
-<td align="center" width="33%">
-  <img src="https://img.shields.io/badge/Icons-Lucide-F56565?style=for-the-badge" /><br />
-  Ícones por <a href="https://lucide.dev/">Lucide</a>
-</td>
-<td align="center" width="33%">
-  <img src="https://img.shields.io/badge/Tech_Icons-Simple_Icons-111111?style=for-the-badge" /><br />
-  SVGs por <a href="https://simpleicons.org/">Simple Icons</a>
-</td>
-</tr>
-</table>
-
----
-
-<div align="center">
-
-### ⭐ Se este projeto foi útil, considere dar uma estrela!
-
-**Made with ❤️ by [Vinicius Rolim Barbosa](https://github.com/Viniirb)**
-
-[🔝 Voltar ao topo](#-portfólio-profissional---vinicius-rolim-barbosa)
-
-</div>
