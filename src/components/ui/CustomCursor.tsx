@@ -42,7 +42,7 @@ export function CustomCursor() {
       document.removeEventListener('mouseenter', onEnter)
       document.removeEventListener('mouseover', onOver)
     }
-  }, [x, y])
+  }, [])
 
   if (isTouch) return null
 

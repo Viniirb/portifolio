@@ -27,7 +27,7 @@ export const stack: StackItem[] = [
   { name: 'GraphQL', tech: 'graphql', color: '#E10098', category: 'backend' },
   { name: 'Python', tech: 'python', color: '#3776AB', category: 'backend' },
   { name: 'Ionic', tech: 'ionic', color: '#3880FF', category: 'mobile' },
-  { name: 'React Native', tech: 'react', color: '#61DAFB', category: 'mobile' },
+  { name: 'React Native', tech: 'reactnative', color: '#61DAFB', category: 'mobile' },
   { name: 'SQL Server', tech: 'sqlserver', color: '#CC2927', category: 'database' },
   { name: 'PostgreSQL', tech: 'postgresql', color: '#4169E1', category: 'database' },
   { name: 'MySQL', tech: 'mysql', color: '#4479A1', category: 'database' },

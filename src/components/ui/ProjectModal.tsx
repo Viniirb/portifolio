@@ -1,8 +1,10 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from '@phosphor-icons/react'
 import { getTechIconComponent, getTechIconLabel } from '@/lib/tech-icon-registry'
+import Image from 'next/image'
+import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
 import type { Project } from '@/types'
 
 interface ProjectModalProps {
@@ -11,11 +13,24 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const closeBtnRef = useRef<HTMLButtonElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
+
+  useEffect(() => {
+    if (project) {
+      previousFocusRef.current = document.activeElement as HTMLElement
+      closeBtnRef.current?.focus()
+    } else {
+      previousFocusRef.current?.focus()
+      previousFocusRef.current = null
+    }
+  }, [project])
 
   useEffect(() => {
     const el = document.getElementById('spa-scroll')
@@ -29,7 +44,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       {project && (
         <>
           <motion.div
-            className="fixed inset-0 z-100 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-100 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -40,27 +55,25 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             role="dialog"
             aria-modal="true"
             aria-label={`Detalhes: ${project.company}`}
-            className="fixed bottom-0 left-0 right-0 z-101 max-h-[85vh] overflow-y-auto rounded-t-2xl border-t border-purple-subtle"
-            style={{ background: '#0f0f1a' }}
+            className="fixed inset-0 z-101 flex items-center justify-center"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
           >
-            <div className="p-6 sm:p-8 max-w-3xl mx-auto">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h2 className="font-display text-2xl font-bold text-white">{project.company}</h2>
-                  <p className="text-purple-glow font-mono text-sm mt-1">{project.title}</p>
-                  <span className="font-mono text-xs text-white-dim mt-1 block">{project.period}</span>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="text-white-dim hover:text-white transition-colors p-1"
-                  aria-label="Fechar"
-                >
-                  <X weight="bold" className="w-6 h-6" />
-                </button>
+            <div className="relative w-full max-w-3xl mx-auto p-6 sm:p-8 rounded-2xl border border-purple-subtle shadow-2xl bg-bg-surface">
+              <button
+                ref={closeBtnRef}
+                onClick={onClose}
+                className="absolute top-4 right-4 text-white-dim hover:text-white transition-colors p-2 z-10"
+                aria-label="Fechar"
+              >
+                <X weight="bold" className="w-7 h-7" />
+              </button>
+              <div className="flex flex-col gap-2 mb-6">
+                <h2 className="font-display text-2xl font-bold text-white">{project.company}</h2>
+                <p className="text-purple-glow font-mono text-sm mt-1">{project.title}</p>
+                <span className="font-mono text-xs text-white-dim mt-1 block">{project.period}</span>
               </div>
 
               <ul className="space-y-3 mb-8">
@@ -80,10 +93,23 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   {project.tech.map((tech) => {
                     const IconComponent = getTechIconComponent(tech)
                     const label = getTechIconLabel(tech)
+                    const legacyIcon = getLegacyTechIcon(tech)
 
                     return (
                       <div key={tech} className="glass-card flex items-center gap-2 px-3 py-1.5 rounded-lg">
-                        <IconComponent size={16} className="w-4 h-4" aria-hidden="true" />
+                        {legacyIcon ? (
+                          <Image
+                            src={legacyIcon.src}
+                            alt={legacyIcon.alt}
+                            width={16}
+                            height={16}
+                            className="w-4 h-4 object-contain"
+                            style={legacyIcon.invertOnDark ? { filter: 'brightness(0) invert(1)' } : undefined}
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <IconComponent size={16} className="w-4 h-4" aria-hidden="true" />
+                        )}
                         <span className="font-mono text-xs text-white-muted">{label}</span>
                       </div>
                     )

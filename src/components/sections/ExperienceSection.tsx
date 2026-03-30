@@ -9,7 +9,6 @@ import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
 
 const chronological = [...projects].reverse()
 
-const yearLabels = ['Set 2021', 'Nov 2023', 'Dez 2023', 'Fev 2025']
 
 interface CardProps {
   project: (typeof projects)[0]
@@ -177,7 +176,7 @@ export function ExperienceSection() {
             {chronological.map((p, i) => {
               const isTop = i % 2 === 0
               const isOpen = openId === p.id
-              const yearLabel = yearLabels[i] ?? p.period
+              const yearLabel = p.period
 
               return (
                 <div key={p.id} className="flex flex-col items-center relative z-10">
@@ -246,7 +245,7 @@ export function ExperienceSection() {
         <div className="lg:hidden space-y-3">
           {chronological.map((p, i) => {
             const isOpen = openId === p.id
-            const yearLabel = yearLabels[i] ?? p.period
+            const yearLabel = p.period
 
             return (
               <div key={`mobile-${p.id}`} className="space-y-2">

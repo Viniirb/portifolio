@@ -12,6 +12,7 @@ interface Particle {
 
 const PARTICLE_COUNT = 80
 const MAX_DISTANCE = 120
+const MAX_DISTANCE_SQ = MAX_DISTANCE * MAX_DISTANCE
 const MOUSE_RADIUS = 150
 
 export function ParticleCanvas() {
@@ -32,6 +33,7 @@ export function ParticleCanvas() {
     }
 
     const init = () => {
+      if (canvas.width === 0 || canvas.height === 0) return
       particles.current = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -75,8 +77,9 @@ export function ParticleCanvas() {
           const b = particles.current[j]
           const dx = a.x - b.x
           const dy = a.y - b.y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < MAX_DISTANCE) {
+          const distSq = dx * dx + dy * dy
+          if (distSq < MAX_DISTANCE_SQ) {
+            const dist = Math.sqrt(distSq)
             const opacity = (1 - dist / MAX_DISTANCE) * 0.15
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)

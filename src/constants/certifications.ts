@@ -7,7 +7,7 @@ export const certifications: Certification[] = [
     institution: "Rocketseat",
     date: "25/03/2026",
     image: "",
-    category: "development",
+    category: "neuralnetworks",
   },
   {
     id: "santander-ciberseguranca-2025",

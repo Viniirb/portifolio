@@ -43,6 +43,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
               <button
                 key={item.id}
                 onClick={() => handleNavigate(item.id)}
+                aria-current={isActive ? 'page' : undefined}
                 className={`relative font-mono text-xs uppercase tracking-widest transition-colors ${
                   isActive ? 'text-purple-glow' : 'text-white-muted hover:text-white'
                 }`}
@@ -102,6 +103,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`font-mono text-sm uppercase tracking-widest text-left py-2 border-b border-purple-subtle/30 transition-colors ${
                     isActive ? 'text-purple-glow' : 'text-white-muted hover:text-white'
                   }`}

@@ -6,6 +6,8 @@ import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
 import { ProjectModal } from '@/components/ui/ProjectModal'
 import { projects } from '@/constants/projects'
 import { getTechIconComponent, getTechIconLabel } from '@/lib/tech-icon-registry'
+import Image from 'next/image'
+import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
 import type { Project } from '@/types'
 
 const containerVariants = {
@@ -32,8 +34,10 @@ export function ProjectsSection() {
         viewport={{ once: true, margin: '-80px' }}
       >
         {projects.map((project) => {
-          const visibleTech = project.tech.slice(0, 5)
-          const remaining = project.tech.length - 5
+
+          // Exibe todos os ícones de tecnologia
+          const visibleTech = project.tech
+          const remaining = 0
 
           return (
             <motion.div
@@ -69,10 +73,23 @@ export function ProjectsSection() {
                 {visibleTech.map((tech) => {
                   const IconComponent = getTechIconComponent(tech)
                   const label = getTechIconLabel(tech)
+                  const legacyIcon = getLegacyTechIcon(tech)
 
                   return (
                     <div key={tech} className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" title={label}>
-                      <IconComponent size={18} className="w-5 h-5" aria-hidden="true" />
+                      {legacyIcon ? (
+                        <Image
+                          src={legacyIcon.src}
+                          alt={legacyIcon.alt}
+                          width={18}
+                          height={18}
+                          className="w-5 h-5 object-contain"
+                          style={legacyIcon.invertOnDark ? { filter: 'brightness(0) invert(1)' } : undefined}
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <IconComponent size={18} className="w-5 h-5" aria-hidden="true" />
+                      )}
                     </div>
                   )
                 })}

@@ -54,7 +54,7 @@ export function StackSection() {
   const categories = Object.entries(stackCategories) as [keyof typeof stackCategories, string][]
 
   return (
-    <section id="stack" className="h-full flex flex-col justify-center py-6 sm:py-8 px-6 dot-grid">
+    <section id="stack" className="h-full flex flex-col justify-center py-6 sm:py-8 px-6">
       <div className="max-w-6xl mx-auto w-full">
 
         <SectionReveal delay={0.1}>

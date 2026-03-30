@@ -26,7 +26,8 @@ export type TechKey =
   | "docker"
   | "n8n"
   | "ionic"
-  | "python";
+  | "python"
+  | "reactnative";
 
 export type Project = {
   id: string;

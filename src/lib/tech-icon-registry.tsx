@@ -60,6 +60,7 @@ export const TECH_ICON_COMPONENTS: Record<TechKey, TechIconComponent> = {
   n8n: fallbackIcon,
   ionic: Ionic as TechIconComponent,
   python: Python as TechIconComponent,
+  reactnative: React as TechIconComponent,
 }
 
 export const TECH_ICON_LABELS: Record<TechKey, string> = {
@@ -91,6 +92,7 @@ export const TECH_ICON_LABELS: Record<TechKey, string> = {
   n8n: 'n8n',
   ionic: 'Ionic',
   python: 'Python',
+  reactnative: 'React Native',
 }
 
 export function getTechIconComponent(tech: TechKey): TechIconComponent {

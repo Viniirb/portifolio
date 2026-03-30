@@ -46,7 +46,7 @@ export function AboutSection() {
 
           <SectionReveal delay={0.2}>
             <p className="text-white-muted leading-relaxed">
-              Natural de Campo Grande, Mato Grosso do Sul, hoje em Joinville, Santa Catarina.
+              Natural de Rio Verde de Mato Grosso, Mato Grosso do Sul, hoje em Joinville, Santa Catarina.
               Sou autista — e enxergo nisso uma vantagem real: foco profundo, pensamento sistemático
               e atenção a detalhes que fazem a diferença em sistemas críticos.
             </p>
@@ -57,7 +57,7 @@ export function AboutSection() {
               Com 5 anos de experiência como Engenheiro de Software Sênior, especializo-me em .NET
               e na modernização de sistemas legados. Já projetei evoluções arquiteturais de monólito
               para serviços, implementei agentes de IA em produção (RAG) e automatizei operações
-              críticas com n8n — sempre com foco em entrega confiável e impacto mensurável.
+              críticas com N8N — sempre com foco em entrega confiável e impacto mensurável.
             </p>
           </SectionReveal>
 

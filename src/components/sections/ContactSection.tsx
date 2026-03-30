@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
 
-const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5547988903621').replace(/\D/g, '')
+const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '').replace(/\D/g, '')
 const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Olá, Vinicius! Vi seu portfólio e gostaria de conversar sobre um projeto.')}`
 
 const contacts = [
