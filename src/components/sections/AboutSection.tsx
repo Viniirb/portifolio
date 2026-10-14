@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   BookOpenIcon,
@@ -43,9 +44,27 @@ export function AboutSection() {
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
         <div className="lg:col-span-3 space-y-4">
           <SectionReveal delay={0.1}>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-gradient">
-              Olá, eu sou o Vinicius.
-            </h2>
+            <div className="flex items-center gap-5">
+              <div
+                className="relative shrink-0 rounded-full p-0.5"
+                style={{
+                  background: 'linear-gradient(135deg, #a78bfa, #4c1d95)',
+                  boxShadow: '0 0 28px rgba(124,58,237,0.45)',
+                }}
+              >
+                <Image
+                  src="/avatar.jpg"
+                  alt="Foto de Vinicius Rolim Barbosa"
+                  width={96}
+                  height={96}
+                  priority
+                  className="h-20 w-20 sm:h-24 sm:w-24 rounded-full object-cover object-[50%_30%] border-2 border-bg-primary"
+                />
+              </div>
+              <h2 className="font-display text-4xl sm:text-5xl font-bold text-gradient">
+                Olá, eu sou o Vinicius.
+              </h2>
+            </div>
           </SectionReveal>
 
           <SectionReveal delay={0.2}>

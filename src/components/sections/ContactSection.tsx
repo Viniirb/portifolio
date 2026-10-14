@@ -1,12 +1,12 @@
 'use client'
 import { motion } from 'framer-motion'
-import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
+import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon, DownloadSimpleIcon, LockSimpleIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
+import { WHATSAPP_NUMBER } from '@/lib/site'
 
-const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '').replace(/\D/g, '')
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Olá, Vinicius! Vi seu portfólio e gostaria de conversar sobre um projeto.')}`
+const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá, Vinicius! Vi seu portfólio e gostaria de conversar sobre um projeto.')}`
 
-const contacts = [
+const allContacts = [
   {
     icon: GithubLogoIcon,
     label: 'GitHub',
@@ -40,7 +40,9 @@ const contacts = [
   },
 ]
 
-export function ContactSection() {
+const contacts = allContacts
+
+export function ContactSection({ locked = false }: { locked?: boolean }) {
   return (
     <section
       id="contato"
@@ -59,7 +61,13 @@ export function ContactSection() {
         </p>
       </SectionReveal>
 
-      <div className="space-y-4">
+      {locked && (
+        <p className="mb-6 font-mono text-[11px] text-white-dim">
+          {'// o Gengar trancou meus contatos. ache os olhos no escuro e pegue ele 5 vezes para destravar.'}
+        </p>
+      )}
+
+      <div className="space-y-4" inert={locked} aria-busy={locked}>
         {contacts.map((contact, index) => {
           const isExternal = contact.href.startsWith('http')
 
@@ -75,7 +83,9 @@ export function ContactSection() {
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
                 download={contact.download ? true : undefined}
-                className="group flex items-center gap-6 py-5 border-b border-purple-subtle/30 hover:border-purple-glow/50 transition-all"
+                className={`group flex items-center gap-6 py-5 border-b border-purple-subtle/30 hover:border-purple-glow/50 transition-all duration-700 ${
+                  locked ? 'opacity-30 grayscale' : ''
+                }`}
                 aria-label={contact.ariaLabel}
               >
                 <contact.icon
@@ -87,9 +97,13 @@ export function ContactSection() {
                     {contact.label}
                   </p>
                 </div>
-                <span className="text-white-dim group-hover:text-purple-glow group-hover:translate-x-1 transition-all font-mono text-sm">
-                  →
-                </span>
+                {locked ? (
+                  <LockSimpleIcon weight="bold" className="h-5 w-5 text-red-400" aria-label="Bloqueado" />
+                ) : (
+                  <span className="text-white-dim group-hover:text-purple-glow group-hover:translate-x-1 transition-all font-mono text-sm">
+                    →
+                  </span>
+                )}
               </a>
             </motion.div>
           )

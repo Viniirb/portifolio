@@ -4,11 +4,11 @@
 <div align="center">
 
 
-Portfólio pessoal em formato SPA, desenvolvido com Next.js 15, apresentando projetos, stack, certificações e experiência profissional de forma minimalista, moderna e interativa.
+Portfólio pessoal em formato SPA, desenvolvido com Next.js 16, apresentando projetos, stack, certificações e experiência profissional de forma minimalista, moderna e interativa.
 
 <br />
 
-[![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
@@ -25,7 +25,7 @@ Portfólio pessoal em formato SPA, desenvolvido com Next.js 15, apresentando pro
 
 ## 🎯 Sobre o Projeto
 
-Portfólio full-stack desenvolvido para apresentar minha trajetória profissional como desenvolvedor, incluindo projetos, stack tecnológica e mais de 32 certificações. O design segue uma abordagem minimalista e moderna.
+Portfólio full-stack desenvolvido para apresentar minha trajetória profissional como desenvolvedor, incluindo projetos, stack tecnológica e mais de 45 certificações. O design segue uma abordagem minimalista e moderna.
 
 
 
@@ -37,9 +37,9 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 | ⚡ **SPA Interativa** | Navegação por tabs, transições animadas e Particle Canvas |
 | 🧩 **Seções Modulares** | Home, Sobre, Stack, Experiência, Projetos, Certificações, Contato |
 | 💼 **Experiências Profissionais** | Cards detalhados, modal de projetos e timeline |
-| 🎓 **Certificações** | 37+ certificações filtráveis por categoria |
+| 🎓 **Certificações** | 45+ certificações com miniatura, lightbox e filtros por categoria |
 | 🛠️ **Stack Visual** | Chips coloridos, ícones SVG e categorias |
-| 🚀 **Performance** | Next.js 15, Turbopack e otimização de assets |
+| 🚀 **Performance** | Next.js 16, Turbopack e otimização de assets |
 | ♿ **Acessibilidade** | Práticas WCAG, navegação por teclado |
 
 ---
@@ -52,11 +52,11 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 
 
 ### Frontend
-- ⚛️ **React 19** - Biblioteca UI
-- 🔷 **Next.js 15 SPA** - Framework React
+- ⚛️ **React 19.3** - Biblioteca UI
+- 🔷 **Next.js 16 (App Router)** - Framework React
 - 📘 **TypeScript** - Tipagem estática
-- 🎨 **Tailwind CSS 3.4** - Utility-first CSS
-- 🎭 **Framer Motion 11** - Animações
+- 🎨 **Tailwind CSS 4** - Utility-first CSS
+- 🎭 **Framer Motion 12** - Animações
 - 🖼️ **SVG Custom Icons** - Tech stack visual
 
 </td>
@@ -84,16 +84,21 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 ┣ 📂 src/
 ┃ ┣ 📂 app/
 ┃ ┃ ┣ 📄 page.tsx              # SPA principal (todas as seções)
-┃ ┃ ┣ 📄 layout.tsx            # Layout raiz
+┃ ┃ ┣ 📄 layout.tsx            # Layout raiz (metadata, JSON-LD)
+┃ ┃ ┣ 📄 opengraph-image.tsx   # Imagem OG gerada
+┃ ┃ ┣ 📄 robots.ts / sitemap.ts
 ┃ ┃ ┣ 📄 globals.css           # Estilos globais
 ┃ ┣ 📂 components/
 ┃ ┃ ┣ 📂 layout/               # Header, Footer, PageCurtain
 ┃ ┃ ┣ 📂 sections/             # Hero, About, Stack, Experience, Projects, Certifications, Contact
 ┃ ┃ ┗ 📂 ui/                   # CustomCursor, ParticleCanvas, SectionReveal, etc
+┃ ┣ 📂 lib/                    # site.ts (SEO), registro de ícones
 ┃ ┣ 📂 constants/              # Dados: projects, certifications, stack
 ┃ ┗ 📂 types/                  # Tipos para projetos, certificações, stack
 ┣ 📂 public/
-┃ ┗ 📂 tech/                   # SVGs de tecnologias
+┃ ┣ 📂 tech/                   # SVGs de tecnologias
+┃ ┣ 📂 certs/                  # Miniaturas dos certificados
+┃ ┗ 📄 Vinicius-Rolim-Barbosa-CV.pdf
 ┗ 📄 package.json
 ```
 ---
@@ -108,16 +113,16 @@ Apresentação profissional, nome, headline e chamada para ação. Destaque para
 Bio detalhada, trajetória, identidade autista, valores e curiosidades. Localização: Joinville, SC.
 
 ### 🛠️ Stack
-Stack visual por categoria (Frontend, Backend, Mobile, Database, DevOps, Ferramentas) com chips coloridos e ícones customizados.
+Stack visual por categoria (IA & Agentes, Frontend, Backend, Mobile, Banco de Dados, DevOps, Ferramentas) com chips coloridos e ícones customizados.
 
 ### 💼 Experiência
-Cards de experiências profissionais (N Tecnologias, EOS, Blump, Inovvati) com timeline, descrição expandida e tecnologias usadas.
+Cards de experiências profissionais (iBR Software, N Tecnologias, EOS, Blump, Inovvati) com timeline, descrição expandida e tecnologias usadas.
 
 ### 🚀 Projetos
 Modal detalhado de projetos, tecnologias, desafios e resultados. Foco em modernização, automação e impacto.
 
 ### 🎓 Certificações
-Mais de 32 certificações filtráveis por categoria: Cibersegurança, Desenvolvimento, Cloud, Redes, IA, Outros.
+Mais de 45 certificações com miniatura e lightbox, filtráveis por categoria (Destaques, IA, Cibersegurança, Cloud, Desenvolvimento, Comunidade & Eventos). Cursos da DIO ficam agrupados como módulos da formação de Cibersegurança.
 
 ### 📧 Contato
 Links diretos para GitHub, LinkedIn, Email e WhatsApp. Disponível para freelas, vagas e networking.
@@ -126,13 +131,13 @@ Links diretos para GitHub, LinkedIn, Email e WhatsApp. Disponível para freelas,
 
 ## 🎨 Customização
 
-
-### 🎨 Customização
-
 - **Cores:** Editar em `src/app/globals.css` via CSS custom properties.
 - **Stack:** Editar categorias e tecnologias em `src/constants/stack.ts`.
 - **Projetos:** Adicionar/editar em `src/constants/projects.ts`.
-- **Certificações:** Adicionar/editar em `src/constants/certifications.ts`.
+- **Certificações:** Adicionar/editar em `src/constants/certifications.ts` (`featured`, `image` e `modules` opcionais).
+- **SEO:** URL e textos em `src/lib/site.ts`.
+- **Navegação:** cada seção tem hash próprio (`/#projetos`, `/#certificacoes`).
+- **WhatsApp:** usa `NEXT_PUBLIC_WHATSAPP_NUMBER` (apenas dígitos, com DDI) e cai em um número padrão em `src/lib/site.ts`.
 
 ---
 

@@ -19,7 +19,7 @@ interface CardProps {
 function ExpCard({ project, isOpen, onToggle }: CardProps) {
   return (
     <div
-      className="rounded-xl overflow-hidden transition-all duration-200 h-full"
+      className="rounded-xl overflow-hidden transition-all duration-200"
       style={{
         background: 'rgba(124,58,237,0.06)',
         border: `1px solid ${isOpen ? 'rgba(124,58,237,0.5)' : 'rgba(124,58,237,0.2)'}`,
@@ -32,11 +32,11 @@ function ExpCard({ project, isOpen, onToggle }: CardProps) {
       >
         <div className="flex-1 min-w-0">
           <p className="text-xs font-bold text-white leading-snug">{project.company}</p>
-          <p className="font-mono text-[10px] mt-0.5" style={{ color: '#a78bfa' }}>
+          <p className="font-mono text-xs mt-0.5" style={{ color: '#a78bfa' }}>
             {project.title}
           </p>
           <span
-            className="inline-block font-mono text-[9px] mt-1 px-1.5 py-0.5 rounded"
+            className="inline-block font-mono text-[11px] mt-1 px-1.5 py-0.5 rounded"
             style={{ color: '#6b7280', background: 'rgba(124,58,237,0.15)' }}
           >
             {project.period}
@@ -83,7 +83,7 @@ function ExpCard({ project, isOpen, onToggle }: CardProps) {
         style={{ maxHeight: isOpen ? 200 : 0 }}
       >
         <div
-          className="px-3 pb-3 pt-2 text-[10px] leading-relaxed"
+          className="px-3 pb-3 pt-2 text-xs leading-relaxed"
           style={{
             borderTop: '1px solid rgba(124,58,237,0.2)',
             color: '#94a3b8',
@@ -148,7 +148,7 @@ export function ExperienceSection() {
         className="w-full"
       >
         <div className="hidden lg:block">
-          <div className="grid grid-cols-5 gap-4 mb-3">
+          <div className="grid grid-cols-5 items-end gap-4 mb-3">
             {chronological.map((p, i) =>
               i % 2 === 0 ? (
                 <ExpCard
@@ -197,7 +197,7 @@ export function ExperienceSection() {
                     onClick={() => toggle(p.id)}
                     aria-label={`Ver ${p.company}`}
                   >
-                    <span className="font-mono text-[10px]" style={{ color: '#94a3b8' }}>
+                    <span className="font-mono text-xs" style={{ color: '#94a3b8' }}>
                       {yearLabel}
                     </span>
                     <span
@@ -226,7 +226,7 @@ export function ExperienceSection() {
             })}
           </div>
 
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-5 items-start gap-4">
             {chronological.map((p, i) =>
               i % 2 !== 0 ? (
                 <ExpCard
@@ -254,7 +254,7 @@ export function ExperienceSection() {
                   onClick={() => toggle(p.id)}
                   aria-label={`Ver ${p.company}`}
                 >
-                  <span className="font-mono text-[10px]" style={{ color: '#94a3b8' }}>
+                  <span className="font-mono text-xs" style={{ color: '#94a3b8' }}>
                     {yearLabel}
                   </span>
                   <span
@@ -268,7 +268,7 @@ export function ExperienceSection() {
                         : '0 0 10px rgba(124,58,237,0.65)',
                     }}
                   />
-                  <span className="text-[11px] text-white truncate">{p.company}</span>
+                  <span className="text-xs text-white truncate">{p.company}</span>
                 </button>
                 <ExpCard project={p} isOpen={isOpen} onToggle={() => toggle(p.id)} />
               </div>

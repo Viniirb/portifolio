@@ -6,8 +6,10 @@
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/700.css";
 
-*, *::before, *::after {
-  cursor: none !important;
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 @theme {
@@ -30,7 +32,6 @@
   html {
     height: 100%;
     overflow: hidden;
-    cursor: none;
   }
 
   body {
@@ -50,12 +51,6 @@
     pointer-events: none;
     z-index: 9999;
     opacity: 0.4;
-  }
-
-  @media (pointer: coarse) {
-    html {
-      cursor: auto;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {

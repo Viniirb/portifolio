@@ -56,12 +56,16 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             aria-modal="true"
             aria-label={`Detalhes: ${project.company}`}
             className="fixed inset-0 z-101 flex overflow-y-auto p-4"
+            onClick={onClose}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
           >
-            <div className="relative w-full max-w-3xl m-auto p-6 sm:p-8 rounded-2xl border border-purple-subtle shadow-2xl bg-bg-surface">
+            <div
+              className="relative w-full max-w-3xl m-auto p-6 sm:p-8 rounded-2xl border border-purple-subtle shadow-2xl bg-bg-surface"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
                 ref={closeBtnRef}
                 onClick={onClose}

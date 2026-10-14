@@ -10,6 +10,7 @@ import { ExperienceSection } from '@/components/sections/ExperienceSection'
 import { ProjectsSection } from '@/components/sections/ProjectsSection'
 import { CertificationsSection } from '@/components/sections/CertificationsSection'
 import { ContactSection } from '@/components/sections/ContactSection'
+import { GengarEasterEgg } from '@/components/ui/GengarEasterEgg'
 
 const ParticleCanvas = dynamic(
   () => import('@/components/ui/ParticleCanvas').then((m) => m.ParticleCanvas),
@@ -18,6 +19,10 @@ const ParticleCanvas = dynamic(
 
 export default function Home() {
   const [active, setActiveState] = useState('hero')
+  const [haunted, setHaunted] = useState(false)
+  const [caught, setCaught] = useState(false)
+  const onHaunt = useCallback(() => setHaunted(true), [])
+  const onCaught = useCallback(() => setCaught(true), [])
 
   const setActive = useCallback((id: string) => {
     if (id === (window.location.hash.slice(1) || 'hero')) return
@@ -44,7 +49,7 @@ export default function Home() {
       case 'experiencia':   return <ExperienceSection />
       case 'projetos':      return <ProjectsSection />
       case 'certificacoes': return <CertificationsSection />
-      case 'contato':       return <ContactSection />
+      case 'contato':       return <ContactSection locked={haunted && !caught} />
       default:              return <HeroSection onNavigate={setActive} />
     }
   }
@@ -67,6 +72,7 @@ export default function Home() {
       {/* Foreground content */}
       <div className="relative z-10 flex flex-col h-full">
         <Header activeSection={active} onNavigate={setActive} />
+        <GengarEasterEgg section={active} caught={caught} onHaunt={onHaunt} onCaught={onCaught} />
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
