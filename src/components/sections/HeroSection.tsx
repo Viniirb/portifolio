@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { ArrowRightIcon } from '@phosphor-icons/react'
+import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 
 interface HeroSectionProps {
   onNavigate: (id: string) => void
@@ -10,9 +10,9 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative w-full h-full flex flex-col items-center justify-center"
+      className="relative w-full min-h-full flex flex-col items-center justify-center"
     >
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20">
+      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto py-10">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           transition={{ duration: 0.6, delay: 1.1 }}
         >
           Especializado em .NET e modernização de sistemas críticos.
-          5 anos construindo arquiteturas escaláveis, automações de alto impacto e IA aplicada em produção.
+          Hoje na iBR Software: ERP distribuído, módulo Financeiro e machine learning aplicado a risco.
         </motion.p>
 
         <motion.div
@@ -68,6 +68,15 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           >
             Falar Comigo
           </button>
+          <a
+            href="/Vinicius-Rolim-Barbosa-CV.pdf"
+            download
+            className="px-8 py-3 font-mono text-sm tracking-widest uppercase text-white-muted hover:text-white border border-purple-subtle/50 hover:border-purple-glow transition-all flex items-center justify-center gap-2"
+            aria-label="Baixar currículo em PDF"
+          >
+            <DownloadSimpleIcon weight="bold" className="w-4 h-4" />
+            Currículo
+          </a>
         </motion.div>
 
         <motion.div

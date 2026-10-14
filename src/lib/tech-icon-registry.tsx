@@ -3,6 +3,7 @@ import {
   Angular,
   Azure,
   Bitbucket,
+  ClaudeAI,
   Bootstrap5,
   CSharp,
   DeveloperIcons,
@@ -10,17 +11,20 @@ import {
   Git,
   GraphQL,
   Ionic,
+  Jenkins,
   JavaScript,
   Jira,
   MicrosoftSQLServer,
   MySQL,
   NextJs,
   NodeJs,
+  OpenAI,
   PostgreSQL,
   Postman,
   Python,
   React,
   Supabase,
+  TailwindCSS,
   TypeScript,
   VisualStudioCode,
   VueJs,
@@ -30,6 +34,13 @@ import type { TechKey } from '@/types'
 type TechIconComponent = ComponentType<SVGProps<SVGElement> & { size?: number }>
 
 const fallbackIcon = DeveloperIcons as TechIconComponent
+
+const CodexIcon: TechIconComponent = ({ style, ...props }) => (
+  <OpenAI
+    {...(props as object)}
+    style={{ ...style, filter: `brightness(0) invert(1) ${style?.filter ?? ''}`.trim() }}
+  />
+)
 
 export const TECH_ICON_COMPONENTS: Record<TechKey, TechIconComponent> = {
   react: React as TechIconComponent,
@@ -61,6 +72,18 @@ export const TECH_ICON_COMPONENTS: Record<TechKey, TechIconComponent> = {
   ionic: Ionic as TechIconComponent,
   python: Python as TechIconComponent,
   reactnative: React as TechIconComponent,
+  rabbitmq: fallbackIcon,
+  efcore: CSharp as TechIconComponent,
+  maui: CSharp as TechIconComponent,
+  sonar: fallbackIcon,
+  tailwind: TailwindCSS as TechIconComponent,
+  ml: CSharp as TechIconComponent,
+  rag: fallbackIcon,
+  deeplearning: fallbackIcon,
+  jenkins: Jenkins as TechIconComponent,
+  cicd: fallbackIcon,
+  claudecode: ClaudeAI as TechIconComponent,
+  codex: CodexIcon,
 }
 
 export const TECH_ICON_LABELS: Record<TechKey, string> = {
@@ -93,6 +116,18 @@ export const TECH_ICON_LABELS: Record<TechKey, string> = {
   ionic: 'Ionic',
   python: 'Python',
   reactnative: 'React Native',
+  rabbitmq: 'RabbitMQ',
+  efcore: 'EF Core',
+  maui: '.NET MAUI',
+  sonar: 'SonarQube',
+  tailwind: 'Tailwind CSS',
+  ml: 'Machine Learning (C#)',
+  rag: 'RAG',
+  deeplearning: 'Deep Learning',
+  jenkins: 'Jenkins',
+  cicd: 'CI/CD',
+  claudecode: 'Claude Code',
+  codex: 'Codex',
 }
 
 export function getTechIconComponent(tech: TechKey): TechIconComponent {

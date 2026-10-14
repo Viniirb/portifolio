@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon } from '@phosphor-icons/react'
+import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
 
 const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '').replace(/\D/g, '')
@@ -26,6 +26,13 @@ const contacts = [
     href: 'mailto:contato@viniciusrb.dev',
   },
   {
+    icon: DownloadSimpleIcon,
+    label: 'Currículo (PDF)',
+    ariaLabel: 'Baixar currículo em PDF',
+    href: '/Vinicius-Rolim-Barbosa-CV.pdf',
+    download: true,
+  },
+  {
     icon: WhatsappLogoIcon,
     label: 'WhatsApp',
     ariaLabel: 'WhatsApp: +55 47 98890-3621',
@@ -37,16 +44,16 @@ export function ContactSection() {
   return (
     <section
       id="contato"
-      className="h-full flex flex-col justify-center pt-14 sm:pt-16 md:pt-8 py-8 sm:py-12 px-6 max-w-6xl mx-auto w-full scroll-mt-28 sm:scroll-mt-32"
+      className="min-h-full flex flex-col justify-center py-8 sm:py-12 px-6 max-w-6xl mx-auto w-full"
     >
       <SectionReveal delay={0.1}>
-        <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-none tracking-tighter mt-8 sm:mt-10 md:mt-6 mb-4">
+        <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-none tracking-tighter mt-2 mb-4">
           <span className="text-gradient">Vamos construir algo.</span>
         </h2>
       </SectionReveal>
 
       <SectionReveal delay={0.2}>
-        <p className="text-white-muted text-lg max-w-lg mb-16 leading-relaxed">
+        <p className="text-white-muted text-lg max-w-lg mb-8 sm:mb-12 leading-relaxed">
           Estou disponível para projetos freelance, oportunidades de emprego ou apenas para
           conversar sobre tecnologia.
         </p>
@@ -67,6 +74,7 @@ export function ContactSection() {
                 href={contact.href}
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
+                download={contact.download ? true : undefined}
                 className="group flex items-center gap-6 py-5 border-b border-purple-subtle/30 hover:border-purple-glow/50 transition-all"
                 aria-label={contact.ariaLabel}
               >

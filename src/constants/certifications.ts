@@ -3,6 +3,7 @@ import type { Certification } from "@/types/certification";
 export const certifications: Certification[] = [
   {
     id: "anthropic-claude-code-in-action",
+    featured: true,
     title: "Claude Code in Action",
     institution: "Anthropic",
     date: "30/03/2026",
@@ -11,6 +12,7 @@ export const certifications: Certification[] = [
   },
   {
     id: "anthropic-claude-101",
+    featured: true,
     title: "Claude 101",
     institution: "Anthropic",
     date: "30/03/2026",
@@ -19,6 +21,7 @@ export const certifications: Certification[] = [
   },
   {
     id: "rocketseat-engenharia-prompt",
+    featured: true,
     title: "Engenharia de Prompt",
     institution: "Rocketseat",
     date: "25/03/2026",
@@ -27,6 +30,7 @@ export const certifications: Certification[] = [
   },
   {
     id: "santander-ciberseguranca-2025",
+    featured: true,
     title: "Santander - Cibersegurança 2025",
     institution: "Santander",
     date: "30/11/2025",
@@ -44,8 +48,9 @@ export const certifications: Certification[] = [
 
   {
     id: "rocketseat-redes-neurais",
+    featured: true,
     title: "Redes Neurais e Deep Learning",
-    institution: "Rockeseat",
+    institution: "Rocketseat",
     date: "27/01/2026",
     image: "",
     category: "neuralnetworks"
@@ -233,6 +238,7 @@ export const certifications: Certification[] = [
 
   {
     id: "microsoft-fabric",
+    featured: true,
     title: "Certificado Microsoft Fabric",
     institution: "Microsoft",
     date: "11/07/2025",
@@ -241,6 +247,7 @@ export const certifications: Certification[] = [
   },
   {
     id: "azure-big-data",
+    featured: true,
     title: "Certificado Azure Big Data",
     institution: "Udemy",
     date: "30/04/2025",
@@ -258,6 +265,7 @@ export const certifications: Certification[] = [
   },
   {
     id: "deal-intro-dotnet",
+    featured: true,
     title: "Introdução Deal Intro .NET",
     institution: "Deal Group",
     date: "23/07/2025",
@@ -283,6 +291,7 @@ export const certifications: Certification[] = [
   },
   {
     id: "nlw-react",
+    featured: true,
     title: "Certificado NLW React",
     institution: "Rocketseat",
     date: "30/04/2025",
@@ -305,5 +314,70 @@ export const certifications: Certification[] = [
     date: "30/04/2025",
     image: "",
     category: "development",
+  },
+  {
+    id: "rocketseat-fundamentos-csharp",
+    featured: true,
+    title: "Fundamentos de C#",
+    institution: "Rocketseat",
+    date: "17/02/2026",
+    image: "",
+    category: "development",
+  },
+  {
+    id: "rocketseat-seo-devs",
+    title: "SEO para Devs",
+    institution: "Rocketseat",
+    date: "2024",
+    image: "",
+    category: "development",
+  },
+  {
+    id: "rocketseat-inteligencia-emocional",
+    title: "Inteligência Emocional",
+    institution: "Rocketseat",
+    date: "2026",
+    image: "",
+    category: "other",
+  },
+  {
+    id: "codecon-summit-2026",
+    title: "Codecon Summit 2026",
+    institution: "Codecon",
+    date: "2026",
+    image: "",
+    category: "development",
+  },
+  {
+    id: "codecon-joinville-meetup-21",
+    title: "Codecon Joinville Meetup 21",
+    institution: "Codecon",
+    date: "2026",
+    image: "",
+    category: "development",
+  },
+  {
+    id: "unisociesc-leitura-interpretacao",
+    title: "Leitura e Interpretação de Texto",
+    institution: "Unisociesc",
+    date: "11/02/2026",
+    image: "",
+    category: "other",
+  },
+  {
+    id: "unisociesc-raciocinio-logico",
+    title: "Raciocínio Lógico",
+    institution: "Unisociesc",
+    date: "14/02/2026",
+    image: "",
+    category: "other",
+  },
+  {
+    id: "unisociesc-masterclass-ciencia-coragem",
+    title: "Master Class: Onde a Ciência Encontra a Coragem",
+    institution: "Unisociesc",
+    date: "2026",
+    image: "",
+    category: "other",
   },
 ];

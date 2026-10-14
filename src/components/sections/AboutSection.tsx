@@ -10,6 +10,7 @@ import {
   MapPinIcon,
   BriefcaseIcon,
   StarIcon,
+  GraduationCapIcon,
 } from '@phosphor-icons/react'
 import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
 
@@ -23,9 +24,10 @@ const curiosidades = [
 ]
 
 const statusItems = [
-  { icon: BriefcaseIcon, label: 'Empresa', value: 'N Tecnologias' },
+  { icon: BriefcaseIcon, label: 'Empresa', value: 'iBR Software' },
   { icon: MapPinIcon, label: 'Localização', value: 'Joinville, SC' },
-  { icon: StarIcon, label: 'Experiência', value: '5 anos' },
+  { icon: StarIcon, label: 'Experiência', value: '5+ anos' },
+  { icon: GraduationCapIcon, label: 'Formação', value: 'Ciência da Computação · Unisociesc · 2027 · média 9,49' },
 ]
 
 const containerVariants = {
@@ -35,7 +37,7 @@ const containerVariants = {
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="py-8 sm:py-10 px-6 max-w-6xl mx-auto h-full flex flex-col justify-center">
+    <section id="sobre" className="py-8 sm:py-10 px-6 w-full max-w-6xl mx-auto min-h-full flex flex-col justify-center">
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
         <div className="lg:col-span-3 space-y-4">
           <SectionReveal delay={0.1}>
@@ -54,10 +56,10 @@ export function AboutSection() {
 
           <SectionReveal delay={0.3}>
             <p className="text-white-muted leading-relaxed">
-              Com 5 anos de experiência como Engenheiro de Software Sênior, especializo-me em .NET
-              e na modernização de sistemas legados. Já projetei evoluções arquiteturais de monólito
-              para serviços, implementei agentes de IA em produção (RAG) e automatizei operações
-              críticas com N8N — sempre com foco em entrega confiável e impacto mensurável.
+              Engenheiro de Software Sênior com mais de 5 anos de experiência, hoje na iBR Software
+              modernizando o ERP, estruturando o novo módulo Financeiro e desenvolvendo um pipeline de
+              machine learning para risco financeiro. Antes, migrei um ERP completo, evoluí um monólito
+              para serviços e implementei agentes de IA — sempre com foco em confiabilidade e impacto mensurável.
             </p>
           </SectionReveal>
 

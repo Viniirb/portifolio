@@ -4,5 +4,6 @@ export type Certification = {
   institution: string;
   date: string;
   image: string;
+  featured?: boolean;
   category: "cybersecurity" | "cloud" | "development" | "networking" | "other" | "neuralnetworks";
 };

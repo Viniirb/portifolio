@@ -6,7 +6,8 @@ import { certifications } from '@/constants/certifications'
 import type { Certification } from '@/types'
 
 const CAT_LABELS: Record<string, string> = {
-  all: 'Todos',
+  featured: 'Destaques',
+  all: 'Todas',
   cybersecurity: 'Cibersegurança',
   development: 'Desenvolvimento',
   cloud: 'Cloud',
@@ -16,7 +17,8 @@ const CAT_LABELS: Record<string, string> = {
 }
 
 const CAT_SHORT: Record<string, string> = {
-  all: 'Todos',
+  featured: 'Destaques',
+  all: 'Todas',
   cybersecurity: 'Ciberseg.',
   development: 'Dev',
   cloud: 'Cloud',
@@ -156,7 +158,7 @@ function CertCard({ cert, isFlipped, onFlip }: CertCardProps) {
 }
 
 export function CertificationsSection() {
-  const [activeCategory, setActiveCategory] = useState('all')
+  const [activeCategory, setActiveCategory] = useState('featured')
   const [currentPage, setCurrentPage] = useState(0)
   const [direction, setDirection] = useState(1)
   const [flippedIds, setFlippedIds] = useState<Set<string>>(new Set())
@@ -173,11 +175,13 @@ export function CertificationsSection() {
   const filtered =
     activeCategory === 'all'
       ? certifications
-      : certifications.filter((c) => c.category === activeCategory)
+      : activeCategory === 'featured'
+        ? certifications.filter((c) => c.featured)
+        : certifications.filter((c) => c.category === activeCategory)
 
   const totalPages = Math.ceil(filtered.length / PER_PAGE)
   const displayed = filtered.slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
-  const categories = ['all', ...Array.from(new Set(certifications.map((c) => c.category)))]
+  const categories = ['featured', 'all', ...Array.from(new Set(certifications.map((c) => c.category)))]
 
   const start = currentPage * PER_PAGE + 1
   const end = Math.min((currentPage + 1) * PER_PAGE, filtered.length)
@@ -221,10 +225,10 @@ export function CertificationsSection() {
   return (
     <section
       id="certificacoes"
-      className="h-full flex flex-col py-6 sm:py-8 px-6 max-w-6xl mx-auto w-full"
+      className="min-h-full flex flex-col py-6 sm:py-8 px-6 max-w-6xl mx-auto w-full"
     >
       <SectionReveal delay={0.1}>
-        <div className="flex items-end gap-4 mt-12 mb-2">
+        <div className="flex items-end gap-4 mt-4 mb-2">
           <h2 className="font-display text-4xl sm:text-5xl font-bold">
             <span className="text-gradient">{certifications.length}+</span>
           </h2>
@@ -257,7 +261,7 @@ export function CertificationsSection() {
         <button
           onClick={() => navigate(-1)}
           disabled={isFirst}
-          className="shrink-0 w-11 h-11 flex items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white hover:border-purple-glow transition-all bg-bg-primary/80 disabled:opacity-25 disabled:cursor-not-allowed text-lg"
+          className="hidden sm:flex shrink-0 w-11 h-11 items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white hover:border-purple-glow transition-all bg-bg-primary/80 disabled:opacity-25 disabled:cursor-not-allowed text-lg"
           aria-label="Anterior"
         >
           ‹
@@ -272,7 +276,7 @@ export function CertificationsSection() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
             >
               {displayed.map((cert) => (
                 <CertCard
@@ -289,7 +293,7 @@ export function CertificationsSection() {
         <button
           onClick={() => navigate(1)}
           disabled={isLast}
-          className="shrink-0 w-11 h-11 flex items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white hover:border-purple-glow transition-all bg-bg-primary/80 disabled:opacity-25 disabled:cursor-not-allowed text-lg"
+          className="hidden sm:flex shrink-0 w-11 h-11 items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white hover:border-purple-glow transition-all bg-bg-primary/80 disabled:opacity-25 disabled:cursor-not-allowed text-lg"
           aria-label="Próximo"
         >
           ›
@@ -312,12 +316,31 @@ export function CertificationsSection() {
         ))}
       </div>
 
+      <div className="sm:hidden flex justify-center gap-4 mt-4">
+        <button
+          onClick={() => navigate(-1)}
+          disabled={isFirst}
+          className="w-11 h-11 flex items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white disabled:opacity-25 text-lg"
+          aria-label="Anterior"
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => navigate(1)}
+          disabled={isLast}
+          className="w-11 h-11 flex items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white disabled:opacity-25 text-lg"
+          aria-label="Próximo"
+        >
+          ›
+        </button>
+      </div>
+
       <p
         className="font-mono text-[10px] text-center mt-3"
         style={{ color: 'rgba(74,74,106,0.7)' }}
       >
         mostrando {start}–{end} de {filtered.length}
-        {activeCategory !== 'all' ? ' nesta categoria' : ''}
+        {activeCategory !== 'all' ? (activeCategory === 'featured' ? ' destaques' : ' nesta categoria') : ''}
       </p>
     </section>
   )

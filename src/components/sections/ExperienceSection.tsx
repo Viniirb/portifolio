@@ -31,7 +31,7 @@ function ExpCard({ project, isOpen, onToggle }: CardProps) {
         onClick={onToggle}
       >
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-bold text-white truncate">{project.company}</p>
+          <p className="text-xs font-bold text-white leading-snug">{project.company}</p>
           <p className="font-mono text-[10px] mt-0.5" style={{ color: '#a78bfa' }}>
             {project.title}
           </p>
@@ -92,7 +92,7 @@ function ExpCard({ project, isOpen, onToggle }: CardProps) {
           {project.short}
         </div>
         <ul className="flex flex-wrap gap-1.5 px-3 pb-3" aria-label="Tecnologias usadas no projeto">
-          {project.tech.slice(0, 5).map((tech) => {
+          {project.tech.slice(0, 8).map((tech) => {
             const IconComponent = getTechIconComponent(tech)
             const label = getTechIconLabel(tech)
             const legacyIcon = getLegacyTechIcon(tech)
@@ -133,7 +133,7 @@ export function ExperienceSection() {
   return (
     <section
       id="experiencia"
-      className="h-full flex flex-col justify-center py-8 sm:py-10 px-6 max-w-6xl mx-auto w-full"
+      className="min-h-full flex flex-col justify-center py-8 sm:py-10 px-6 max-w-6xl mx-auto w-full"
     >
       <SectionReveal delay={0.1}>
         <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-8">
@@ -148,7 +148,7 @@ export function ExperienceSection() {
         className="w-full"
       >
         <div className="hidden lg:block">
-          <div className="grid grid-cols-4 gap-4 mb-3">
+          <div className="grid grid-cols-5 gap-4 mb-3">
             {chronological.map((p, i) =>
               i % 2 === 0 ? (
                 <ExpCard
@@ -163,7 +163,7 @@ export function ExperienceSection() {
             )}
           </div>
 
-          <div className="relative grid grid-cols-4 gap-4 items-center mb-3">
+          <div className="relative grid grid-cols-5 gap-4 items-center mb-3">
             <div
               className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 pointer-events-none"
               style={{
@@ -226,7 +226,7 @@ export function ExperienceSection() {
             })}
           </div>
 
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {chronological.map((p, i) =>
               i % 2 !== 0 ? (
                 <ExpCard

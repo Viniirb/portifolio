@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Header } from '@/components/layout/Header/Header'
@@ -17,7 +17,24 @@ const ParticleCanvas = dynamic(
 )
 
 export default function Home() {
-  const [active, setActive] = useState('hero')
+  const [active, setActiveState] = useState('hero')
+
+  const setActive = useCallback((id: string) => {
+    if (id === (window.location.hash.slice(1) || 'hero')) return
+    setActiveState(id)
+    window.history.pushState(null, '', id === 'hero' ? window.location.pathname : `#${id}`)
+  }, [])
+
+  useEffect(() => {
+    const fromHash = () => setActiveState(window.location.hash.slice(1) || 'hero')
+    fromHash()
+    window.addEventListener('popstate', fromHash)
+    window.addEventListener('hashchange', fromHash)
+    return () => {
+      window.removeEventListener('popstate', fromHash)
+      window.removeEventListener('hashchange', fromHash)
+    }
+  }, [])
 
   const renderSection = () => {
     switch (active) {
@@ -33,7 +50,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative h-screen overflow-hidden flex flex-col">
+    <div className="relative h-dvh overflow-hidden flex flex-col">
       {/* Persistent background layer */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <ParticleCanvas />
@@ -58,7 +75,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="flex-1 overflow-y-auto"
+            className="flex-1 overflow-y-auto pt-16"
           >
             {renderSection()}
           </motion.div>

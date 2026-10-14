@@ -19,7 +19,7 @@ export function ProjectsSection() {
   const [selected, setSelected] = useState<Project | null>(null)
 
   return (
-    <section id="projetos" className="h-full flex flex-col justify-center py-6 px-6 max-w-6xl mx-auto">
+    <section id="projetos" className="min-h-full flex flex-col justify-center py-6 px-6 max-w-6xl mx-auto w-full">
       <SectionReveal delay={0.1}>
         <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-6">
           O que eu <span className="text-gradient">Construí</span>
