@@ -41,6 +41,7 @@ export const stack: StackItem[] = [
   { name: 'PostgreSQL', tech: 'postgresql', color: '#4169E1', category: 'database' },
   { name: 'Supabase', tech: 'supabase', color: '#3ECF8E', category: 'database' },
   { name: 'CI/CD', tech: 'cicd', color: '#38BDF8', category: 'devops' },
+  { name: 'GitHub Actions', tech: 'githubactions', color: '#2088FF', category: 'devops' },
   { name: 'Jenkins', tech: 'jenkins', color: '#D24939', category: 'devops' },
   { name: 'Azure DevOps', tech: 'azuredevops', color: '#0078D7', category: 'devops' },
   { name: 'Docker', tech: 'docker', color: '#2496ED', category: 'devops' },
@@ -48,5 +49,6 @@ export const stack: StackItem[] = [
   { name: 'SonarQube', tech: 'sonar', color: '#4E9BCD', category: 'devops' },
   { name: 'n8n', tech: 'n8n', color: '#EA4B71', category: 'devops' },
   { name: 'Git', tech: 'git', color: '#F05032', category: 'tools' },
+  { name: 'GitHub', tech: 'github', color: '#FFFFFF', category: 'tools' },
   { name: 'Postman', tech: 'postman', color: '#FF6C37', category: 'tools' },
 ]

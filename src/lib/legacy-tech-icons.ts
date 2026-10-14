@@ -13,6 +13,8 @@ const LEGACY_ICON_MAP: Partial<Record<TechKey, LegacyTechIcon>> = {
   rabbitmq: { src: '/tech/rabbitmq.svg', alt: 'RabbitMQ' },
   rag: { src: '/tech/rag.svg', alt: 'RAG' },
   deeplearning: { src: '/tech/deeplearning.svg', alt: 'Deep Learning' },
+  github: { src: '/tech/github.svg', alt: 'GitHub' },
+  githubactions: { src: '/tech/githubactions.svg', alt: 'GitHub Actions' },
   cicd: { src: '/tech/cicd.svg', alt: 'CI/CD' },
   sonar: { src: '/tech/sonar.svg', alt: 'SonarQube' },
 }

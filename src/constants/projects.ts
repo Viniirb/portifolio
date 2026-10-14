@@ -15,7 +15,7 @@ export const projects: Project[] = [
       "Desenvolve pipeline de machine learning para risco financeiro, com dados temporais, governança, treinamento, inferência segura e monitoramento auditável.",
       "Entrega APIs, dashboard, DRE, exportação XLSX, integrações de marketplace e melhorias de UX, acessibilidade, temas, mobile e qualidade.",
     ],
-    tech: ["dotnet", "ml", "claudecode", "codex", "jenkins", "rabbitmq", "sqlserver", "azuredevops", "git"],
+    tech: ["dotnet", "ml", "claudecode", "codex", "jenkins", "githubactions", "rabbitmq", "sqlserver", "git", "github"],
   },
   {
     id: "ntecnologias",

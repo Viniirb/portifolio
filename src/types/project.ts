@@ -36,6 +36,8 @@ export type TechKey =
   | "ml"
   | "rag"
   | "deeplearning"
+  | "github"
+  | "githubactions"
   | "jenkins"
   | "cicd"
   | "claudecode"
