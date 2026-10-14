@@ -27,7 +27,21 @@ export type TechKey =
   | "n8n"
   | "ionic"
   | "python"
-  | "reactnative";
+  | "reactnative"
+  | "rabbitmq"
+  | "efcore"
+  | "maui"
+  | "sonar"
+  | "tailwind"
+  | "ml"
+  | "rag"
+  | "deeplearning"
+  | "github"
+  | "githubactions"
+  | "jenkins"
+  | "cicd"
+  | "claudecode"
+  | "codex";
 
 export type Project = {
   id: string;

@@ -2,10 +2,26 @@ import type { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "ibr",
+    title: "Engenheiro de Software Sênior",
+    company: "iBR Software",
+    period: "Abr 2026 – Atual",
+    short:
+      "Modernização do ERP, novo módulo Financeiro e pipeline de machine learning para risco financeiro.",
+    description: [
+      "Atua na modernização do ERP com arquitetura distribuída, contratos, fronteiras de domínio, adaptadores e integração entre aplicações .NET.",
+      "Responsável pela estruturação do novo Financeiro: contas a pagar/receber, créditos, baixas, transferências, pendências, plano de contas, centros de custo e históricos.",
+      "Implementa migração e cutover com validação, reconciliação, isolamento por empresa, idempotência, atomicidade, auditoria, feature flags e retry.",
+      "Desenvolve pipeline de machine learning para risco financeiro, com dados temporais, governança, treinamento, inferência segura e monitoramento auditável.",
+      "Entrega APIs, dashboard, DRE, exportação XLSX, integrações de marketplace e melhorias de UX, acessibilidade, temas, mobile e qualidade.",
+    ],
+    tech: ["dotnet", "ml", "claudecode", "codex", "jenkins", "githubactions", "rabbitmq", "sqlserver", "git", "github"],
+  },
+  {
     id: "ntecnologias",
     title: "Engenheiro de Software Sênior",
     company: "N Tecnologias — Coopercargo",
-    period: "Fev 2025 – Atual",
+    period: "Fev 2025 – Abr 2026",
     short:
       "Modernização de ERP, agentes de IA generativa e automação de processos logísticos críticos.",
     description: [

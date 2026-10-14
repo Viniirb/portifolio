@@ -36,7 +36,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           VB.DEV
         </button>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="Navegação principal">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Navegação principal">
           {navItems.map((item) => {
             const isActive = activeSection === item.id
             return (
@@ -60,7 +60,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <a
             href="https://github.com/Viniirb"
             target="_blank"
@@ -82,7 +82,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
         </div>
 
         <button
-          className="md:hidden text-white"
+          className="lg:hidden text-white p-2 -mr-2"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
         >
@@ -94,7 +94,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden border-t border-purple-subtle/50 bg-bg-surface"
+          className="lg:hidden border-t border-purple-subtle/50 bg-bg-surface max-h-[calc(100dvh-4rem)] overflow-y-auto"
         >
           <nav className="flex flex-col p-6 gap-4" aria-label="Menu mobile">
             {navItems.map((item) => {

@@ -1,18 +1,20 @@
 'use client'
-import { motion } from 'framer-motion'
-import { ArrowRightIcon } from '@phosphor-icons/react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 
 interface HeroSectionProps {
   onNavigate: (id: string) => void
 }
 
 export function HeroSection({ onNavigate }: HeroSectionProps) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section
       id="hero"
-      className="relative w-full h-full flex flex-col items-center justify-center"
+      className="relative w-full min-h-full flex flex-col items-center justify-center"
     >
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20">
+      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto py-10">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,17 +24,23 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           {'< Engenheiro de Software Sênior />'}
         </motion.p>
 
-        <motion.h1
-          className="font-display text-[clamp(3.5rem,12vw,9rem)] font-bold leading-none tracking-tighter text-gradient select-none"
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          style={{ animation: 'glitch 0.3s steps(1) 1.8s 3' }}
+        <h1
+          className="font-display text-[clamp(3.5rem,12vw,9rem)] font-bold leading-none tracking-tighter select-none"
+          aria-label="Vinicius Barbosa"
         >
-          VINICIUS
-          <br />
-          BARBOSA
-        </motion.h1>
+          {['VINICIUS', 'BARBOSA'].map((word, i) => (
+            <span key={word} className="block overflow-hidden pb-[0.08em]" aria-hidden="true">
+              <motion.span
+                className="block text-gradient"
+                initial={reduceMotion ? false : { y: '105%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.9 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
 
         <motion.p
           className="mt-8 text-white-muted text-lg max-w-xl leading-relaxed"
@@ -41,7 +49,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           transition={{ duration: 0.6, delay: 1.1 }}
         >
           Especializado em .NET e modernização de sistemas críticos.
-          5 anos construindo arquiteturas escaláveis, automações de alto impacto e IA aplicada em produção.
+          Hoje na iBR Software: ERP distribuído, módulo Financeiro e machine learning aplicado a risco.
         </motion.p>
 
         <motion.div
@@ -68,6 +76,15 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           >
             Falar Comigo
           </button>
+          <a
+            href="/Vinicius-Rolim-Barbosa-CV.pdf"
+            download
+            className="px-8 py-3 font-mono text-sm tracking-widest uppercase text-white-muted hover:text-white border border-purple-subtle/50 hover:border-purple-glow transition-all flex items-center justify-center gap-2"
+            aria-label="Baixar currículo em PDF"
+          >
+            <DownloadSimpleIcon weight="bold" className="w-4 h-4" />
+            Currículo
+          </a>
         </motion.div>
 
         <motion.div
