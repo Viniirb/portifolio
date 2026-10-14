@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Header } from '@/components/layout/Header/Header'
@@ -21,17 +21,40 @@ export default function Home() {
   const [active, setActiveState] = useState('hero')
   const [haunted, setHaunted] = useState(false)
   const [caught, setCaught] = useState(false)
+  // o Gengar só ataca ao ENTRAR na página de contato: cada entrada conta uma "visita"
+  const [visit, setVisit] = useState(0)
+  const [caughtAt, setCaughtAt] = useState(0)
+  const activeRef = useRef('hero')
+  const visitRef = useRef(0)
+
+  const go = useCallback((id: string) => {
+    if (id === 'contato' && activeRef.current !== 'contato') {
+      visitRef.current += 1
+      setVisit(visitRef.current)
+    }
+    activeRef.current = id
+    setActiveState(id)
+  }, [])
+
   const onHaunt = useCallback(() => setHaunted(true), [])
-  const onCaught = useCallback(() => setCaught(true), [])
+  const onCaught = useCallback(() => {
+    setCaught(true)
+    setCaughtAt(visitRef.current)
+  }, [])
+  const onReset = useCallback(() => {
+    setCaught(false)
+    setHaunted(false)
+    setCaughtAt(visitRef.current)
+  }, [])
 
   const setActive = useCallback((id: string) => {
     if (id === (window.location.hash.slice(1) || 'hero')) return
-    setActiveState(id)
+    go(id)
     window.history.pushState(null, '', id === 'hero' ? window.location.pathname : `#${id}`)
-  }, [])
+  }, [go])
 
   useEffect(() => {
-    const fromHash = () => setActiveState(window.location.hash.slice(1) || 'hero')
+    const fromHash = () => go(window.location.hash.slice(1) || 'hero')
     fromHash()
     window.addEventListener('popstate', fromHash)
     window.addEventListener('hashchange', fromHash)
@@ -39,7 +62,7 @@ export default function Home() {
       window.removeEventListener('popstate', fromHash)
       window.removeEventListener('hashchange', fromHash)
     }
-  }, [])
+  }, [go])
 
   const renderSection = () => {
     switch (active) {
@@ -72,7 +95,7 @@ export default function Home() {
       {/* Foreground content */}
       <div className="relative z-10 flex flex-col h-full">
         <Header activeSection={active} onNavigate={setActive} />
-        <GengarEasterEgg section={active} caught={caught} onHaunt={onHaunt} onCaught={onCaught} />
+        <GengarEasterEgg section={active} enabled={visit > caughtAt} caught={caught} onHaunt={onHaunt} onCaught={onCaught} onReset={onReset} />
         <AnimatePresence mode="wait">
           <motion.div
             key={active}

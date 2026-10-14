@@ -82,6 +82,7 @@ function GlowingEyes() {
 type Phase = 'hidden' | 'eyes' | 'chase' | 'won'
 const HITS_TO_WIN = 5
 const MAX_MISSES = 3
+const COOLDOWN_MS = 5 * 60 * 1000
 const TEASES = [
   'Qual é o café favorito do Gengar? O espectro-presso. Kihihi! Contatos liberados.',
   'Por que o Gengar não usa Wi-Fi? Porque ele já atravessa paredes... e firewalls. Kihihi! Tá liberado.',
@@ -89,6 +90,14 @@ const TEASES = [
   'O que o fantasma disse para o bug? "Não me assombra!" Kihihi! Pode entrar em contato.',
   'Fantasma não aceita elogio: passa direto. Que nem seus cliques. Kihihi! Liberei.',
 ]
+const WINS = [
+  'Kihihi... você me pegou! Contatos destravados. Pode mandar aquele oi, sou só um fantasma, não mordo.',
+  'Pegou o Gengar! Reflexo de tipo fantasma, hein? Kihihi! Contatos liberados.',
+  'Boo! Até eu me assustei com a sua mira. Quem pega fantasma merece resposta rápida. Contatos liberados!',
+  'Ok, ok, você venceu. Eu só queria companhia... o Vinicius está logo ali, é só chamar. Kihihi!',
+  'Parabéns! Você ganhou uma assombração de brinde e, claro, os contatos. Kihihi!',
+]
+const pick = (list: string[]) => list[Math.floor(Math.random() * list.length)]
 const rand = (min: number, max: number) => min + Math.random() * (max - min)
 type Spot = { left: number; top: number }
 
@@ -119,19 +128,21 @@ function randomSpot(kind: 'eyes' | 'chase', pixel = 6): Spot {
 
 interface Props {
   section: string
+  enabled: boolean
   caught: boolean
   onHaunt: () => void
   onCaught: () => void
+  onReset: () => void
 }
 
-export function GengarEasterEgg({ section, caught, onHaunt, onCaught }: Props) {
+export function GengarEasterEgg({ section, enabled, caught, onHaunt, onCaught, onReset }: Props) {
   const reduceMotion = useReducedMotion()
   const [phase, setPhase] = useState<Phase>('hidden')
   const [spot, setSpot] = useState<Spot>({ left: 50, top: 40 })
   const [hits, setHits] = useState(0)
   const [misses, setMisses] = useState(0)
   const [mercy, setMercy] = useState(false)
-  const [tease, setTease] = useState(TEASES[0])
+  const [message, setMessage] = useState(WINS[0])
   const [blink, setBlink] = useState(false)
   const [line, setLine] = useState('')
   const [pixel, setPixel] = useState(6)
@@ -143,7 +154,7 @@ export function GengarEasterEgg({ section, caught, onHaunt, onCaught }: Props) {
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const onContact = section === 'contato'
+  const onContact = section === 'contato' && enabled
 
   // só mora na página de contato: olhos surgem no escuro, mudam de lugar de tempos em tempos
   useEffect(() => {
@@ -162,6 +173,13 @@ export function GengarEasterEgg({ section, caught, onHaunt, onCaught }: Props) {
     const t = setTimeout(() => setPhase('hidden'), onContact ? 12000 : 150)
     return () => clearTimeout(t)
   }, [phase, onContact])
+
+  // depois de cada tentativa concluída (acerto ou erro), ele volta em 5 minutos
+  useEffect(() => {
+    if (!caught) return
+    const t = setTimeout(onReset, COOLDOWN_MS)
+    return () => clearTimeout(t)
+  }, [caught, onReset])
 
   // piscar
   useEffect(() => {
@@ -206,6 +224,7 @@ export function GengarEasterEgg({ section, caught, onHaunt, onCaught }: Props) {
     const next = hits + 1
     if (next >= HITS_TO_WIN) {
       setMercy(false)
+      setMessage(pick(WINS))
       setPhase('won')
       onCaught()
       return
@@ -219,7 +238,7 @@ export function GengarEasterEgg({ section, caught, onHaunt, onCaught }: Props) {
     const next = misses + 1
     if (next >= MAX_MISSES) {
       setMercy(true)
-      setTease(TEASES[Math.floor(Math.random() * TEASES.length)])
+      setMessage(pick(TEASES))
       setPhase('won')
       onCaught()
       return
@@ -324,7 +343,7 @@ export function GengarEasterEgg({ section, caught, onHaunt, onCaught }: Props) {
                 {mercy ? 'Liberado! Boo-a tentativa' : 'Desafio aceito!'}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-white-muted">
-                {mercy ? tease : 'Kihihi... você me pegou! Contatos destravados. Pode mandar aquele oi, sou só um fantasma, não mordo.'}
+                {message}
               </p>
               <button
                 type="button"
