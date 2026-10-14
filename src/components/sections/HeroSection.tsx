@@ -1,5 +1,5 @@
 'use client'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 
 interface HeroSectionProps {
@@ -7,6 +7,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ onNavigate }: HeroSectionProps) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section
       id="hero"
@@ -22,17 +24,23 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           {'< Engenheiro de Software Sênior />'}
         </motion.p>
 
-        <motion.h1
-          className="font-display text-[clamp(3.5rem,12vw,9rem)] font-bold leading-none tracking-tighter text-gradient select-none"
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          style={{ animation: 'glitch 0.3s steps(1) 1.8s 3' }}
+        <h1
+          className="font-display text-[clamp(3.5rem,12vw,9rem)] font-bold leading-none tracking-tighter select-none"
+          aria-label="Vinicius Barbosa"
         >
-          VINICIUS
-          <br />
-          BARBOSA
-        </motion.h1>
+          {['VINICIUS', 'BARBOSA'].map((word, i) => (
+            <span key={word} className="block overflow-hidden pb-[0.08em]" aria-hidden="true">
+              <motion.span
+                className="block text-gradient"
+                initial={reduceMotion ? false : { y: '105%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.9 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
 
         <motion.p
           className="mt-8 text-white-muted text-lg max-w-xl leading-relaxed"

@@ -1,5 +1,7 @@
 'use client'
-import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { useCallback, useEffect, useState } from 'react'
+import { ArrowsOutSimpleIcon, XIcon } from '@phosphor-icons/react'
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { SectionReveal } from '@/components/ui/SectionReveal'
 import { certifications } from '@/constants/certifications'
@@ -13,6 +15,7 @@ const CAT_LABELS: Record<string, string> = {
   cloud: 'Cloud',
   networking: 'Redes',
   neuralnetworks: 'IA / Redes Neurais',
+  community: 'Comunidade & Eventos',
   other: 'Outros',
 }
 
@@ -23,6 +26,7 @@ const CAT_SHORT: Record<string, string> = {
   development: 'Dev',
   cloud: 'Cloud',
   neuralnetworks: 'IA',
+  community: 'Evento',
   networking: 'Redes',
   other: 'Outros',
 }
@@ -61,107 +65,147 @@ const cardVariants: Variants = {
 
 interface CertCardProps {
   cert: Certification
-  isFlipped: boolean
-  onFlip: () => void
+  onOpen: (cert: Certification) => void
 }
 
-function CertCard({ cert, isFlipped, onFlip }: CertCardProps) {
+function CertCard({ cert, onOpen }: CertCardProps) {
+  const hasImage = Boolean(cert.image)
+  const moduleCount = cert.modules?.length ?? 0
+
   return (
-    <motion.div
+    <motion.button
+      type="button"
       variants={cardVariants}
-      style={{ perspective: 900 }}
-      className="cursor-pointer select-none"
-      onClick={onFlip}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          onFlip()
-        }
-      }}
-      role="button"
-      tabIndex={0}
-      aria-pressed={isFlipped}
-      aria-label={`Virar card: ${cert.title}`}
-      whileHover={{ scale: 1.025, transition: { duration: 0.18 } }}
-      whileTap={{ scale: 0.98 }}
+      onClick={() => hasImage && onOpen(cert)}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className={`group relative block w-full aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-xl border border-purple-subtle/40 bg-bg-surface text-left transition-colors hover:border-purple-glow/70 ${
+        hasImage ? 'cursor-pointer' : 'cursor-default'
+      }`}
+      aria-label={hasImage ? `Ampliar certificado: ${cert.title}` : cert.title}
     >
-      <motion.div
-        style={{ transformStyle: 'preserve-3d', position: 'relative', height: '11rem' }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ type: 'spring', stiffness: 220, damping: 28 }}
-      >
-        <div
-          className="absolute inset-0 rounded-xl p-4 flex flex-col gap-2 border"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            borderColor: 'rgba(167,139,250,0.30)',
-            background: 'linear-gradient(135deg, rgba(124,58,237,0.16) 0%, rgba(76,29,149,0.07) 100%)',
-          }}
+      {hasImage ? (
+        <Image
+          src={cert.image}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+          className="object-cover object-top opacity-50 grayscale transition duration-500 group-hover:scale-105 group-hover:opacity-90 group-hover:grayscale-0"
+        />
+      ) : (
+        <span
+          className="absolute inset-0 flex items-center justify-center font-display text-7xl font-bold text-white/5 select-none"
+          aria-hidden="true"
         >
-          <div className="flex items-center justify-between">
-            <span className="font-mono text-[9px] text-purple-glow uppercase tracking-[1.5px]">
-              {CAT_SHORT[cert.category] ?? cert.category}
-            </span>
-            <span className="font-mono text-[9px] text-white-dim/40">↩ virar</span>
-          </div>
+          {cert.institution.slice(0, 2).toUpperCase()}
+        </span>
+      )}
 
-          <p className="text-sm font-semibold text-white leading-snug flex-1 line-clamp-3">
-            {cert.title}
-          </p>
+      <div className="absolute inset-0 bg-linear-to-t from-bg-primary via-bg-primary/70 to-transparent" />
 
-          <span className="font-mono text-[10px] text-white-dim mt-auto">
-            {cert.date}
-          </span>
+      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-4">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-purple-glow">
+          {cert.institution} · {CAT_SHORT[cert.category] ?? cert.category}
+        </span>
+        <p className="line-clamp-2 text-sm font-semibold leading-snug text-white">{cert.title}</p>
+        <span className="font-mono text-[11px] text-white-muted">
+          {cert.date}
+          {moduleCount > 0 && <span className="text-purple-glow"> · {moduleCount} {moduleCount === 1 ? 'módulo' : 'módulos'}</span>}
+        </span>
+      </div>
 
-          <div
-            className="absolute inset-0 rounded-xl pointer-events-none opacity-0 hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: 'linear-gradient(135deg, rgba(167,139,250,0.06) 0%, transparent 60%)',
-            }}
-            aria-hidden="true"
-          />
-        </div>
+      {hasImage && (
+        <ArrowsOutSimpleIcon
+          weight="bold"
+          className="absolute right-3 top-3 h-4 w-4 text-white opacity-0 transition-opacity group-hover:opacity-80"
+          aria-hidden="true"
+        />
+      )}
+    </motion.button>
+  )
+}
 
-        <div
-          className="absolute inset-0 rounded-xl p-4 flex flex-col justify-between border"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-            borderColor: 'rgba(124,58,237,0.22)',
-            background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(76,29,149,0.06) 100%)',
-          }}
+function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!cert) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [cert, onClose])
+
+  return (
+    <AnimatePresence>
+      {cert && (
+        <motion.div
+          className="fixed inset-0 z-100 flex items-center justify-center overflow-y-auto bg-black/85 p-4 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Certificado: ${cert.title}`}
         >
-          <span className="text-[15px] font-bold truncate" style={{ color: '#a78bfa' }}>
-            {cert.institution}
-          </span>
-
-          <p className="text-[11px] text-white-muted leading-relaxed line-clamp-4 flex-1 my-2">
-            {cert.title}
-          </p>
-
-          <span
-            className="font-mono text-[9px] px-2 py-0.5 rounded-full self-start border"
-            style={{
-              color: '#7c3aed',
-              background: 'rgba(124,58,237,0.15)',
-              borderColor: 'rgba(124,58,237,0.3)',
-            }}
+          <motion.div
+            className="relative m-auto w-full max-w-4xl"
+            initial={{ opacity: 0, scale: 0.96, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: 12 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
           >
-            {CAT_SHORT[cert.category] ?? cert.category}
-          </span>
-        </div>
-      </motion.div>
-    </motion.div>
+            <Image
+              src={cert.image}
+              alt={`Certificado ${cert.title} — ${cert.institution}`}
+              width={1200}
+              height={900}
+              className="mx-auto h-auto max-h-[55vh] w-auto max-w-full rounded-lg border border-purple-subtle/50 object-contain shadow-2xl"
+              priority
+            />
+            {cert.modules && (
+              <div className="mt-4 rounded-lg border border-purple-subtle/50 bg-bg-surface/80 p-4">
+                <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-purple-glow">
+                  {cert.modules.length} {cert.modules.length === 1 ? 'curso' : 'cursos'} da formação
+                </p>
+                <ul className="grid max-h-48 grid-cols-1 gap-x-6 gap-y-1.5 overflow-y-auto pr-2 sm:grid-cols-2">
+                  {cert.modules.map((m) => (
+                    <li key={m.title} className="flex justify-between gap-3 text-xs text-white-muted">
+                      <span className="leading-snug">{m.title}</span>
+                      <span className="shrink-0 font-mono text-[10px] text-white-dim">{m.date}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="mt-4 flex items-end justify-between gap-4">
+              <div>
+                <p className="font-display text-lg font-bold text-white">{cert.title}</p>
+                <p className="font-mono text-xs text-white-muted">
+                  {cert.institution} · {cert.date}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                className="shrink-0 rounded-full border border-purple-subtle/60 p-2 text-white-muted transition-colors hover:border-purple-glow hover:text-white"
+                aria-label="Fechar"
+              >
+                <XIcon weight="bold" className="h-5 w-5" />
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
 export function CertificationsSection() {
+  const totalCount = certifications.reduce((n, c) => n + 1 + (c.modules?.length ?? 0), 0)
   const [activeCategory, setActiveCategory] = useState('featured')
   const [currentPage, setCurrentPage] = useState(0)
   const [direction, setDirection] = useState(1)
-  const [flippedIds, setFlippedIds] = useState<Set<string>>(new Set())
+  const [selected, setSelected] = useState<Certification | null>(null)
+  const closeLightbox = useCallback(() => setSelected(null), [])
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
 
   useEffect(() => {
@@ -192,7 +236,6 @@ export function CertificationsSection() {
     if (cat === activeCategory) return
     setDirection(1)
     setCurrentPage(0)
-    setFlippedIds(new Set())
     setActiveCategory(cat)
   }
 
@@ -200,24 +243,13 @@ export function CertificationsSection() {
     const next = currentPage + dir
     if (next < 0 || next >= totalPages) return
     setDirection(dir > 0 ? 1 : -1)
-    setFlippedIds(new Set())
     setCurrentPage(next)
   }
 
   function goToPage(p: number) {
     if (p === currentPage) return
     setDirection(p > currentPage ? 1 : -1)
-    setFlippedIds(new Set())
     setCurrentPage(p)
-  }
-
-  function toggleFlip(certId: string) {
-    setFlippedIds((prev) => {
-      const next = new Set(prev)
-      if (next.has(certId)) next.delete(certId)
-      else next.add(certId)
-      return next
-    })
   }
 
   const dir = prefersReducedMotion ? 0 : direction
@@ -230,7 +262,7 @@ export function CertificationsSection() {
       <SectionReveal delay={0.1}>
         <div className="flex items-end gap-4 mt-4 mb-2">
           <h2 className="font-display text-4xl sm:text-5xl font-bold">
-            <span className="text-gradient">{certifications.length}+</span>
+            <span className="text-gradient">{totalCount}+</span>
           </h2>
           <p className="text-white-muted font-mono text-sm mb-2">certificações técnicas</p>
         </div>
@@ -276,15 +308,10 @@ export function CertificationsSection() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
             >
               {displayed.map((cert) => (
-                <CertCard
-                  key={cert.id}
-                  cert={cert}
-                  isFlipped={flippedIds.has(cert.id)}
-                  onFlip={() => toggleFlip(cert.id)}
-                />
+                <CertCard key={cert.id} cert={cert} onOpen={setSelected} />
               ))}
             </motion.div>
           </AnimatePresence>
@@ -342,6 +369,7 @@ export function CertificationsSection() {
         mostrando {start}–{end} de {filtered.length}
         {activeCategory !== 'all' ? (activeCategory === 'featured' ? ' destaques' : ' nesta categoria') : ''}
       </p>
+      <CertLightbox cert={selected} onClose={closeLightbox} />
     </section>
   )
 }

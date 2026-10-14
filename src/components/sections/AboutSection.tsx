@@ -11,6 +11,7 @@ import {
   BriefcaseIcon,
   StarIcon,
   GraduationCapIcon,
+  UsersThreeIcon,
 } from '@phosphor-icons/react'
 import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
 
@@ -26,8 +27,9 @@ const curiosidades = [
 const statusItems = [
   { icon: BriefcaseIcon, label: 'Empresa', value: 'iBR Software' },
   { icon: MapPinIcon, label: 'Localização', value: 'Joinville, SC' },
-  { icon: StarIcon, label: 'Experiência', value: '5+ anos' },
-  { icon: GraduationCapIcon, label: 'Formação', value: 'Ciência da Computação · Unisociesc · 2027 · média 9,49' },
+  { icon: StarIcon, label: 'Experiência', value: '6 anos' },
+  { icon: UsersThreeIcon, label: 'Comunidade', value: 'Comunidade Codecon · voluntário no Codecon Summit 2026' },
+  { icon: GraduationCapIcon, label: 'Formação', value: 'Análise e Desenvolvimento de Sistemas · Católica SC · previsão final de 2027' },
 ]
 
 const containerVariants = {
@@ -56,7 +58,7 @@ export function AboutSection() {
 
           <SectionReveal delay={0.3}>
             <p className="text-white-muted leading-relaxed">
-              Engenheiro de Software Sênior com mais de 5 anos de experiência, hoje na iBR Software
+              Engenheiro de Software Sênior com 6 anos de experiência, hoje na iBR Software
               modernizando o ERP, estruturando o novo módulo Financeiro e desenvolvendo um pipeline de
               machine learning para risco financeiro. Antes, migrei um ERP completo, evoluí um monólito
               para serviços e implementei agentes de IA — sempre com foco em confiabilidade e impacto mensurável.
