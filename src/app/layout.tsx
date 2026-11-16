@@ -50,7 +50,6 @@ const jsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   jobTitle: 'Engenheiro de Software Sênior',
-  worksFor: { '@type': 'Organization', name: 'iBR Software' },
   address: { '@type': 'PostalAddress', addressLocality: 'Joinville', addressRegion: 'SC', addressCountry: 'BR' },
   email: 'contato@viniciusrb.dev',
   sameAs: ['https://github.com/Viniirb', 'https://linkedin.com/in/viniciusrolimbarbosa'],

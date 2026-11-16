@@ -41,13 +41,30 @@ export type TechKey =
   | "jenkins"
   | "cicd"
   | "claudecode"
-  | "codex";
+  | "codex"
+  | "playwright"
+  | "xunit"
+  | "sdd"
+  | "ddd"
+  | "tdd"
+  | "nunit"
+  | "plsql"
+  | "cleanarch"
+  | "distributed"
+  | "microservices"
+  | "hexagonal"
+  | "fsd"
+  | "atomic"
+  | "componentdriven"
+  | "solid"
+  | "prompt";
 
 export type Project = {
   id: string;
   title: string;
   company: string;
   period?: string;
+  award?: { label: string; detail: string };
   short: string;
   description: string[];
   tech: TechKey[];

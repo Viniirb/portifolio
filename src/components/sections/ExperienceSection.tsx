@@ -1,142 +1,98 @@
 'use client'
-import Image from 'next/image'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { CaretLeftIcon, CaretRightIcon, GitBranchIcon, StarIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
 import { projects } from '@/constants/projects'
-import { getTechIconComponent, getTechIconLabel } from '@/lib/tech-icon-registry'
-import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
+import { OPEN_SOURCE_BRANCH_FROM, openSourceItems } from '@/constants/cases'
 
+// Oldest first, so the timeline reads left to right.
 const chronological = [...projects].reverse()
+const award = projects.find((p) => p.award)?.award
 
+const DASH = 'rgba(52,211,153,0.8)'
 
-interface CardProps {
-  project: (typeof projects)[0]
-  isOpen: boolean
-  onToggle: () => void
+type Job = (typeof projects)[0]
+
+function JobCard({ job }: { job: Job }) {
+  return (
+    <article className="glass-card glow-border rounded-xl p-4 text-left">
+      <p className="font-mono text-xs text-white-muted">{job.period}</p>
+      <h3 className="mt-1 flex items-center gap-2 font-display text-base font-bold leading-tight text-white">
+        {job.company}
+        {job.award && (
+          <span className="inline-flex shrink-0 text-amber-400" title={job.award.label}>
+            <StarIcon weight="fill" className="h-4 w-4" style={{ filter: 'drop-shadow(0 0 5px rgba(251,191,36,0.7))' }} aria-hidden="true" />
+            <span className="sr-only">{job.award.label}. Veja a legenda no fim da seção.</span>
+          </span>
+        )}
+      </h3>
+      <p className="mt-1 font-mono text-xs leading-snug text-purple-glow">{job.title}</p>
+    </article>
+  )
 }
 
-function ExpCard({ project, isOpen, onToggle }: CardProps) {
+// Open source is a second line that branches off the career. Each item is a slide.
+function OpenSourceCarousel() {
+  const [index, setIndex] = useState(0)
+  const item = openSourceItems[index]
+  const many = openSourceItems.length > 1
+  const step = (dir: 1 | -1) => setIndex((i) => (i + dir + openSourceItems.length) % openSourceItems.length)
+
   return (
-    <div
-      className="rounded-xl overflow-hidden transition-all duration-200"
-      style={{
-        background: 'rgba(124,58,237,0.06)',
-        border: `1px solid ${isOpen ? 'rgba(124,58,237,0.5)' : 'rgba(124,58,237,0.2)'}`,
-        boxShadow: isOpen ? '0 0 20px rgba(124,58,237,0.15)' : 'none',
-      }}
-    >
-      <div
-        className="flex items-start justify-between gap-2 p-3 cursor-pointer select-none"
-        onClick={onToggle}
+    <div>
+      <article
+        className="rounded-xl border-l border-dashed py-1 pl-4"
+        style={{ borderColor: DASH }}
+        aria-live="polite"
       >
-        <div className="flex-1 min-w-0">
-          <p className="text-xs font-bold text-white leading-snug">{project.company}</p>
-          <p className="font-mono text-xs mt-0.5" style={{ color: '#a78bfa' }}>
-            {project.title}
-          </p>
-          <span
-            className="inline-block font-mono text-[11px] mt-1 px-1.5 py-0.5 rounded"
-            style={{ color: '#6b7280', background: 'rgba(124,58,237,0.15)' }}
-          >
-            {project.period}
-          </span>
+        <h3 className="flex items-center gap-2 font-display text-base font-bold leading-tight text-white">
+          <GitBranchIcon weight="bold" className="h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
+          {item.title}
+        </h3>
+        <p className="mt-1 font-mono text-xs text-white-muted">{item.period}</p>
+      </article>
+
+      {many && (
+        <div className="mt-3 flex items-center justify-between">
+          <div className="flex gap-1.5" aria-hidden="true">
+            {openSourceItems.map((it, i) => (
+              <span
+                key={it.id}
+                className={`h-1.5 w-1.5 rounded-full ${i === index ? 'bg-emerald-400' : 'bg-purple-subtle'}`}
+              />
+            ))}
+          </div>
+          <div className="flex gap-1.5">
+            {([-1, 1] as const).map((dir) => {
+              const Icon = dir === -1 ? CaretLeftIcon : CaretRightIcon
+              return (
+                <button
+                  key={dir}
+                  type="button"
+                  onClick={() => step(dir)}
+                  aria-label={dir === -1 ? 'Contribuição anterior' : 'Próxima contribuição'}
+                  className="flex h-7 w-7 items-center justify-center rounded-full border border-emerald-400/50 text-emerald-400 transition-colors hover:bg-emerald-400/10"
+                >
+                  <Icon weight="bold" className="h-3 w-3" aria-hidden="true" />
+                </button>
+              )
+            })}
+          </div>
         </div>
-
-        <button
-          aria-label={isOpen ? 'Fechar' : 'Expandir'}
-          className="shrink-0 rounded-full relative transition-all duration-300"
-          style={{
-            width: 22,
-            height: 22,
-            border: '1px solid rgba(124,58,237,0.5)',
-            background: isOpen ? 'rgba(124,58,237,0.25)' : 'transparent',
-            transform: isOpen ? 'rotate(45deg)' : 'none',
-          }}
-          onClick={(e) => { e.stopPropagation(); onToggle() }}
-        >
-          <span
-            className="absolute"
-            style={{
-              top: '50%', left: '50%',
-              width: 10, height: 1.5,
-              background: '#a78bfa',
-              transform: 'translate(-50%, -50%)',
-              borderRadius: 1,
-            }}
-          />
-          <span
-            className="absolute"
-            style={{
-              top: '50%', left: '50%',
-              width: 1.5, height: 10,
-              background: '#a78bfa',
-              transform: 'translate(-50%, -50%)',
-              borderRadius: 1,
-            }}
-          />
-        </button>
-      </div>
-
-      <div
-        className="overflow-hidden transition-all duration-300"
-        style={{ maxHeight: isOpen ? 200 : 0 }}
-      >
-        <div
-          className="px-3 pb-3 pt-2 text-xs leading-relaxed"
-          style={{
-            borderTop: '1px solid rgba(124,58,237,0.2)',
-            color: '#94a3b8',
-          }}
-        >
-          {project.short}
-        </div>
-        <ul className="flex flex-wrap gap-1.5 px-3 pb-3" aria-label="Tecnologias usadas no projeto">
-          {project.tech.slice(0, 8).map((tech) => {
-            const IconComponent = getTechIconComponent(tech)
-            const label = getTechIconLabel(tech)
-            const legacyIcon = getLegacyTechIcon(tech)
-
-            return (
-              <li
-                key={`${project.id}-${tech}`}
-                className="w-4 h-4 flex items-center justify-center"
-                title={label}
-              >
-                {legacyIcon ? (
-                  <Image
-                    src={legacyIcon.src}
-                    alt={legacyIcon.alt}
-                    width={14}
-                    height={14}
-                    className="w-3.5 h-3.5 object-contain"
-                    style={legacyIcon.invertOnDark ? { filter: 'brightness(0) invert(1)' } : undefined}
-                  />
-                ) : (
-                  <IconComponent size={14} className="w-3.5 h-3.5" aria-hidden="true" />
-                )}
-                <span className="sr-only">{label}</span>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      )}
     </div>
   )
 }
 
 export function ExperienceSection() {
-  const [openId, setOpenId] = useState<string | null>(null)
-
-  const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id))
-
   return (
     <section
       id="experiencia"
-      className="min-h-full flex flex-col justify-center py-8 sm:py-10 px-6 max-w-6xl mx-auto w-full"
+      className="min-h-full flex flex-col justify-center py-8 sm:py-10 px-6 max-w-7xl mx-auto w-full"
     >
       <SectionReveal delay={0.1}>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-8">
+        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-10 xl:mb-14">
           Minha <span className="text-gradient">Experiência</span>
         </h2>
       </SectionReveal>
@@ -147,134 +103,104 @@ export function ExperienceSection() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="w-full"
       >
-        <div className="hidden lg:block">
-          <div className="grid grid-cols-5 items-end gap-4 mb-3">
-            {chronological.map((p, i) =>
-              i % 2 === 0 ? (
-                <ExpCard
-                  key={p.id}
-                  project={p}
-                  isOpen={openId === p.id}
-                  onToggle={() => toggle(p.id)}
-                />
-              ) : (
-                <div key={p.id} aria-hidden="true" />
-              )
+        {/* Wide screens: the career on a horizontal line, open source branching off 2026 to the right. */}
+        <div className="hidden xl:grid grid-cols-[minmax(0,1fr)_14.5rem] gap-x-8">
+          <div className="grid grid-cols-5 items-end gap-4 min-h-28">
+            {chronological.map((job, i) =>
+              i % 2 === 0 ? <JobCard key={job.id} job={job} /> : <div key={job.id} aria-hidden="true" />
             )}
           </div>
+          <div aria-hidden="true" />
 
-          <div className="relative grid grid-cols-5 gap-4 items-center mb-3">
+          <div className="relative my-2 grid h-14 grid-cols-5 items-center gap-4">
             <div
-              className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 pointer-events-none"
+              className="pointer-events-none absolute inset-x-0 top-1/2 h-px"
               style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(124,58,237,0.4) 5%, rgba(124,58,237,0.4) 95%, transparent)',
+                background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.5) 4%, rgba(124,58,237,0.5))',
                 boxShadow: '0 0 12px rgba(124,58,237,0.3)',
               }}
             />
-
-            {chronological.map((p, i) => {
-              const isTop = i % 2 === 0
-              const isOpen = openId === p.id
-              const yearLabel = p.period
-
+            {chronological.map((job) => {
+              const branches = job.id === OPEN_SOURCE_BRANCH_FROM
               return (
-                <div key={p.id} className="flex flex-col items-center relative z-10">
-                  <div
-                    className="w-px"
+                <div key={job.id} className="relative z-10 flex flex-col items-center gap-1">
+                  <span className="font-mono text-xs text-white-muted">{job.period?.split(' – ')[0]}</span>
+                  <span
+                    className="h-3 w-3 rounded-full"
                     style={{
-                      height: 16,
-                      background: 'rgba(124,58,237,0.35)',
-                      visibility: isTop ? 'visible' : 'hidden',
-                    }}
-                  />
-
-                  <button
-                    className="flex flex-col items-center gap-1 transition-all"
-                    style={{
-                      transform: isOpen ? 'scale(1.05)' : 'scale(1)',
-                    }}
-                    onClick={() => toggle(p.id)}
-                    aria-label={`Ver ${p.company}`}
-                  >
-                    <span className="font-mono text-xs" style={{ color: '#94a3b8' }}>
-                      {yearLabel}
-                    </span>
-                    <span
-                      className="rounded-full transition-all"
-                      style={{
-                        width: 12,
-                        height: 12,
-                        background: isOpen ? '#c4b5fd' : '#7c3aed',
-                        boxShadow: isOpen
-                          ? '0 0 16px rgba(196,181,253,0.9)'
-                          : '0 0 10px rgba(124,58,237,0.65)',
-                      }}
-                    />
-                  </button>
-
-                  <div
-                    className="w-px"
-                    style={{
-                      height: 16,
-                      background: 'rgba(124,58,237,0.35)',
-                      visibility: isTop ? 'hidden' : 'visible',
+                      background: '#7c3aed',
+                      boxShadow: branches ? '0 0 10px rgba(52,211,153,0.7)' : '0 0 10px rgba(124,58,237,0.65)',
                     }}
                   />
                 </div>
               )
             })}
           </div>
+          <div aria-hidden="true" />
 
-          <div className="grid grid-cols-5 items-start gap-4">
-            {chronological.map((p, i) =>
-              i % 2 !== 0 ? (
-                <ExpCard
-                  key={p.id}
-                  project={p}
-                  isOpen={openId === p.id}
-                  onToggle={() => toggle(p.id)}
-                />
+          <div className="grid grid-cols-5 items-start gap-4 min-h-28">
+            {chronological.map((job, i) =>
+              i % 2 === 1 ? (
+                <JobCard key={job.id} job={job} />
+              ) : job.id === OPEN_SOURCE_BRANCH_FROM ? (
+                // Elbow: drops from the 2026 marker, then runs right into the open source line.
+                <div key={job.id} className="relative h-7" aria-hidden="true">
+                  <div
+                    className="absolute left-1/2 top-0 -right-8 h-full rounded-bl-xl border-b border-l border-dashed"
+                    style={{ borderColor: DASH }}
+                  />
+                </div>
               ) : (
-                <div key={p.id} aria-hidden="true" />
+                <div key={job.id} aria-hidden="true" />
               )
             )}
           </div>
+
+          <div>
+            <div className="relative h-7 border-b border-dashed" style={{ borderColor: DASH }}>
+              <span className="absolute left-0 top-0 font-mono text-xs uppercase tracking-widest text-emerald-400">
+                Open source
+              </span>
+            </div>
+            <div className="mt-3">
+              <OpenSourceCarousel />
+            </div>
+          </div>
         </div>
 
-        <div className="lg:hidden space-y-3">
-          {chronological.map((p, i) => {
-            const isOpen = openId === p.id
-            const yearLabel = p.period
-
-            return (
-              <div key={`mobile-${p.id}`} className="space-y-2">
-                <button
-                  className="flex items-center gap-2"
-                  onClick={() => toggle(p.id)}
-                  aria-label={`Ver ${p.company}`}
-                >
-                  <span className="font-mono text-xs" style={{ color: '#94a3b8' }}>
-                    {yearLabel}
-                  </span>
-                  <span
-                    className="rounded-full transition-all"
-                    style={{
-                      width: 10,
-                      height: 10,
-                      background: isOpen ? '#c4b5fd' : '#7c3aed',
-                      boxShadow: isOpen
-                        ? '0 0 16px rgba(196,181,253,0.9)'
-                        : '0 0 10px rgba(124,58,237,0.65)',
-                    }}
-                  />
-                  <span className="text-xs text-white truncate">{p.company}</span>
-                </button>
-                <ExpCard project={p} isOpen={isOpen} onToggle={() => toggle(p.id)} />
-              </div>
-            )
-          })}
+        {/* Narrow screens: one column, the open source line hangs under the job it started in. */}
+        <div className="xl:hidden">
+          <ol className="relative space-y-3 border-l border-purple-glow/50 pl-6">
+            {[...chronological].reverse().map((job) => (
+              <li key={job.id} className="relative">
+                <span
+                  className="absolute -left-[31px] top-5 h-3 w-3 rounded-full"
+                  style={{ background: '#7c3aed', boxShadow: '0 0 10px rgba(124,58,237,0.65)' }}
+                  aria-hidden="true"
+                />
+                <JobCard job={job} />
+                {job.id === OPEN_SOURCE_BRANCH_FROM && (
+                  <div
+                    className="ml-3 mt-3 rounded-bl-xl border-l border-dashed pb-1 pl-4 pt-2"
+                    style={{ borderColor: DASH }}
+                  >
+                    <p className="mb-3 font-mono text-xs uppercase tracking-widest text-emerald-400">
+                      Open source
+                    </p>
+                    <OpenSourceCarousel />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
         </div>
+
+        {award && (
+          <p className="mt-8 flex items-center gap-2 font-mono text-xs text-white-muted">
+            <StarIcon weight="fill" className="h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden="true" />
+            {award.label}, {award.detail}
+          </p>
+        )}
       </motion.div>
     </section>
   )
