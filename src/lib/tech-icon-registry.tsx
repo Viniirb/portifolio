@@ -173,7 +173,17 @@ export function getTechIconComponent(tech: TechKey): TechIconComponent {
   return TECH_ICON_COMPONENTS[tech] ?? fallbackIcon
 }
 
-export function getTechIconLabel(tech: TechKey): string {
+// Labels that are words rather than product names change with the language.
+const TECH_LABELS_EN: Partial<Record<TechKey, string>> = {
+  solid: 'SOLID Principles',
+  prompt: 'Prompt Engineering',
+  distributed: 'Distributed architecture',
+  microservices: 'Microservices',
+  hexagonal: 'Hexagonal architecture',
+}
+
+export function getTechIconLabel(tech: TechKey, lang: 'pt' | 'en' = 'pt'): string {
+  if (lang === 'en' && TECH_LABELS_EN[tech]) return TECH_LABELS_EN[tech]
   return TECH_ICON_LABELS[tech] ?? tech
 }
 

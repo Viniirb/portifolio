@@ -17,25 +17,20 @@ import {
   CatIcon,
 } from '@phosphor-icons/react'
 import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
+import { useT } from '@/i18n'
+import type { Segment } from '@/i18n/strings'
 
-const curiosidades = [
-  { text: 'Amo estudar e aprender', icon: BookOpenIcon },
-  { text: 'Gosto de cozinhar', icon: CookingPotIcon },
-  { text: 'Leitor de histórias em quadrinhos', icon: BookBookmarkIcon },
-  { text: 'Entusiasta de videogames', icon: GameControllerIcon },
-  { text: 'Apaixonado por viajar', icon: AirplaneTiltIcon },
-  { text: 'Tenho dois gatos, o Arkyn e o Loki', icon: CatIcon },
-  { text: 'Sempre buscando novos conhecimentos', icon: LightbulbIcon },
+const curiosityIcons = [
+  BookOpenIcon,
+  CookingPotIcon,
+  BookBookmarkIcon,
+  GameControllerIcon,
+  AirplaneTiltIcon,
+  CatIcon,
+  LightbulbIcon,
 ]
 
-const statusItems = [
-  { icon: BriefcaseIcon, label: 'Status', value: 'Disponível para novas oportunidades' },
-  { icon: MapPinIcon, label: 'Localização', value: 'Joinville, SC' },
-  { icon: StarIcon, label: 'Experiência', value: '6 anos' },
-  { icon: GitPullRequestIcon, label: 'Open Source', value: 'Contribuidor Open Source' },
-  { icon: UsersThreeIcon, label: 'Comunidade', value: 'Comunidade Codecon · voluntário no Codecon Summit 2026' },
-  { icon: GraduationCapIcon, label: 'Formação', value: 'Análise e Desenvolvimento de Sistemas · Católica SC · previsão final de 2027' },
-]
+const statusIcons = [BriefcaseIcon, MapPinIcon, StarIcon, GitPullRequestIcon, UsersThreeIcon, GraduationCapIcon]
 
 // One emphasis style for the whole text: semibold, light violet.
 function Em({ children }: { children: React.ReactNode }) {
@@ -75,12 +70,30 @@ function PuzzleSymbol({ className }: { className?: string }) {
   )
 }
 
+// Renders a text made of plain pieces and pieces with their own emphasis.
+function Rich({ segments }: { segments: Segment[] }) {
+  return (
+    <>
+      {segments.map((seg, i) => {
+        if (typeof seg === 'string') return <span key={i}>{seg}</span>
+        if ('em' in seg) return <Em key={i}>{seg.em}</Em>
+        if ('b' in seg) return <strong key={i} className="font-bold text-white">{seg.b}</strong>
+        if ('blue' in seg) return <strong key={i} className="font-semibold text-[#4aa9f0]">{seg.blue}</strong>
+        if ('yellow' in seg) return <strong key={i} className="font-semibold text-[#fdc82f]">{seg.yellow}</strong>
+        return <strong key={i} className="font-semibold text-[#f4524d]">{seg.red}</strong>
+      })}
+    </>
+  )
+}
+
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08 } },
 }
 
 export function AboutSection() {
+  const t = useT().about
+
   return (
     <section id="sobre" className="py-8 sm:py-10 px-6 w-full max-w-6xl mx-auto min-h-full flex flex-col justify-center">
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
@@ -96,7 +109,7 @@ export function AboutSection() {
               >
                 <Image
                   src="/avatar.jpg"
-                  alt="Foto de Vinicius Rolim Barbosa"
+                  alt={t.photoAlt}
                   width={96}
                   height={96}
                   priority
@@ -104,47 +117,40 @@ export function AboutSection() {
                 />
               </div>
               <h2 className="font-display text-4xl sm:text-5xl font-bold text-gradient">
-                Olá, eu sou o Vinicius.
+                {t.greeting}
               </h2>
             </div>
           </SectionReveal>
 
           <SectionReveal delay={0.2}>
             <p className="max-w-prose text-sm leading-relaxed text-white-muted">
-              Natural de Rio Verde de Mato Grosso, Mato Grosso do Sul, hoje em Joinville, Santa Catarina.
+              {t.origin}
             </p>
           </SectionReveal>
 
           <SectionReveal delay={0.3}>
             <p className="max-w-prose text-sm leading-relaxed text-white-muted">
-              Engenheiro de Software Sênior com mais de{' '}
-              <Em>6 anos de experiência</Em> no ciclo completo de
-              desenvolvimento de sistemas críticos, com foco em{' '}
-              <Em>backend .NET/C#</Em>,{' '}
-              <Em>arquitetura distribuída</Em> e{' '}
-              <Em>integrações de sistemas</Em> (ERPs, marketplaces e
-              mensageria).
+              <Rich segments={t.summary} />
             </p>
             <p className="mt-4 max-w-prose text-sm leading-relaxed text-white-muted">
-              Histórico em <Em>modernização de ERPs legados</Em>,{' '}
-              <Em>migração de dados em produção</Em> e domínio
-              financeiro.
+              <Rich segments={t.background} />
             </p>
             <p className="mt-4 max-w-prose text-sm leading-relaxed text-white-muted">
-              Aplico <Em>IA em produtos reais</Em>, com LLMs, agentes
-              de IA generativa, RAG e machine learning para análise de risco, e no próprio fluxo de engenharia, com
-              desenvolvimento assistido por agentes de IA (Claude Code e Codex) guiado por Spec-Driven Development.
+              <Rich segments={t.ai} />
             </p>
           </SectionReveal>
 
           <SectionReveal delay={0.4}>
             <div className="flex flex-wrap gap-4 pt-2">
-              {statusItems.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-center gap-2 text-sm text-white-muted">
-                  <Icon weight="bold" className="w-4 h-4 text-purple-glow" />
-                  <span>{value}</span>
-                </div>
-              ))}
+              {t.status.map((value, i) => {
+                const Icon = statusIcons[i]
+                return (
+                  <div key={value} className="flex items-center gap-2 text-sm text-white-muted">
+                    <Icon weight="bold" className="w-4 h-4 text-purple-glow" />
+                    <span>{value}</span>
+                  </div>
+                )
+              })}
             </div>
           </SectionReveal>
         </div>
@@ -154,19 +160,14 @@ export function AboutSection() {
             <div className="glass-card glow-border mb-6 flex items-center gap-4 rounded-xl p-4">
               <PuzzleSymbol className="h-16 w-16 shrink-0" />
               <p className="text-sm font-medium leading-relaxed text-white">
-                Sou <strong className="font-bold text-white">autista</strong> — e enxergo nisso uma{' '}
-                <strong className="font-bold text-white">vantagem real</strong>:{' '}
-                <strong className="font-semibold text-[#4aa9f0]">foco profundo</strong>,{' '}
-                <strong className="font-semibold text-[#fdc82f]">pensamento sistemático</strong> e{' '}
-                <strong className="font-semibold text-[#f4524d]">atenção a detalhes</strong> que fazem a diferença
-                em sistemas críticos.
+                <Rich segments={t.autism} />
               </p>
             </div>
           </SectionReveal>
 
           <SectionReveal delay={0.2}>
             <h3 className="font-mono text-xs text-purple-glow uppercase tracking-widest mb-6">
-              Curiosidades
+              {t.curiositiesTitle}
             </h3>
           </SectionReveal>
 
@@ -177,16 +178,19 @@ export function AboutSection() {
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
           >
-            {curiosidades.map(({ text, icon: Icon }) => (
-              <motion.li
-                key={text}
-                variants={itemVariants}
-                className="glass-card glow-border p-3 flex items-center gap-3 text-sm text-white-muted"
-              >
-                <Icon weight="bold" className="w-4 h-4 text-purple-glow shrink-0" />
-                {text}
-              </motion.li>
-            ))}
+            {t.curiosities.map((text, i) => {
+              const Icon = curiosityIcons[i]
+              return (
+                <motion.li
+                  key={text}
+                  variants={itemVariants}
+                  className="glass-card glow-border p-3 flex items-center gap-3 text-sm text-white-muted"
+                >
+                  <Icon weight="bold" className="w-4 h-4 text-purple-glow shrink-0" />
+                  {text}
+                </motion.li>
+              )
+            })}
           </motion.ul>
         </div>
       </div>

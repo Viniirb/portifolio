@@ -1,3 +1,4 @@
+import type { Localized } from '@/i18n/types'
 import type { TechKey } from '@/types'
 
 export interface StackItem {
@@ -7,18 +8,18 @@ export interface StackItem {
   category: 'ai' | 'frontend' | 'backend' | 'mobile' | 'database' | 'devops' | 'testing' | 'practices' | 'architecture' | 'tools'
 }
 
-export const stackCategories = {
-  ai: 'IA & Agentes',
-  frontend: 'Frontend',
-  backend: 'Backend',
-  mobile: 'Mobile',
-  database: 'Banco de Dados',
-  tools: 'Ferramentas',
-  testing: 'Testes',
-  practices: 'Práticas',
-  architecture: 'Arquitetura',
-  devops: 'DevOps & Plataforma',
-} as const
+export const stackCategories: Record<StackItem['category'], Localized<string>> = {
+  ai: { pt: 'IA & Agentes', en: 'AI & Agents' },
+  frontend: { pt: 'Frontend', en: 'Frontend' },
+  backend: { pt: 'Backend', en: 'Backend' },
+  mobile: { pt: 'Mobile', en: 'Mobile' },
+  database: { pt: 'Banco de Dados', en: 'Databases' },
+  tools: { pt: 'Ferramentas', en: 'Tools' },
+  testing: { pt: 'Testes', en: 'Testing' },
+  practices: { pt: 'Práticas', en: 'Practices' },
+  architecture: { pt: 'Arquitetura', en: 'Architecture' },
+  devops: { pt: 'DevOps & Plataforma', en: 'DevOps & Platform' },
+}
 
 export const stack: StackItem[] = [
   { name: 'Claude Code', tech: 'claudecode', color: '#D97757', category: 'ai' },

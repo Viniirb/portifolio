@@ -5,31 +5,8 @@ import { ArrowsOutSimpleIcon, XIcon } from '@phosphor-icons/react'
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { SectionReveal } from '@/components/ui/SectionReveal'
 import { certifications } from '@/constants/certifications'
+import { useT } from '@/i18n'
 import type { Certification } from '@/types'
-
-const CAT_LABELS: Record<string, string> = {
-  featured: 'Destaques',
-  all: 'Todas',
-  cybersecurity: 'Cibersegurança',
-  development: 'Desenvolvimento',
-  cloud: 'Cloud',
-  networking: 'Redes',
-  neuralnetworks: 'IA / Redes Neurais',
-  community: 'Comunidade & Eventos',
-  other: 'Outros',
-}
-
-const CAT_SHORT: Record<string, string> = {
-  featured: 'Destaques',
-  all: 'Todas',
-  cybersecurity: 'Ciberseg.',
-  development: 'Dev',
-  cloud: 'Cloud',
-  neuralnetworks: 'IA',
-  community: 'Evento',
-  networking: 'Redes',
-  other: 'Outros',
-}
 
 const PER_PAGE = 6
 
@@ -69,6 +46,7 @@ interface CertCardProps {
 }
 
 function CertCard({ cert, onOpen }: CertCardProps) {
+  const t = useT().certifications
   const hasImage = Boolean(cert.image)
   const moduleCount = cert.modules?.length ?? 0
 
@@ -81,7 +59,7 @@ function CertCard({ cert, onOpen }: CertCardProps) {
       className={`group relative block w-full aspect-[16/10] sm:aspect-[4/3] lg:aspect-auto lg:h-[clamp(8.5rem,21vh,15rem)] overflow-hidden rounded-xl border border-purple-subtle/40 bg-bg-surface text-left transition-colors hover:border-purple-glow/70 ${
         hasImage ? 'cursor-pointer' : 'cursor-default'
       }`}
-      aria-label={hasImage ? `Ampliar certificado: ${cert.title}` : cert.title}
+      aria-label={hasImage ? t.enlarge(cert.title) : cert.title}
     >
       {hasImage ? (
         <Image
@@ -104,12 +82,12 @@ function CertCard({ cert, onOpen }: CertCardProps) {
 
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-4">
         <span className="font-mono text-xs uppercase tracking-widest text-purple-glow">
-          {cert.institution} · {CAT_SHORT[cert.category] ?? cert.category}
+          {cert.institution} · {t.categoriesShort[cert.category] ?? cert.category}
         </span>
         <p className="line-clamp-2 text-sm font-semibold leading-snug text-white">{cert.title}</p>
         <span className="font-mono text-xs text-white-muted">
           {cert.date}
-          {moduleCount > 0 && <span className="text-purple-glow"> · {moduleCount} {moduleCount === 1 ? 'módulo' : 'módulos'}</span>}
+          {moduleCount > 0 && <span className="text-purple-glow"> · {t.modules(moduleCount)}</span>}
         </span>
       </div>
 
@@ -125,6 +103,7 @@ function CertCard({ cert, onOpen }: CertCardProps) {
 }
 
 function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: () => void }) {
+  const t = useT().certifications
   useEffect(() => {
     if (!cert) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
@@ -143,7 +122,7 @@ function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: 
           onClick={onClose}
           role="dialog"
           aria-modal="true"
-          aria-label={`Certificado: ${cert.title}`}
+          aria-label={t.dialog(cert.title)}
         >
           <motion.div
             className="relative m-auto w-full max-w-4xl"
@@ -155,7 +134,7 @@ function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: 
           >
             <Image
               src={cert.image}
-              alt={`Certificado ${cert.title} — ${cert.institution}`}
+              alt={t.imageAlt(cert.title, cert.institution)}
               width={1200}
               height={900}
               className="mx-auto h-auto max-h-[55vh] w-auto max-w-full rounded-lg border border-purple-subtle/50 object-contain shadow-2xl"
@@ -164,7 +143,7 @@ function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: 
             {cert.modules && (
               <div className="mt-4 rounded-lg border border-purple-subtle/50 bg-bg-surface/80 p-4">
                 <p className="mb-3 font-mono text-xs uppercase tracking-widest text-purple-glow">
-                  {cert.modules.length} {cert.modules.length === 1 ? 'curso' : 'cursos'} da formação
+                  {t.courses(cert.modules.length)}
                 </p>
                 <ul className="grid max-h-48 grid-cols-1 gap-x-6 gap-y-1.5 overflow-y-auto pr-2 sm:grid-cols-2">
                   {cert.modules.map((m) => (
@@ -187,7 +166,7 @@ function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: 
                 type="button"
                 onClick={onClose}
                 className="shrink-0 rounded-full border border-purple-subtle/60 p-2 text-white-muted transition-colors hover:border-purple-glow hover:text-white"
-                aria-label="Fechar"
+                aria-label={t.close}
               >
                 <XIcon weight="bold" className="h-5 w-5" />
               </button>
@@ -200,6 +179,7 @@ function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: 
 }
 
 export function CertificationsSection() {
+  const t = useT().certifications
   const totalCount = certifications.reduce((n, c) => n + 1 + (c.modules?.length ?? 0), 0)
   const [activeCategory, setActiveCategory] = useState('featured')
   const [currentPage, setCurrentPage] = useState(0)
@@ -265,7 +245,7 @@ export function CertificationsSection() {
             <h2 className="font-display text-4xl sm:text-5xl font-bold">
               <span className="text-gradient">{totalCount}+</span>
             </h2>
-            <p className="text-white-muted font-mono text-sm mb-2">certificações técnicas</p>
+            <p className="text-white-muted font-mono text-sm mb-2">{t.count}</p>
           </div>
         </SectionReveal>
 
@@ -284,7 +264,7 @@ export function CertificationsSection() {
                     : 'text-white-muted border-transparent hover:text-white'
                 }`}
               >
-                {CAT_LABELS[cat] ?? cat}
+                {t.categories[cat] ?? cat}
               </button>
             ))}
           </div>
@@ -296,7 +276,7 @@ export function CertificationsSection() {
           onClick={() => navigate(-1)}
           disabled={isFirst}
           className="hidden sm:flex shrink-0 w-11 h-11 items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white hover:border-purple-glow transition-all bg-bg-primary/80 disabled:opacity-25 disabled:cursor-not-allowed text-lg"
-          aria-label="Anterior"
+          aria-label={t.previous}
         >
           ‹
         </button>
@@ -323,7 +303,7 @@ export function CertificationsSection() {
           onClick={() => navigate(1)}
           disabled={isLast}
           className="hidden sm:flex shrink-0 w-11 h-11 items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white hover:border-purple-glow transition-all bg-bg-primary/80 disabled:opacity-25 disabled:cursor-not-allowed text-lg"
-          aria-label="Próximo"
+          aria-label={t.next}
         >
           ›
         </button>
@@ -341,13 +321,12 @@ export function CertificationsSection() {
                   : 'w-2 hover:bg-purple-subtle'
               }`}
               style={i !== currentPage ? { background: 'rgba(124,58,237,0.3)' } : undefined}
-              aria-label={`Página ${i + 1}`}
+              aria-label={t.page(i + 1)}
             />
           ))}
         </div>
         <p className="font-mono text-xs text-center" style={{ color: 'rgba(74,74,106,0.7)' }}>
-          mostrando {start}–{end} de {filtered.length}
-          {activeCategory !== 'all' ? (activeCategory === 'featured' ? ' destaques' : ' nesta categoria') : ''}
+          {t.showing(start, end, filtered.length, activeCategory)}
         </p>
       </div>
 
@@ -356,7 +335,7 @@ export function CertificationsSection() {
           onClick={() => navigate(-1)}
           disabled={isFirst}
           className="w-11 h-11 flex items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white disabled:opacity-25 text-lg"
-          aria-label="Anterior"
+          aria-label={t.previous}
         >
           ‹
         </button>
@@ -364,7 +343,7 @@ export function CertificationsSection() {
           onClick={() => navigate(1)}
           disabled={isLast}
           className="w-11 h-11 flex items-center justify-center rounded-full border border-purple-subtle/50 text-white-muted hover:text-white disabled:opacity-25 text-lg"
-          aria-label="Próximo"
+          aria-label={t.next}
         >
           ›
         </button>

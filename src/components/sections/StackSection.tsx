@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { SectionReveal, itemVariants } from '@/components/ui/SectionReveal'
 import { TechChip } from '@/components/ui/TechIcon'
 import { stack, stackCategories } from '@/constants/stack'
+import { useL, useT } from '@/i18n'
 
 const containerVariants = {
   hidden: {},
@@ -10,14 +11,16 @@ const containerVariants = {
 }
 
 export function StackSection() {
-  const categories = Object.entries(stackCategories) as [keyof typeof stackCategories, string][]
+  const t = useT().stack
+  const l = useL()
+  const categories = Object.entries(stackCategories) as [keyof typeof stackCategories, (typeof stackCategories)[keyof typeof stackCategories]][]
 
   return (
     <section id="stack" className="min-h-full flex flex-col justify-center py-3 sm:py-4 px-6">
       <div className="max-w-6xl mx-auto w-full">
         <SectionReveal delay={0.1}>
           <h2 className="font-display text-4xl sm:text-5xl font-bold mt-1 mb-4">
-            Minha <span className="text-gradient">Stack</span>
+            {t.titlePre}<span className="text-gradient">{t.titleEm}</span>
           </h2>
         </SectionReveal>
 
@@ -36,7 +39,7 @@ export function StackSection() {
               >
                 <div className="flex items-center gap-3 mb-2">
                   <span className="font-mono text-xs text-white-dim uppercase tracking-widest">
-                    {label}
+                    {l(label)}
                   </span>
                   <div className="flex-1 h-px bg-linear-to-r from-purple-subtle to-transparent" />
                 </div>

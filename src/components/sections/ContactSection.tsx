@@ -3,46 +3,48 @@ import { motion } from 'framer-motion'
 import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
 import { WHATSAPP_NUMBER } from '@/lib/site'
+import { useT } from '@/i18n'
 
-const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá, Vinicius! Vi seu portfólio e gostaria de conversar sobre um projeto.')}`
-
-const allContacts = [
-  {
-    icon: GithubLogoIcon,
-    label: 'GitHub',
-    ariaLabel: 'GitHub: Viniirb',
-    href: 'https://github.com/Viniirb',
-  },
-  {
-    icon: LinkedinLogoIcon,
-    label: 'LinkedIn',
-    ariaLabel: 'LinkedIn: viniciusrolimbarbosa',
-    href: 'https://linkedin.com/in/viniciusrolimbarbosa',
-  },
-  {
-    icon: EnvelopeSimpleIcon,
-    label: 'Email',
-    ariaLabel: 'Email: contato@viniciusrb.dev',
-    href: 'mailto:contato@viniciusrb.dev',
-  },
-  {
-    icon: DownloadSimpleIcon,
-    label: 'Currículo (PDF)',
-    ariaLabel: 'Baixar currículo em PDF',
-    href: '/Vinicius-Rolim-Barbosa-CV.pdf',
-    download: true,
-  },
-  {
-    icon: WhatsappLogoIcon,
-    label: 'WhatsApp',
-    ariaLabel: 'WhatsApp: +55 47 98890-3621',
-    href: whatsappHref,
-  },
-]
-
-const contacts = allContacts
+type ContactItem = {
+  icon: typeof GithubLogoIcon
+  label: string
+  ariaLabel: string
+  href: string
+  download?: boolean
+}
 
 export function ContactSection() {
+  const t = useT().contact
+
+  const contacts: ContactItem[] = [
+    { icon: GithubLogoIcon, label: 'GitHub', ariaLabel: 'GitHub: Viniirb', href: 'https://github.com/Viniirb' },
+    {
+      icon: LinkedinLogoIcon,
+      label: 'LinkedIn',
+      ariaLabel: 'LinkedIn: viniciusrolimbarbosa',
+      href: 'https://linkedin.com/in/viniciusrolimbarbosa',
+    },
+    {
+      icon: EnvelopeSimpleIcon,
+      label: 'Email',
+      ariaLabel: 'Email: contato@viniciusrb.dev',
+      href: 'mailto:contato@viniciusrb.dev',
+    },
+    {
+      icon: DownloadSimpleIcon,
+      label: t.cv,
+      ariaLabel: t.cvAria,
+      href: '/Vinicius-Rolim-Barbosa-CV.pdf',
+      download: true,
+    },
+    {
+      icon: WhatsappLogoIcon,
+      label: 'WhatsApp',
+      ariaLabel: 'WhatsApp: +55 47 98890-3621',
+      href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappMessage)}`,
+    },
+  ]
+
   return (
     <section
       id="contato"
@@ -52,14 +54,13 @@ export function ContactSection() {
       <div>
         <SectionReveal delay={0.1}>
           <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-none tracking-tighter mb-4">
-            <span className="text-gradient">Vamos construir algo.</span>
+            <span className="text-gradient">{t.title}</span>
           </h2>
         </SectionReveal>
 
         <SectionReveal delay={0.2}>
           <p className="text-white-muted text-lg max-w-lg leading-relaxed">
-            Estou disponível para projetos freelance, oportunidades de emprego ou apenas para
-            conversar sobre tecnologia.
+            {t.lead}
           </p>
         </SectionReveal>
       </div>

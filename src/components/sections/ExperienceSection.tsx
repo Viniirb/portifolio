@@ -5,6 +5,7 @@ import { CaretLeftIcon, CaretRightIcon, GitBranchIcon, StarIcon } from '@phospho
 import { SectionReveal } from '@/components/ui/SectionReveal'
 import { projects } from '@/constants/projects'
 import { OPEN_SOURCE_BRANCH_FROM, openSourceItems } from '@/constants/cases'
+import { useL, useT } from '@/i18n'
 
 // Oldest first, so the timeline reads left to right.
 const chronological = [...projects].reverse()
@@ -15,25 +16,30 @@ const DASH = 'rgba(52,211,153,0.8)'
 type Job = (typeof projects)[0]
 
 function JobCard({ job }: { job: Job }) {
+  const t = useT().experience
+  const l = useL()
+
   return (
     <article className="glass-card glow-border rounded-xl p-4 text-left">
-      <p className="font-mono text-xs text-white-muted">{job.period}</p>
+      <p className="font-mono text-xs text-white-muted">{job.period && l(job.period)}</p>
       <h3 className="mt-1 flex items-center gap-2 font-display text-base font-bold leading-tight text-white">
         {job.company}
         {job.award && (
-          <span className="inline-flex shrink-0 text-amber-400" title={job.award.label}>
+          <span className="inline-flex shrink-0 text-amber-400" title={l(job.award.label)}>
             <StarIcon weight="fill" className="h-4 w-4" style={{ filter: 'drop-shadow(0 0 5px rgba(251,191,36,0.7))' }} aria-hidden="true" />
-            <span className="sr-only">{job.award.label}. Veja a legenda no fim da seção.</span>
+            <span className="sr-only">{l(job.award.label)}. {t.legendHint}</span>
           </span>
         )}
       </h3>
-      <p className="mt-1 font-mono text-xs leading-snug text-purple-glow">{job.title}</p>
+      <p className="mt-1 font-mono text-xs leading-snug text-purple-glow">{l(job.title)}</p>
     </article>
   )
 }
 
 // Open source is a second line that branches off the career. Each item is a slide.
 function OpenSourceCarousel() {
+  const t = useT().experience
+  const l = useL()
   const [index, setIndex] = useState(0)
   const item = openSourceItems[index]
   const many = openSourceItems.length > 1
@@ -48,9 +54,9 @@ function OpenSourceCarousel() {
       >
         <h3 className="flex items-center gap-2 font-display text-base font-bold leading-tight text-white">
           <GitBranchIcon weight="bold" className="h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
-          {item.title}
+          {l(item.title)}
         </h3>
-        <p className="mt-1 font-mono text-xs text-white-muted">{item.period}</p>
+        <p className="mt-1 font-mono text-xs text-white-muted">{l(item.period)}</p>
       </article>
 
       {many && (
@@ -71,7 +77,7 @@ function OpenSourceCarousel() {
                   key={dir}
                   type="button"
                   onClick={() => step(dir)}
-                  aria-label={dir === -1 ? 'Contribuição anterior' : 'Próxima contribuição'}
+                  aria-label={dir === -1 ? t.previous : t.next}
                   className="flex h-7 w-7 items-center justify-center rounded-full border border-emerald-400/50 text-emerald-400 transition-colors hover:bg-emerald-400/10"
                 >
                   <Icon weight="bold" className="h-3 w-3" aria-hidden="true" />
@@ -86,6 +92,9 @@ function OpenSourceCarousel() {
 }
 
 export function ExperienceSection() {
+  const t = useT().experience
+  const l = useL()
+
   return (
     <section
       id="experiencia"
@@ -93,7 +102,7 @@ export function ExperienceSection() {
     >
       <SectionReveal delay={0.1}>
         <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-10 xl:mb-14">
-          Minha <span className="text-gradient">Experiência</span>
+          {t.titlePre}<span className="text-gradient">{t.titleEm}</span>
         </h2>
       </SectionReveal>
 
@@ -124,7 +133,7 @@ export function ExperienceSection() {
               const branches = job.id === OPEN_SOURCE_BRANCH_FROM
               return (
                 <div key={job.id} className="relative z-10 flex flex-col items-center gap-1">
-                  <span className="font-mono text-xs text-white-muted">{job.period?.split(' – ')[0]}</span>
+                  <span className="font-mono text-xs text-white-muted">{job.period && l(job.period).split(' – ')[0]}</span>
                   <span
                     className="h-3 w-3 rounded-full"
                     style={{
@@ -159,7 +168,7 @@ export function ExperienceSection() {
           <div>
             <div className="relative h-7 border-b border-dashed" style={{ borderColor: DASH }}>
               <span className="absolute left-0 top-0 font-mono text-xs uppercase tracking-widest text-emerald-400">
-                Open source
+                {t.openSource}
               </span>
             </div>
             <div className="mt-3">
@@ -170,7 +179,7 @@ export function ExperienceSection() {
 
         {/* Narrow screens: one column, the open source line hangs under the job it started in. */}
         <div className="xl:hidden">
-          <ol className="relative space-y-3 border-l border-purple-glow/50 pl-6">
+          <ol className="relative max-w-2xl space-y-3 border-l border-purple-glow/50 pl-6">
             {[...chronological].reverse().map((job) => (
               <li key={job.id} className="relative">
                 <span
@@ -185,7 +194,7 @@ export function ExperienceSection() {
                     style={{ borderColor: DASH }}
                   >
                     <p className="mb-3 font-mono text-xs uppercase tracking-widest text-emerald-400">
-                      Open source
+                      {t.openSource}
                     </p>
                     <OpenSourceCarousel />
                   </div>
@@ -198,7 +207,7 @@ export function ExperienceSection() {
         {award && (
           <p className="mt-8 flex items-center gap-2 font-mono text-xs text-white-muted">
             <StarIcon weight="fill" className="h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden="true" />
-            {award.label}, {award.detail}
+            {l(award.label)}, {l(award.detail)}
           </p>
         )}
       </motion.div>

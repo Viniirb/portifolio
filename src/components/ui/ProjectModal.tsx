@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { StarIcon, XIcon } from '@phosphor-icons/react'
 import { TechChip } from '@/components/ui/TechIcon'
+import { useL, useT } from '@/i18n'
 import type { Project } from '@/types'
 
 interface ProjectModalProps {
@@ -12,6 +13,8 @@ interface ProjectModalProps {
 
 // Opens from a project card with everything that was done in that job.
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const t = useT().projects
+  const l = useL()
   const closeRef = useRef<HTMLButtonElement>(null)
   const returnFocus = useRef<HTMLElement | null>(null)
 
@@ -57,7 +60,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={`Detalhes: ${project.company}`}
+            aria-label={t.modalLabel(project.company)}
             className="fixed inset-0 z-101 flex p-4"
             onClick={onClose}
             initial={{ opacity: 0, y: 24 }}
@@ -74,27 +77,27 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 type="button"
                 onClick={onClose}
                 className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-purple-subtle text-white-muted transition-colors hover:border-purple-glow hover:text-white"
-                aria-label="Fechar"
+                aria-label={t.close}
               >
                 <XIcon weight="bold" className="h-4 w-4" />
               </button>
 
-              <div className="overflow-y-auto p-6 sm:p-8">
-                <p className="font-mono text-xs text-white-muted">{project.period}</p>
+              <div className="overflow-y-auto p-6 sm:p-8 [scrollbar-color:#4c1d95_transparent] [scrollbar-width:thin]">
+                <p className="font-mono text-xs text-white-muted">{project.period && l(project.period)}</p>
                 <h2 className="mt-1 pr-10 font-display text-2xl font-bold text-white sm:text-3xl">{project.company}</h2>
-                <p className="mt-1 font-mono text-sm text-purple-glow">{project.title}</p>
+                <p className="mt-1 font-mono text-sm text-purple-glow">{l(project.title)}</p>
 
                 {project.award && (
                   <p className="mt-4 flex items-start gap-2 text-sm font-semibold text-amber-400">
                     <StarIcon weight="fill" className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                     <span>
-                      {project.award.label}, {project.award.detail}
+                      {l(project.award.label)}, {l(project.award.detail)}
                     </span>
                   </p>
                 )}
 
                 <ul className="mt-6 space-y-3">
-                  {project.description.map((item) => (
+                  {l(project.description).map((item) => (
                     <li key={item} className="flex gap-3 text-sm leading-relaxed text-white-muted">
                       <span className="mt-0.5 shrink-0 text-purple-glow" aria-hidden="true">
                         ▸
@@ -105,7 +108,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </ul>
 
                 <p className="mb-3 mt-8 font-mono text-xs uppercase tracking-widest text-white-dim">
-                  Stack utilizada
+                  {t.stackUsed}
                 </p>
                 <ul className="flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
