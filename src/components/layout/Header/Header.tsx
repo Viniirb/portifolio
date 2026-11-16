@@ -2,16 +2,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ListIcon, X, GithubLogoIcon, LinkedinLogoIcon } from '@phosphor-icons/react'
+import { LanguageSwitch } from '@/components/ui/LanguageSwitch'
+import { useT } from '@/i18n'
 
-const navItems = [
-  { name: 'Início', id: 'hero' },
-  { name: 'Sobre', id: 'sobre' },
-  { name: 'Stack', id: 'stack' },
-  { name: 'Experiência', id: 'experiencia' },
-  { name: 'Projetos', id: 'projetos' },
-  { name: 'Certificações', id: 'certificacoes' },
-  { name: 'Contato', id: 'contato' },
-]
+const navIds = ['hero', 'sobre', 'stack', 'experiencia', 'projetos', 'certificacoes', 'contato'] as const
 
 interface HeaderProps {
   activeSection: string
@@ -20,6 +14,8 @@ interface HeaderProps {
 
 export function Header({ activeSection, onNavigate }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const t = useT()
+  const navItems = navIds.map((id) => ({ id, name: t.nav[id] }))
 
   const handleNavigate = (id: string) => {
     setIsOpen(false)
@@ -36,7 +32,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           VB.DEV
         </button>
 
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Navegação principal">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8" aria-label={t.header.mainNav}>
           {navItems.map((item) => {
             const isActive = activeSection === item.id
             return (
@@ -61,6 +57,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
+          <LanguageSwitch />
           <a
             href="https://github.com/Viniirb"
             target="_blank"
@@ -81,13 +78,16 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           </a>
         </div>
 
+        <div className="flex items-center gap-3 lg:hidden">
+          <LanguageSwitch />
         <button
-          className="lg:hidden text-white p-2 -mr-2"
+          className="text-white p-2 -mr-2"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-label={isOpen ? t.header.closeMenu : t.header.openMenu}
         >
           {isOpen ? <X weight="bold" className="w-6 h-6" /> : <ListIcon weight="bold" className="w-6 h-6" />}
         </button>
+        </div>
       </div>
 
       {isOpen && (
@@ -96,7 +96,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           animate={{ opacity: 1, y: 0 }}
           className="lg:hidden border-t border-purple-subtle/50 bg-bg-surface max-h-[calc(100dvh-4rem)] overflow-y-auto"
         >
-          <nav className="flex flex-col p-6 gap-4" aria-label="Menu mobile">
+          <nav className="flex flex-col p-6 gap-4" aria-label={t.header.mobileNav}>
             {navItems.map((item) => {
               const isActive = activeSection === item.id
               return (

@@ -1,7 +1,9 @@
+'use client'
 import Image from 'next/image'
 import type { TechKey } from '@/types'
 import { getTechIconLabel, isConceptTech, renderTechIcon } from '@/lib/tech-icon-registry'
 import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
+import { useLang } from '@/i18n'
 
 const CONCEPT_FILTER = 'brightness(0) invert(1) opacity(0.85)'
 
@@ -38,10 +40,12 @@ export function TechTile({ tech, size = 26 }: { tech: TechKey; size?: number }) 
 }
 
 export function TechChip({ tech }: { tech: TechKey }) {
+  const { lang } = useLang()
+
   return (
     <span className="inline-flex items-center gap-1.5 rounded-lg border border-purple-subtle/70 bg-white/3 py-0.5 pl-0.5 pr-2.5">
       <TechTile tech={tech} size={22} />
-      <span className="font-mono text-xs text-white">{getTechIconLabel(tech)}</span>
+      <span className="font-mono text-xs text-white">{getTechIconLabel(tech, lang)}</span>
     </span>
   )
 }

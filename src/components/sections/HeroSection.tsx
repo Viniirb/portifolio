@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRightIcon, DownloadSimpleIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
 import { WHATSAPP_NUMBER } from '@/lib/site'
+import { useT } from '@/i18n'
 
 interface HeroSectionProps {
   onNavigate: (id: string) => void
@@ -29,8 +30,10 @@ function DecodeWord({ word, start }: { word: string; start: number }) {
         l.style.width = ''
         l.textContent = l.dataset.l ?? ''
       })
+      // offsetLeft is relative to the nearest positioned ancestor, not to the word, so measure from the word.
+      const rootLeft = root.getBoundingClientRect().left
       const total = root.scrollWidth
-      const metrics = letters.map((l) => [l.offsetWidth, l.offsetLeft])
+      const metrics = letters.map((l) => [l.offsetWidth, l.getBoundingClientRect().left - rootLeft])
       letters.forEach((l, i) => {
         const [width, left] = metrics[i]
         l.style.width = `${width}px`
@@ -86,6 +89,7 @@ function DecodeWord({ word, start }: { word: string; start: number }) {
 
 export function HeroSection({ onNavigate }: HeroSectionProps) {
   const [copied, setCopied] = useState(false)
+  const t = useT().hero
 
   const copyEmail = async () => {
     try {
@@ -109,7 +113,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="font-mono text-sm text-purple-glow mb-[min(1.5rem,2.5vh)] tracking-widest"
         >
-          {'< Engenheiro de Software Sênior />'}
+          {t.tag}
         </motion.p>
 
         <h1
@@ -126,9 +130,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          Especializado em .NET e modernização de sistemas críticos.
-          Passei pela iBR Software: ERP distribuído, módulo Financeiro e machine learning aplicado a risco.
-          Hoje contribuo com open source.
+          {t.lead}
         </motion.p>
 
         <motion.div
@@ -140,9 +142,9 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           <button
             onClick={() => onNavigate('projetos')}
             className="glass-card glow-border px-8 py-[clamp(0.5rem,1.6vh,0.75rem)] font-mono text-sm tracking-widest uppercase text-white flex items-center gap-2 group transition-all"
-            aria-label="Ver projetos"
+            aria-label={t.projectsAria}
           >
-            Ver Projetos
+            {t.projects}
             <ArrowRightIcon
               weight="bold"
               className="w-4 h-4 group-hover:translate-x-1 transition-transform"
@@ -151,18 +153,18 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           <button
             onClick={() => onNavigate('contato')}
             className="px-8 py-[clamp(0.5rem,1.6vh,0.75rem)] font-mono text-sm tracking-widest uppercase text-white-muted hover:text-white border border-purple-subtle/50 hover:border-purple-glow transition-all"
-            aria-label="Falar comigo"
+            aria-label={t.talkAria}
           >
-            Falar Comigo
+            {t.talk}
           </button>
           <a
             href="/Vinicius-Rolim-Barbosa-CV.pdf"
             download
             className="px-8 py-[clamp(0.5rem,1.6vh,0.75rem)] font-mono text-sm tracking-widest uppercase text-white-muted hover:text-white border border-purple-subtle/50 hover:border-purple-glow transition-all flex items-center justify-center gap-2"
-            aria-label="Baixar currículo em PDF"
+            aria-label={t.cvAria}
           >
             <DownloadSimpleIcon weight="bold" className="w-4 h-4" />
-            Currículo
+            {t.cv}
           </a>
         </motion.div>
 
@@ -178,18 +180,18 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
               animate={{ opacity: [1, 0.4, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            Disponível para novas oportunidades
+            {t.available}
           </span>
 
-          <span className="flex items-center gap-5 font-mono text-xs text-white-muted">
+          <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-xs text-white-muted">
             <button
               type="button"
               onClick={copyEmail}
               className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
-              aria-label={`Copiar e-mail ${EMAIL}`}
+              aria-label={`${t.copyEmail} ${EMAIL}`}
             >
               <EnvelopeSimpleIcon weight="bold" className="h-4 w-4" aria-hidden="true" />
-              {copied ? 'Copiado' : EMAIL}
+              {copied ? t.copied : EMAIL}
             </button>
             <a
               href="https://linkedin.com/in/viniciusrolimbarbosa"

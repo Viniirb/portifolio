@@ -1,3 +1,5 @@
+import type { Localized } from "@/i18n/types";
+
 export type TechKey =
   | "react"
   | "nextjs"
@@ -61,11 +63,11 @@ export type TechKey =
 
 export type Project = {
   id: string;
-  title: string;
+  title: Localized<string>;
   company: string;
-  period?: string;
-  award?: { label: string; detail: string };
-  short: string;
-  description: string[];
+  period?: Localized<string>;
+  award?: { label: Localized<string>; detail: Localized<string> };
+  short: Localized<string>;
+  description: Localized<string[]>;
   tech: TechKey[];
 };
