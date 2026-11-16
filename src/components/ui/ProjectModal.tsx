@@ -1,10 +1,8 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { X } from '@phosphor-icons/react'
-import { getTechIconComponent, getTechIconLabel } from '@/lib/tech-icon-registry'
-import Image from 'next/image'
-import { getLegacyTechIcon } from '@/lib/legacy-tech-icons'
+import { AnimatePresence, motion } from 'framer-motion'
+import { StarIcon, XIcon } from '@phosphor-icons/react'
+import { TechChip } from '@/components/ui/TechIcon'
 import type { Project } from '@/types'
 
 interface ProjectModalProps {
@@ -12,23 +10,26 @@ interface ProjectModalProps {
   onClose: () => void
 }
 
+// Opens from a project card with everything that was done in that job.
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
-  const closeBtnRef = useRef<HTMLButtonElement>(null)
-  const previousFocusRef = useRef<HTMLElement | null>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const returnFocus = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
 
   useEffect(() => {
     if (project) {
-      previousFocusRef.current = document.activeElement as HTMLElement
-      closeBtnRef.current?.focus()
+      returnFocus.current = document.activeElement as HTMLElement
+      closeRef.current?.focus()
     } else {
-      previousFocusRef.current?.focus()
-      previousFocusRef.current = null
+      returnFocus.current?.focus()
+      returnFocus.current = null
     }
   }, [project])
 
@@ -36,7 +37,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     const el = document.getElementById('spa-scroll')
     if (!el) return
     el.style.overflow = project ? 'hidden' : ''
-    return () => { el.style.overflow = '' }
+    return () => {
+      el.style.overflow = ''
+    }
   }, [project])
 
   return (
@@ -44,7 +47,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       {project && (
         <>
           <motion.div
-            className="fixed inset-0 z-100 backdrop-blur-sm"
+            className="fixed inset-0 z-100 bg-bg-primary/70 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -55,70 +58,62 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             role="dialog"
             aria-modal="true"
             aria-label={`Detalhes: ${project.company}`}
-            className="fixed inset-0 z-101 flex overflow-y-auto p-4"
+            className="fixed inset-0 z-101 flex p-4"
             onClick={onClose}
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 24 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
             <div
-              className="relative w-full max-w-3xl m-auto p-6 sm:p-8 rounded-2xl border border-purple-subtle shadow-2xl bg-bg-surface"
+              className="relative m-auto flex max-h-[calc(100dvh-2rem)] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-purple-subtle bg-bg-surface shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                ref={closeBtnRef}
+                ref={closeRef}
+                type="button"
                 onClick={onClose}
-                className="absolute top-4 right-4 text-white-dim hover:text-white transition-colors p-2 z-10"
+                className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-purple-subtle text-white-muted transition-colors hover:border-purple-glow hover:text-white"
                 aria-label="Fechar"
               >
-                <X weight="bold" className="w-7 h-7" />
+                <XIcon weight="bold" className="h-4 w-4" />
               </button>
-              <div className="flex flex-col gap-2 mb-6">
-                <h2 className="font-display text-2xl font-bold text-white">{project.company}</h2>
-                <p className="text-purple-glow font-mono text-sm mt-1">{project.title}</p>
-                <span className="font-mono text-xs text-white-dim mt-1 block">{project.period}</span>
-              </div>
 
-              <ul className="space-y-3 mb-8">
-                {project.description.map((item, i) => (
-                  <li key={i} className="flex gap-3 text-white-muted text-sm leading-relaxed">
-                    <span className="text-purple-glow mt-0.5 shrink-0">▸</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <div className="overflow-y-auto p-6 sm:p-8">
+                <p className="font-mono text-xs text-white-muted">{project.period}</p>
+                <h2 className="mt-1 pr-10 font-display text-2xl font-bold text-white sm:text-3xl">{project.company}</h2>
+                <p className="mt-1 font-mono text-sm text-purple-glow">{project.title}</p>
 
-              <div>
-                <p className="font-mono text-xs text-white-dim uppercase tracking-widest mb-3">
+                {project.award && (
+                  <p className="mt-4 flex items-start gap-2 text-sm font-semibold text-amber-400">
+                    <StarIcon weight="fill" className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>
+                      {project.award.label}, {project.award.detail}
+                    </span>
+                  </p>
+                )}
+
+                <ul className="mt-6 space-y-3">
+                  {project.description.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-white-muted">
+                      <span className="mt-0.5 shrink-0 text-purple-glow" aria-hidden="true">
+                        ▸
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="mb-3 mt-8 font-mono text-xs uppercase tracking-widest text-white-dim">
                   Stack utilizada
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => {
-                    const IconComponent = getTechIconComponent(tech)
-                    const label = getTechIconLabel(tech)
-                    const legacyIcon = getLegacyTechIcon(tech)
-
-                    return (
-                      <div key={tech} className="glass-card flex items-center gap-2 px-3 py-1.5 rounded-lg">
-                        {legacyIcon ? (
-                          <Image
-                            src={legacyIcon.src}
-                            alt={legacyIcon.alt}
-                            width={16}
-                            height={16}
-                            className="w-4 h-4 object-contain"
-                            style={legacyIcon.invertOnDark ? { filter: 'brightness(0) invert(1)' } : undefined}
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <IconComponent size={16} className="w-4 h-4" aria-hidden="true" />
-                        )}
-                        <span className="font-mono text-xs text-white-muted">{label}</span>
-                      </div>
-                    )
-                  })}
-                </div>
+                <ul className="flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <li key={tech}>
+                      <TechChip tech={tech} />
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </motion.div>

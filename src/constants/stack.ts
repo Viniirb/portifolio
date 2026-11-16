@@ -4,7 +4,7 @@ export interface StackItem {
   name: string
   tech: TechKey
   color: string
-  category: 'ai' | 'frontend' | 'backend' | 'mobile' | 'database' | 'devops' | 'tools'
+  category: 'ai' | 'frontend' | 'backend' | 'mobile' | 'database' | 'devops' | 'testing' | 'practices' | 'architecture' | 'tools'
 }
 
 export const stackCategories = {
@@ -13,8 +13,11 @@ export const stackCategories = {
   backend: 'Backend',
   mobile: 'Mobile',
   database: 'Banco de Dados',
-  devops: 'DevOps & Plataforma',
   tools: 'Ferramentas',
+  testing: 'Testes',
+  practices: 'Práticas',
+  architecture: 'Arquitetura',
+  devops: 'DevOps & Plataforma',
 } as const
 
 export const stack: StackItem[] = [
@@ -39,6 +42,7 @@ export const stack: StackItem[] = [
   { name: '.NET MAUI', tech: 'maui', color: '#512BD4', category: 'mobile' },
   { name: 'SQL Server', tech: 'sqlserver', color: '#CC2927', category: 'database' },
   { name: 'PostgreSQL', tech: 'postgresql', color: '#4169E1', category: 'database' },
+  { name: 'PL/SQL (Oracle)', tech: 'plsql', color: '#F80000', category: 'database' },
   { name: 'Supabase', tech: 'supabase', color: '#3ECF8E', category: 'database' },
   { name: 'CI/CD', tech: 'cicd', color: '#38BDF8', category: 'devops' },
   { name: 'GitHub Actions', tech: 'githubactions', color: '#2088FF', category: 'devops' },
@@ -48,6 +52,21 @@ export const stack: StackItem[] = [
   { name: 'RabbitMQ', tech: 'rabbitmq', color: '#FF6600', category: 'devops' },
   { name: 'SonarQube', tech: 'sonar', color: '#4E9BCD', category: 'devops' },
   { name: 'n8n', tech: 'n8n', color: '#EA4B71', category: 'devops' },
+  { name: 'NUnit', tech: 'nunit', color: '#A78BFA', category: 'testing' },
+  { name: 'Playwright', tech: 'playwright', color: '#2EAD33', category: 'testing' },
+  { name: 'xUnit', tech: 'xunit', color: '#A78BFA', category: 'testing' },
+  { name: 'Test-Driven Development (TDD)', tech: 'tdd', color: '#A78BFA', category: 'practices' },
+  { name: 'Princípios SOLID', tech: 'solid', color: '#A78BFA', category: 'practices' },
+  { name: 'Engenharia de Prompt', tech: 'prompt', color: '#A78BFA', category: 'practices' },
+  { name: 'Spec-Driven Development', tech: 'sdd', color: '#A78BFA', category: 'practices' },
+  { name: 'Domain-Driven Design (DDD)', tech: 'ddd', color: '#A78BFA', category: 'architecture' },
+  { name: 'Clean Architecture', tech: 'cleanarch', color: '#A78BFA', category: 'architecture' },
+  { name: 'Arquitetura distribuída', tech: 'distributed', color: '#A78BFA', category: 'architecture' },
+  { name: 'Microsserviços', tech: 'microservices', color: '#A78BFA', category: 'architecture' },
+  { name: 'Arquitetura hexagonal', tech: 'hexagonal', color: '#A78BFA', category: 'architecture' },
+  { name: 'Feature-Sliced Design', tech: 'fsd', color: '#A78BFA', category: 'architecture' },
+  { name: 'Atomic Design', tech: 'atomic', color: '#A78BFA', category: 'architecture' },
+  { name: 'Component-driven (Storybook)', tech: 'componentdriven', color: '#FF4785', category: 'architecture' },
   { name: 'Git', tech: 'git', color: '#F05032', category: 'tools' },
   { name: 'GitHub', tech: 'github', color: '#FFFFFF', category: 'tools' },
   { name: 'Postman', tech: 'postman', color: '#FF6C37', category: 'tools' },

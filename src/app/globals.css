@@ -53,6 +53,16 @@
     opacity: 0.4;
   }
 
+  /* Sections are designed to fit the screen; when one does not, it still scrolls, without a bar. */
+  #spa-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #spa-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;

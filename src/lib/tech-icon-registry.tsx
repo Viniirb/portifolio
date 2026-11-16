@@ -19,10 +19,13 @@ import {
   NextJs,
   NodeJs,
   OpenAI,
+  Oracle,
+  Playwright,
   PostgreSQL,
   Postman,
   Python,
   React,
+  Storybook,
   Supabase,
   TailwindCSS,
   TypeScript,
@@ -86,6 +89,22 @@ export const TECH_ICON_COMPONENTS: Record<TechKey, TechIconComponent> = {
   cicd: fallbackIcon,
   claudecode: ClaudeAI as TechIconComponent,
   codex: CodexIcon,
+  playwright: Playwright as TechIconComponent,
+  xunit: fallbackIcon,
+  sdd: fallbackIcon,
+  ddd: fallbackIcon,
+  tdd: fallbackIcon,
+  nunit: fallbackIcon,
+  plsql: Oracle as TechIconComponent,
+  cleanarch: fallbackIcon,
+  distributed: fallbackIcon,
+  microservices: fallbackIcon,
+  hexagonal: fallbackIcon,
+  fsd: fallbackIcon,
+  atomic: fallbackIcon,
+  componentdriven: Storybook as TechIconComponent,
+  solid: fallbackIcon,
+  prompt: fallbackIcon,
 }
 
 export const TECH_ICON_LABELS: Record<TechKey, string> = {
@@ -132,6 +151,22 @@ export const TECH_ICON_LABELS: Record<TechKey, string> = {
   cicd: 'CI/CD',
   claudecode: 'Claude Code',
   codex: 'Codex',
+  playwright: 'Playwright',
+  xunit: 'xUnit',
+  sdd: 'Spec-Driven Development',
+  ddd: 'Domain-Driven Design (DDD)',
+  tdd: 'Test-Driven Development (TDD)',
+  nunit: 'NUnit',
+  plsql: 'PL/SQL (Oracle)',
+  cleanarch: 'Clean Architecture',
+  distributed: 'Arquitetura distribuída',
+  microservices: 'Microsserviços',
+  hexagonal: 'Arquitetura hexagonal',
+  fsd: 'Feature-Sliced Design',
+  atomic: 'Atomic Design',
+  componentdriven: 'Component-driven (Storybook)',
+  solid: 'Princípios SOLID',
+  prompt: 'Engenharia de Prompt',
 }
 
 export function getTechIconComponent(tech: TechKey): TechIconComponent {
@@ -140,4 +175,17 @@ export function getTechIconComponent(tech: TechKey): TechIconComponent {
 
 export function getTechIconLabel(tech: TechKey): string {
   return TECH_ICON_LABELS[tech] ?? tech
+}
+
+// Icons that stand for an idea rather than a product. They have no brand color, so the tile shows
+// them in a neutral tone instead of the amber/sky they were drawn in.
+const CONCEPT_TECH = new Set<TechKey>(['rag', 'deeplearning', 'cicd', 'ml', 'xunit', 'sdd', 'ddd', 'tdd', 'nunit', 'cleanarch', 'distributed', 'microservices', 'hexagonal', 'fsd', 'atomic', 'solid', 'prompt'])
+
+export function isConceptTech(tech: TechKey): boolean {
+  return CONCEPT_TECH.has(tech)
+}
+
+export function renderTechIcon(tech: TechKey, props: SVGProps<SVGElement> & { size?: number }) {
+  const Icon = getTechIconComponent(tech)
+  return <Icon {...props} />
 }

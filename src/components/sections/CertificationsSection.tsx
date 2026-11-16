@@ -78,7 +78,7 @@ function CertCard({ cert, onOpen }: CertCardProps) {
       variants={cardVariants}
       onClick={() => hasImage && onOpen(cert)}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className={`group relative block w-full aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-xl border border-purple-subtle/40 bg-bg-surface text-left transition-colors hover:border-purple-glow/70 ${
+      className={`group relative block w-full aspect-[16/10] sm:aspect-[4/3] lg:aspect-auto lg:h-[clamp(8.5rem,21vh,15rem)] overflow-hidden rounded-xl border border-purple-subtle/40 bg-bg-surface text-left transition-colors hover:border-purple-glow/70 ${
         hasImage ? 'cursor-pointer' : 'cursor-default'
       }`}
       aria-label={hasImage ? `Ampliar certificado: ${cert.title}` : cert.title}
@@ -103,11 +103,11 @@ function CertCard({ cert, onOpen }: CertCardProps) {
       <div className="absolute inset-0 bg-linear-to-t from-bg-primary via-bg-primary/70 to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-4">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-purple-glow">
+        <span className="font-mono text-xs uppercase tracking-widest text-purple-glow">
           {cert.institution} · {CAT_SHORT[cert.category] ?? cert.category}
         </span>
         <p className="line-clamp-2 text-sm font-semibold leading-snug text-white">{cert.title}</p>
-        <span className="font-mono text-[11px] text-white-muted">
+        <span className="font-mono text-xs text-white-muted">
           {cert.date}
           {moduleCount > 0 && <span className="text-purple-glow"> · {moduleCount} {moduleCount === 1 ? 'módulo' : 'módulos'}</span>}
         </span>
@@ -163,14 +163,14 @@ function CertLightbox({ cert, onClose }: { cert: Certification | null; onClose: 
             />
             {cert.modules && (
               <div className="mt-4 rounded-lg border border-purple-subtle/50 bg-bg-surface/80 p-4">
-                <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-purple-glow">
+                <p className="mb-3 font-mono text-xs uppercase tracking-widest text-purple-glow">
                   {cert.modules.length} {cert.modules.length === 1 ? 'curso' : 'cursos'} da formação
                 </p>
                 <ul className="grid max-h-48 grid-cols-1 gap-x-6 gap-y-1.5 overflow-y-auto pr-2 sm:grid-cols-2">
                   {cert.modules.map((m) => (
                     <li key={m.title} className="flex justify-between gap-3 text-xs text-white-muted">
                       <span className="leading-snug">{m.title}</span>
-                      <span className="shrink-0 font-mono text-[10px] text-white-dim">{m.date}</span>
+                      <span className="shrink-0 font-mono text-xs text-white-dim">{m.date}</span>
                     </li>
                   ))}
                 </ul>
@@ -257,37 +257,39 @@ export function CertificationsSection() {
   return (
     <section
       id="certificacoes"
-      className="min-h-full flex flex-col py-6 sm:py-8 px-6 max-w-6xl mx-auto w-full"
+      className="min-h-full flex flex-col justify-center py-4 sm:py-5 px-6 max-w-6xl mx-auto w-full"
     >
-      <SectionReveal delay={0.1}>
-        <div className="flex items-end gap-4 mt-4 mb-2">
-          <h2 className="font-display text-4xl sm:text-5xl font-bold">
-            <span className="text-gradient">{totalCount}+</span>
-          </h2>
-          <p className="text-white-muted font-mono text-sm mb-2">certificações técnicas</p>
-        </div>
-      </SectionReveal>
+      <div className="mt-2 mb-4 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
+        <SectionReveal delay={0.1} className="shrink-0">
+          <div className="flex items-end gap-3">
+            <h2 className="font-display text-4xl sm:text-5xl font-bold">
+              <span className="text-gradient">{totalCount}+</span>
+            </h2>
+            <p className="text-white-muted font-mono text-sm mb-2">certificações técnicas</p>
+          </div>
+        </SectionReveal>
 
-      <SectionReveal delay={0.2}>
-        <div
-          className="flex gap-0 border-b border-purple-subtle/30 mb-6 overflow-x-auto [&::-webkit-scrollbar]:hidden"
-          style={{ scrollbarWidth: 'none' } as React.CSSProperties}
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => handleFilter(cat)}
-              className={`font-mono text-xs px-4 py-2 whitespace-nowrap transition-colors border-b-2 -mb-px ${
-                activeCategory === cat
-                  ? 'text-white border-purple-glow'
-                  : 'text-white-muted border-transparent hover:text-white'
-              }`}
-            >
-              {CAT_LABELS[cat] ?? cat}
-            </button>
-          ))}
-        </div>
-      </SectionReveal>
+        <SectionReveal delay={0.2} className="min-w-0">
+          <div
+            className="flex gap-0 border-b border-purple-subtle/30 overflow-x-auto [&::-webkit-scrollbar]:hidden"
+            style={{ scrollbarWidth: 'none' } as React.CSSProperties}
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleFilter(cat)}
+                className={`font-mono text-xs px-4 py-2 whitespace-nowrap transition-colors border-b-2 -mb-px ${
+                  activeCategory === cat
+                    ? 'text-white border-purple-glow'
+                    : 'text-white-muted border-transparent hover:text-white'
+                }`}
+              >
+                {CAT_LABELS[cat] ?? cat}
+              </button>
+            ))}
+          </div>
+        </SectionReveal>
+      </div>
 
       <div className="relative flex items-center gap-3">
         <button
@@ -327,23 +329,29 @@ export function CertificationsSection() {
         </button>
       </div>
 
-      <div className="flex gap-1.5 justify-center mt-5">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goToPage(i)}
-            className={`h-1 rounded-full transition-all duration-300 ${
-              i === currentPage
-                ? 'w-6 bg-purple-glow'
-                : 'w-2 hover:bg-purple-subtle'
-            }`}
-            style={i !== currentPage ? { background: 'rgba(124,58,237,0.3)' } : undefined}
-            aria-label={`Página ${i + 1}`}
-          />
-        ))}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        <div className="flex gap-1.5">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToPage(i)}
+              className={`h-1 rounded-full transition-all duration-300 ${
+                i === currentPage
+                  ? 'w-6 bg-purple-glow'
+                  : 'w-2 hover:bg-purple-subtle'
+              }`}
+              style={i !== currentPage ? { background: 'rgba(124,58,237,0.3)' } : undefined}
+              aria-label={`Página ${i + 1}`}
+            />
+          ))}
+        </div>
+        <p className="font-mono text-xs text-center" style={{ color: 'rgba(74,74,106,0.7)' }}>
+          mostrando {start}–{end} de {filtered.length}
+          {activeCategory !== 'all' ? (activeCategory === 'featured' ? ' destaques' : ' nesta categoria') : ''}
+        </p>
       </div>
 
-      <div className="sm:hidden flex justify-center gap-4 mt-4">
+      <div className="sm:hidden flex justify-center gap-4 mt-3">
         <button
           onClick={() => navigate(-1)}
           disabled={isFirst}
@@ -361,14 +369,6 @@ export function CertificationsSection() {
           ›
         </button>
       </div>
-
-      <p
-        className="font-mono text-[10px] text-center mt-3"
-        style={{ color: 'rgba(74,74,106,0.7)' }}
-      >
-        mostrando {start}–{end} de {filtered.length}
-        {activeCategory !== 'all' ? (activeCategory === 'featured' ? ' destaques' : ' nesta categoria') : ''}
-      </p>
       <CertLightbox cert={selected} onClose={closeLightbox} />
     </section>
   )
