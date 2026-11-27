@@ -2,8 +2,8 @@
 import { motion } from 'framer-motion'
 import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon, WhatsappLogoIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 import { SectionReveal } from '@/components/ui/SectionReveal'
-import { WHATSAPP_NUMBER } from '@/lib/site'
-import { useT } from '@/i18n'
+import { CV_FILES, WHATSAPP_NUMBER } from '@/lib/site'
+import { useLang, useT } from '@/i18n'
 
 type ContactItem = {
   icon: typeof GithubLogoIcon
@@ -15,6 +15,7 @@ type ContactItem = {
 
 export function ContactSection() {
   const t = useT().contact
+  const { lang } = useLang()
 
   const contacts: ContactItem[] = [
     { icon: GithubLogoIcon, label: 'GitHub', ariaLabel: 'GitHub: Viniirb', href: 'https://github.com/Viniirb' },
@@ -27,14 +28,21 @@ export function ContactSection() {
     {
       icon: EnvelopeSimpleIcon,
       label: 'Email',
-      ariaLabel: 'Email: contato@viniciusrb.dev',
-      href: 'mailto:contato@viniciusrb.dev',
+      ariaLabel: 'Email: viiniirb@pm.me',
+      href: 'mailto:viiniirb@pm.me',
     },
     {
       icon: DownloadSimpleIcon,
       label: t.cv,
       ariaLabel: t.cvAria,
-      href: '/Vinicius-Rolim-Barbosa-CV.pdf',
+      href: CV_FILES[lang].visual,
+      download: true,
+    },
+    {
+      icon: DownloadSimpleIcon,
+      label: t.cvAts,
+      ariaLabel: t.cvAtsAria,
+      href: CV_FILES[lang].ats,
       download: true,
     },
     {

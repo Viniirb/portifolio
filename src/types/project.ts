@@ -59,7 +59,18 @@ export type TechKey =
   | "atomic"
   | "componentdriven"
   | "solid"
-  | "prompt";
+  | "prompt"
+  | "hangfire"
+  | "azurefunctions"
+  | "awss3"
+  | "electron"
+  | "bun"
+  | "vite"
+  | "openapi"
+  | "jwt"
+  | "gemini"
+  | "chromadb"
+  | "primeng";
 
 export type Project = {
   id: string;

@@ -5,3 +5,9 @@ export const SITE_NAME = 'Vinicius Rolim Barbosa'
 export const SITE_TITLE = 'Vinicius Rolim Barbosa — Engenheiro de Software Sênior'
 export const SITE_DESCRIPTION =
   'Engenheiro de Software Sênior com 6 anos de experiência em .NET, arquitetura distribuída, integrações, machine learning e IA aplicada. Modernização de ERP, módulo Financeiro e automação de sistemas críticos.'
+
+// Resume downloads, one per language. "Visual" is the designed version, "ATS" is plain text for recruiting systems.
+export const CV_FILES = {
+  pt: { visual: '/Vinicius-Rolim-Barbosa-CV-PT.pdf', ats: '/Vinicius-Rolim-Barbosa-CV-PT-ATS.pdf' },
+  en: { visual: '/Vinicius-Rolim-Barbosa-Resume-EN.pdf', ats: '/Vinicius-Rolim-Barbosa-Resume-EN-ATS.pdf' },
+} as const

@@ -29,7 +29,7 @@ const pt = {
   },
   hero: {
     tag: '< Engenheiro de Software Sênior />',
-    lead: 'Especializado em .NET e modernização de sistemas críticos. Passei pela iBR Software: ERP distribuído, módulo Financeiro e machine learning aplicado a risco. Hoje contribuo com open source.',
+    lead: 'Especializado em .NET e modernização de sistemas críticos. Passei pela iBR Tecnologia: ERP distribuído, módulo Financeiro e machine learning aplicado a risco. Hoje contribuo com open source.',
     projects: 'Ver Projetos',
     projectsAria: 'Ver projetos',
     talk: 'Falar Comigo',
@@ -86,7 +86,7 @@ const pt = {
       '6 anos',
       'Contribuidor Open Source',
       'Comunidade Codecon · voluntário no Codecon Summit 2026',
-      'Análise e Desenvolvimento de Sistemas · Católica SC · previsão final de 2027',
+      'Análise e Desenvolvimento de Sistemas · Católica SC · média 9,49 · previsão final de 2027',
     ],
     curiositiesTitle: 'Curiosidades',
     curiosities: [
@@ -164,6 +164,8 @@ const pt = {
     whatsappMessage: 'Olá, Vinicius! Vi seu portfólio e gostaria de conversar sobre um projeto.',
     cv: 'Currículo (PDF)',
     cvAria: 'Baixar currículo em PDF',
+    cvAts: 'Currículo ATS (PDF)',
+    cvAtsAria: 'Baixar currículo em PDF, versão em texto simples para sistemas de recrutamento (ATS)',
   },
   footer: {
     built: 'Feito com Next.js & Framer Motion.',
@@ -195,7 +197,7 @@ const en: Strings = {
   },
   hero: {
     tag: '< Senior Software Engineer />',
-    lead: 'Specialized in .NET and the modernization of critical systems. At iBR Software: distributed ERP, the Finance module and machine learning applied to risk. Today I contribute to open source.',
+    lead: 'Specialized in .NET and the modernization of critical systems. At iBR Tecnologia: distributed ERP, the Finance module and machine learning applied to risk. Today I contribute to open source.',
     projects: 'View Projects',
     projectsAria: 'View projects',
     talk: 'Talk to Me',
@@ -252,7 +254,7 @@ const en: Strings = {
       '6 years',
       'Open Source Contributor',
       'Codecon community · volunteer at Codecon Summit 2026',
-      'Systems Analysis and Development · Católica SC · expected graduation in 2027',
+      'Systems Analysis and Development · Católica SC · GPA 9.49/10 · expected graduation in 2027',
     ],
     curiositiesTitle: 'Fun facts',
     curiosities: [
@@ -330,6 +332,8 @@ const en: Strings = {
     whatsappMessage: "Hi, Vinicius! I saw your portfolio and would like to talk about a project.",
     cv: 'Resume (PDF)',
     cvAria: 'Download resume as PDF',
+    cvAts: 'Resume ATS (PDF)',
+    cvAtsAria: 'Download resume as PDF, plain-text version for applicant tracking systems (ATS)',
   },
   footer: {
     built: 'Built with Next.js & Framer Motion.',
