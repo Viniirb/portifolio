@@ -98,7 +98,7 @@ Portfólio full-stack desenvolvido para apresentar minha trajetória profissiona
 ┣ 📂 public/
 ┃ ┣ 📂 tech/                   # SVGs de tecnologias
 ┃ ┣ 📂 certs/                  # Miniaturas dos certificados
-┃ ┗ 📄 Vinicius-Rolim-Barbosa-CV.pdf
+┃ ┗ 📄 Vinicius-Rolim-Barbosa-{CV-PT,CV-PT-ATS,Resume-EN,Resume-EN-ATS}.pdf
 ┗ 📄 package.json
 ```
 ---
@@ -116,7 +116,7 @@ Bio detalhada, trajetória, identidade autista, valores e curiosidades. Localiza
 Stack visual por categoria (IA & Agentes, Frontend, Backend, Mobile, Banco de Dados, DevOps, Ferramentas) com chips coloridos e ícones customizados.
 
 ### 💼 Experiência
-Cards de experiências profissionais (iBR Software, N Tecnologias, EOS, Blump, Inovvati) com timeline, descrição expandida e tecnologias usadas.
+Cards de experiências profissionais (iBR Tecnologia, N Tecnologias, EOS, Blump, Inovvati) com timeline, descrição expandida e tecnologias usadas.
 
 ### 🚀 Projetos
 Modal detalhado de projetos, tecnologias, desafios e resultados. Foco em modernização, automação e impacto.
@@ -165,7 +165,7 @@ MIT License - Copyright (c) 2025 Vinicius Rolim Barbosa
 
 [![GitHub](https://img.shields.io/badge/GitHub-Viniirb-181717?style=for-the-badge&logo=github)](https://github.com/Viniirb)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-viniciusrolimbarbosa-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/viniciusrolimbarbosa/)
-[![Email](https://img.shields.io/badge/Email-contato@viniciusrb.dev-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:contato@viniciusrb.dev)
+[![Email](https://img.shields.io/badge/Email-viiniirb%40pm.me-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:viiniirb@pm.me)
 
 </div>
 

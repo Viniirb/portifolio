@@ -51,7 +51,7 @@ const jsonLd = {
   url: SITE_URL,
   jobTitle: 'Engenheiro de Software Sênior',
   address: { '@type': 'PostalAddress', addressLocality: 'Joinville', addressRegion: 'SC', addressCountry: 'BR' },
-  email: 'contato@viniciusrb.dev',
+  email: 'viiniirb@pm.me',
   sameAs: ['https://github.com/Viniirb', 'https://linkedin.com/in/viniciusrolimbarbosa'],
   knowsAbout: ['.NET', 'C#', 'Arquitetura distribuída', 'Machine Learning', 'React', 'Next.js'],
 }

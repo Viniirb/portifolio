@@ -2,6 +2,11 @@ import type { ComponentType, SVGProps } from 'react'
 import {
   Angular,
   Azure,
+  AWS,
+  BunJs,
+  Electron,
+  Swagger,
+  ViteJS,
   Bitbucket,
   ClaudeAI,
   Bootstrap5,
@@ -105,6 +110,17 @@ export const TECH_ICON_COMPONENTS: Record<TechKey, TechIconComponent> = {
   componentdriven: Storybook as TechIconComponent,
   solid: fallbackIcon,
   prompt: fallbackIcon,
+  hangfire: fallbackIcon,
+  azurefunctions: Azure as TechIconComponent,
+  awss3: fallbackIcon,
+  electron: Electron as TechIconComponent,
+  bun: BunJs as TechIconComponent,
+  vite: ViteJS as TechIconComponent,
+  openapi: Swagger as TechIconComponent,
+  jwt: fallbackIcon,
+  gemini: fallbackIcon,
+  chromadb: fallbackIcon,
+  primeng: fallbackIcon,
 }
 
 export const TECH_ICON_LABELS: Record<TechKey, string> = {
@@ -167,6 +183,17 @@ export const TECH_ICON_LABELS: Record<TechKey, string> = {
   componentdriven: 'Component-driven (Storybook)',
   solid: 'Princípios SOLID',
   prompt: 'Engenharia de Prompt',
+  hangfire: 'Hangfire',
+  azurefunctions: 'Azure Functions',
+  awss3: 'AWS S3',
+  electron: 'Electron',
+  bun: 'Bun',
+  vite: 'Vite',
+  openapi: 'OpenAPI',
+  jwt: 'JWT',
+  gemini: 'Gemini',
+  chromadb: 'ChromaDB',
+  primeng: 'PrimeNG',
 }
 
 export function getTechIconComponent(tech: TechKey): TechIconComponent {

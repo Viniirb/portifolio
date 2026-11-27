@@ -33,6 +33,12 @@ const LEGACY_ICON_MAP: Partial<Record<TechKey, LegacyTechIcon>> = {
   atomic: { src: '/tech/atomic.svg', alt: 'Atomic Design' },
   solid: { src: '/tech/solid.svg', alt: 'Princípios SOLID' },
   prompt: { src: '/tech/prompt.svg', alt: 'Engenharia de Prompt' },
+  hangfire: { src: '/tech/hangfire.svg', alt: 'Hangfire' },
+  jwt: { src: '/tech/jwt.svg', alt: 'JWT' },
+  gemini: { src: '/tech/gemini.svg', alt: 'Gemini' },
+  chromadb: { src: '/tech/chromadb.svg', alt: 'ChromaDB' },
+  primeng: { src: '/tech/primeng.svg', alt: 'PrimeNG' },
+  awss3: { src: '/tech/awss3.svg', alt: 'AWS S3' },
 }
 
 export function getLegacyTechIcon(tech: TechKey): LegacyTechIcon | undefined {

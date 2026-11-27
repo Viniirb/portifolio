@@ -2,14 +2,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRightIcon, DownloadSimpleIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
-import { WHATSAPP_NUMBER } from '@/lib/site'
-import { useT } from '@/i18n'
+import { CV_FILES, WHATSAPP_NUMBER } from '@/lib/site'
+import { useLang, useT } from '@/i18n'
 
 interface HeroSectionProps {
   onNavigate: (id: string) => void
 }
 
-const EMAIL = 'contato@viniciusrb.dev'
+const EMAIL = 'viiniirb@pm.me'
 const GLYPHS = '01<>/{}[]#=+*'
 
 // The name resolves letter by letter from random glyphs. Each letter has a fixed width (measured from the
@@ -90,6 +90,7 @@ function DecodeWord({ word, start }: { word: string; start: number }) {
 export function HeroSection({ onNavigate }: HeroSectionProps) {
   const [copied, setCopied] = useState(false)
   const t = useT().hero
+  const { lang } = useLang()
 
   const copyEmail = async () => {
     try {
@@ -158,7 +159,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             {t.talk}
           </button>
           <a
-            href="/Vinicius-Rolim-Barbosa-CV.pdf"
+            href={CV_FILES[lang].visual}
             download
             className="px-8 py-[clamp(0.5rem,1.6vh,0.75rem)] font-mono text-sm tracking-widest uppercase text-white-muted hover:text-white border border-purple-subtle/50 hover:border-purple-glow transition-all flex items-center justify-center gap-2"
             aria-label={t.cvAria}
